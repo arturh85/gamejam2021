@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://materials/ground.tres" type="Material" id=1]
+[ext_resource path="res://materials/needles.tres" type="Material" id=2]
+[ext_resource path="res://materials/trunk.tres" type="Material" id=3]
+[ext_resource path="res://models/tree.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://models/ground.obj" type="ArrayMesh" id=5]
+
+[node name="ground_trees" type="MeshInstance"]
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 1 )
+
+[node name="ground_tree1" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03193, 0, 0.960585 )
+mesh = ExtResource( 4 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 2 )
+
+[node name="ground_tree3" type="MeshInstance" parent="."]
+transform = Transform( 0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, -2.74111, 0, 2.1981 )
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 2 )
+
+[node name="ground_tree2" type="MeshInstance" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -2.73983, 0, -2.30137 )
+mesh = ExtResource( 4 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 2 )

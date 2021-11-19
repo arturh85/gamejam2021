@@ -1,9 +1,31 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://models/ground.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://materials/ground.tres" type="Material" id=2]
+[ext_resource path="res://materials/trunk.tres" type="Material" id=3]
+[ext_resource path="res://materials/needles.tres" type="Material" id=4]
+[ext_resource path="res://models/ground-3trees.obj" type="ArrayMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.329412, 0.329412, 0.329412, 1 )
 
 [node name="Spatial" type="Spatial"]
 
-[node name="ground" type="MeshInstance" parent="."]
+[node name="ground_asphalt" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
-material/0 = null
+skeleton = NodePath("../ground_green")
+material/0 = SubResource( 2 )
+
+[node name="ground_green" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="ground-3trees" type="MeshInstance" parent="."]
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 4 )
+material/2 = ExtResource( 2 )
+material/3 = ExtResource( 4 )
+material/4 = ExtResource( 3 )
+material/5 = ExtResource( 4 )
+material/6 = ExtResource( 3 )

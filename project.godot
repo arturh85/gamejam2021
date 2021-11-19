@@ -22,6 +22,10 @@ config/icon="res://icon.png"
 
 window/size/fullscreen=true
 
+[global]
+
+view=false
+
 [input]
 
 main_command={
