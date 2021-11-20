@@ -1,11 +1,25 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://CamBase.gd" type="Script" id=1]
 [ext_resource path="res://SelectionBox.gd" type="Script" id=2]
+[ext_resource path="res://ColorRect.gd" type="Script" id=3]
 [ext_resource path="res://meshlib/gridmap2.tres" type="MeshLibrary" id=4]
-[ext_resource path="res://Fire.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World.gd" type="Script" id=6]
 [ext_resource path="res://GridMap.gd" type="Script" id=7]
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float contrast = 0.2;
+    COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+    float avg = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
+	float a = pow(abs(avg * 2.0 - 1.0), 1.0 / max(contrast, 0.0001)) * sign(avg - 0.5) + 0.5;
+    COLOR.rgb = vec3(a);
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 11 )
 
 [sub_resource type="CubeMesh" id=9]
 
@@ -17,6 +31,18 @@ albedo_color = Color( 0.945098, 0, 1, 1 )
 
 [node name="World" type="Spatial"]
 script = ExtResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 10 )
+margin_top = 569.0
+margin_right = 1026.0
+margin_bottom = 600.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CamBase" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 0 )
@@ -34,9 +60,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Particles" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.6103, 6.16893, -58.7244 )
 
 [node name="GridMap" type="GridMap" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
