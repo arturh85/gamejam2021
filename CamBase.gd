@@ -29,7 +29,7 @@ func _process(delta):
 	elif tree_content >= 0: # Trees
 		mat.emission = Color(1, 0, 0)
 		if Input.is_action_just_released("alt_command"):
-			$"..".add_fire(p.x, p.z)
+			$"..".add_fire(Vector3(p.x, 0, p.z))
 	else: #Grass
 		mat.emission = Color(0.5, 0.5, 0.5)
 	

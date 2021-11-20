@@ -1,24 +1,24 @@
-extends Node2D
+extends Sprite3D
 
 var bar_red = preload("res://sprites/barHorizontal_red.png")
 var bar_green = preload("res://sprites/barHorizontal_green.png")
 var bar_yellow = preload("res://sprites/barHorizontal_yellow.png")
 
-onready var healthbar = $HealthBar
+onready var healthbar = $"Viewport/HealthBar"
 
 var showBar = false
 
 func _ready():
 	if not showBar:
 		hide()
-		
 	
 func show_always():
 	showBar = true
 	show()
 	
 func _process(delta):
-	global_rotation = 0
+	pass
+	# global_rotation = 0
 	
 func update_healthbar(value, max_health):
 	healthbar.max_value = max_health
