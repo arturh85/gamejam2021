@@ -1,0 +1,41 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        platform: [ linux, windows, mac ]
+
+    steps:
+    - name: Download client
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: godot-ci.yml
+        workflow_conclusion: success
+        commit: ${{ github.sha }}
+        event: push
+        name: DisasterArena-${{ github.sha }}-${{ matrix.platform }}
+        path: DisasterArena
+
+    - name: Set version
+      run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+
+    - name: Set filename
+      run: echo "FILENAME=DisasterArena-${{ env.VERSION }}-${{ matrix.platform }}" >> $GITHUB_ENV
+
+    - name: Zip client
+      run: zip -q -r ${{ env.FILENAME }}.zip DisasterArena
+
+    - name: Publish to github release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ${{ env.FILENAME }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
