@@ -332,5 +332,18 @@ func _on_TreeGrowthTimer_timeout():
 	_update_tree_growth(false)
 
 
+
 func _on_WindDirectionTimer_timeout():
 	_update_wind_direction()
+
+func _on_DisasterTimer_timeout():
+	var disaster_type = rng.randi_range(0, 0)
+	if disaster_type == 0:
+		var fire_count = rng.randi_range(1, 2)
+		print("disaster: fire x ", fire_count, "after", $"DisasterTimer".wait_time )
+		var trees = TreeMap.get_used_cells()
+		for i in range(fire_count):
+			var pos = _random_element(trees)
+			add_fire(pos)
+
+	$"DisasterTimer".wait_time += 5

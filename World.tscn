@@ -182,6 +182,10 @@ autostart = true
 wait_time = 10.0
 autostart = true
 
+[node name="DisasterTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
 [node name="SelectionTile" type="Spatial" parent="."]
 
 [node name="T1" type="MeshInstance" parent="SelectionTile"]
@@ -210,3 +214,4 @@ anims/idle = SubResource( 13 )
 [connection signal="timeout" from="SpreadEffectsTimer" to="." method="_on_SpreadEffectsTimer_timeout"]
 [connection signal="timeout" from="TreeGrowthTimer" to="." method="_on_TreeGrowthTimer_timeout"]
 [connection signal="timeout" from="WindDirectionTimer" to="." method="_on_WindDirectionTimer_timeout"]
+[connection signal="timeout" from="DisasterTimer" to="." method="_on_DisasterTimer_timeout"]
