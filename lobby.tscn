@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://lobby.gd" type="Script" id=1]
+[ext_resource path="res://images/bg.png" type="Texture" id=2]
 
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
@@ -8,6 +9,18 @@ anchor_bottom = 1.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.001
+anchor_bottom = 1.0
+margin_right = 894.976
+margin_bottom = 480.0
+rect_scale = Vector2( 0.534, 0.558 )
+texture = ExtResource( 2 )
+stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -80,6 +93,9 @@ margin_right = 138.5
 margin_bottom = 83.5
 size_flags_horizontal = 2
 size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NameLabel" type="Label" parent="Connect"]
 margin_left = 14.0
