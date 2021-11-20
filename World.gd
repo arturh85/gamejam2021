@@ -127,19 +127,45 @@ func damage_tree(key):
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 
+
+	options.add_item("Fire", 0)
+	options.add_item("Tree", 1)
+	options.add_item("Bulldozer", 2)
+	options.add_item("SolarCell", 3)
+	options.add_item("Battery", 4)
+	options.add_item("PowerLine", 5)
+	options.add_item("Farm", 6)
+	options.add_item("WaterTower", 7)
+	options.add_item("Silo", 8)
+
 	if options.selected == 0: # Fire
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
 			add_fire(pos)
-	elif options.selected == 1: # SolarCell
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
-		self._update_buildings()
-	elif options.selected == 2: # Bulldozer
-		self.on_burndown(pos)
-	elif options.selected == 3: # Tree
+	elif options.selected == 1: # Tree
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		if building_content == -1:
 			TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
+	elif options.selected == 2: # Bulldozer
+		self.on_burndown(pos)
+	elif options.selected == 3: # SolarCell
+		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
+		self._update_buildings()
+	elif options.selected == 4: # Battery
+		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 7) # Battery
+		self._update_buildings()
+	elif options.selected == 5: # PowerLine
+		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 1) # PowerLine
+		self._update_buildings()
+	elif options.selected == 6: # Farm
+		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 8) # Farm
+		self._update_buildings()
+	elif options.selected == 7: # WaterTower
+		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 9) # WaterTower
+		self._update_buildings()
+	elif options.selected == 8: # Silo
+		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 10) # Silo
+		self._update_buildings()
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
