@@ -4,6 +4,10 @@ extends Spatial
 onready var TreeMap = get_node("TreeMap")
 onready var GroundMap = get_node("GroundMap")
 
+var dayDuration = 60.0 #seconds
+var sunHours = 2.0
+var fadeTimeHours = 1.0
+
 var wind_direction = 0
 signal wind_direction_changed
 
@@ -20,6 +24,8 @@ var fires = {}
 
 var rng = RandomNumberGenerator.new()
 
+var theTime = 0.0
+
 func _ready():
 	rng.randomize()
 
@@ -27,6 +33,46 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func _process(delta):
+	var env = get_node("WorldEnvironment")
+	
+	if env:
+		var mono = get_node("CanvasLayer/MonochromeShader")
+		var clockText = get_node("CanvasLayer/HUD-Status/Label-Clock")
+		
+		theTime = theTime + delta
+		var daytime = theTime
+		while daytime > dayDuration:
+			daytime = daytime - dayDuration
+		
+		var h = floor(daytime / dayDuration * 24)
+		var m = str(int((daytime / dayDuration * 24 - h) * 60.0))
+		if m.length() == 1:
+			m = "0" + m
+		clockText.text = str(int(h)) + ":" + m
+				
+		var sunS = sunHours * dayDuration / 24.0
+		var fadeTimeS = fadeTimeHours * dayDuration / 24.0
+			
+		if daytime > (dayDuration - sunS) / 2.0 and daytime < (dayDuration + sunS) / 2.0:
+			mono.modulate = Color(1, 1, 1, 1)
+			env.environment.ambient_light_color = Color(1, 1, 1, 1)
+		elif daytime > (dayDuration - sunS - fadeTimeS*2.0) / 2.0 and daytime <= (dayDuration - sunS) / 2.0:
+			var d =  (daytime - (dayDuration - sunS - fadeTimeS*2.0) / 2.0) / fadeTimeS
+			var t = 0.1 + d*0.9
+			mono.modulate = Color(1, 1, 1, d)
+			env.environment.ambient_light_color = Color(t, t, t, 1)
+		elif daytime >= (dayDuration + sunS) / 2.0 and daytime < (dayDuration + sunS + fadeTimeS*2.0) / 2.0:
+			var d =  ((dayDuration + sunS + fadeTimeS*2.0) / 2.0 - daytime) / fadeTimeS
+			var t = 0.1 + d*0.9
+			mono.modulate = Color(1, 1, 1, d)
+			env.environment.ambient_light_color = Color(t, t, t, 1)
+		else:
+			mono.modulate = Color(1, 1, 1, 0)
+			env.environment.ambient_light_color = Color(0.1, 0.1, 0.1, 1)
+		
+		
 
 func add_fire(x, z):
 	var key = str(x) + "," + str(z)

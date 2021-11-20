@@ -52,3 +52,19 @@ text = "CO2 Level: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label-Clock" type="Label" parent="."]
+anchor_left = -0.484
+anchor_top = -2.46
+anchor_right = -0.484
+anchor_bottom = -2.46
+margin_left = 74.6
+margin_top = -296.2
+margin_right = 210.6
+margin_bottom = -267.2
+text = "0:00"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
