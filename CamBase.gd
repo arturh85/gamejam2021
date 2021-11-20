@@ -21,8 +21,17 @@ func _process(delta):
 	$"../SelectionTile".translation.x = p.x * $"../GridMap".cell_size.x + $"../GridMap".cell_size.x / 2.0
 	$"../SelectionTile".translation.z = p.z * $"../GridMap".cell_size.z + $"../GridMap".cell_size.z / 2.0
 	
-	if Input.is_action_just_released("alt_command"):
-		$"../GridMap".add_fire(p.x, p.z)
+	var mat = $"../SelectionTile".get_surface_material(0)
+	var cell_content = $"../GridMap".get_cell_item(p.x, 0, p.z)
+	if cell_content == 0: # Asphalt
+		mat.albedo_color = Color(0, 1, 0, 0.1)
+	elif cell_content == 2: # Trees
+		mat.albedo_color = Color(1, 0, 0, 0.1)
+		if Input.is_action_just_released("alt_command"):
+			$"../GridMap".add_fire(p.x, p.z)
+	else:
+		mat.albedo_color = Color(0.5, 0.5, 0.5, 0.1)
+	
 	
 	return
 	
