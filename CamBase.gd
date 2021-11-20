@@ -26,7 +26,7 @@ func _process(delta):
 	var tree_content = $"../TreeMap".get_cell_item(p.x, 0, p.z)
 	if ground_content == 0: # Asphalt
 		mat.emission = Color(0, 1, 0)
-	elif tree_content == 2: # Trees
+	elif tree_content >= 0: # Trees
 		mat.emission = Color(1, 0, 0)
 		if Input.is_action_just_released("alt_command"):
 			$"../TreeMap".add_fire(p.x, p.z)

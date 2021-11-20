@@ -4,7 +4,7 @@
 [ext_resource path="res://SelectionBox.gd" type="Script" id=2]
 [ext_resource path="res://ColorRect.gd" type="Script" id=3]
 [ext_resource path="res://meshlib/gridmap2.tres" type="MeshLibrary" id=4]
-[ext_resource path="res://meshlib/gridmap3.tres" type="MeshLibrary" id=5]
+[ext_resource path="res://meshlib/TreeMeshLib2.tres" type="MeshLibrary" id=5]
 [ext_resource path="res://World.gd" type="Script" id=6]
 [ext_resource path="res://GridMap.gd" type="Script" id=7]
 [ext_resource path="res://environment.tres" type="Environment" id=8]
@@ -98,7 +98,7 @@ mesh_library = ExtResource( 5 )
 cell_size = Vector3( 5, 0.1, 5 )
 cell_scale = 0.5
 data = {
-"cells": PoolIntArray( 65527, 0, 2, 65528, 0, 2, 65526, 1, 2, 65527, 1, 2, 65528, 1, 2, 65526, 2, 2, 65527, 2, 2, 65528, 2, 2, 9, 4, 2, 10, 4, 2, 11, 4, 2, 8, 5, 2, 9, 5, 2, 10, 5, 2, 11, 5, 2, 5, 6, 2, 6, 6, 2, 7, 6, 2, 8, 6, 2, 9, 6, 2, 10, 6, 2, 11, 6, 2, 12, 6, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 8, 7, 2, 9, 7, 2, 10, 7, 2, 11, 7, 2, 12, 7, 2, 6, 8, 2, 7, 8, 2, 8, 8, 2, 9, 8, 2, 10, 8, 2, 11, 8, 2, 12, 8, 2, 7, 9, 2, 8, 9, 2, 9, 9, 2, 10, 9, 2, 11, 9, 2, 12, 9, 2, 7, 10, 2, 8, 10, 2, 9, 10, 2, 10, 10, 2, 9, 11, 2, 10, 11, 2, 11, 11, 2, 12, 11, 2, 18, 65528, 2, 19, 65528, 2, 17, 65529, 2, 18, 65529, 2, 19, 65529, 2, 16, 65530, 2, 17, 65530, 2, 18, 65530, 2, 16, 65531, 2, 17, 65531, 2, 16, 65532, 2 )
+"cells": PoolIntArray( 6, 1, 0, 7, 1, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 4, 5, 0, 5, 5, 0, 6, 5, 0, 7, 5, 0, 8, 5, 0, 5, 6, 0, 6, 6, 0, 7, 6, 0, 8, 6, 0, 5, 7, 0, 6, 7, 0, 5, 65529, 0, 3, 65530, 0, 4, 65530, 0, 5, 65530, 0, 2, 65531, 0, 3, 65531, 0, 4, 65531, 0, 2, 65532, 0, 3, 65532, 0 )
 }
 script = ExtResource( 7 )
 __meta__ = {

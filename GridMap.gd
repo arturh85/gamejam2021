@@ -72,7 +72,7 @@ func _on_Timer_timeout():
 							
 							var kkey =  str(xx) + "," + str(zz)
 							var cell_content = get_cell_item(xx,0, zz)
-							if cell_content == 2: # Trees
+							if cell_content >= 0: # Trees
 								if rng.randf_range(0, 1) < direction_factor:
 									fires_to_add.append([xx, zz])
 	for key in fires_to_add:
