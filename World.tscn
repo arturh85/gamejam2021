@@ -36,7 +36,7 @@ script = ExtResource( 6 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource( 10 )
-margin_top = 569.0
+margin_top = 585.0
 margin_right = 1026.0
 margin_bottom = 600.0
 script = ExtResource( 3 )
