@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://models/ground.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://materials/ground.tres" type="Material" id=2]
@@ -9,19 +9,42 @@
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.329412, 0.329412, 0.329412, 1 )
 
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -5.02732, 0.0273224, -5.02732, 5.02729, 0.0273224, 5.02732, -5.02732, 0.0273224, 5.02732, 5.02729, 0.0273224, -5.02732 )
+
+[sub_resource type="ConvexPolygonShape" id=4]
+points = PoolVector3Array( -5.02732, 0.0273224, -5.02732, 5.02729, 0.0273224, 5.02732, -5.02732, 0.0273224, 5.02732, 5.02729, 0.0273224, -5.02732 )
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -5, -0.000851616, -5, 2.11629, 1.98383, -4.31382, 5, -0.000851616, -5, 2.11629, -0.06579, -3.26351, 2.04875, -0.06579, -3.25666, 1.98316, -0.06579, -3.23708, 1.92247, -0.06579, -3.20478, 1.86962, -0.06579, -3.16073, 1.82557, -0.06579, -3.10787, 1.79327, -0.06579, -3.04718, -2.9581, -0.0292622, -2.09769, -2.97866, -0.0292622, -2.03211, -2.98551, -0.0292622, -1.96359, -5, -0.000851616, 5, -4.03485, 2.89905, -1.96359, -2.63508, 7.09975, -1.96359, 2.11629, 4.92432, -2.91308, 5, -0.000851616, 5, 2.46672, -0.06579, -2.91308, 2.45987, -0.06579, -2.9816, 2.44029, -0.06579, -3.04718, 2.40799, -0.06579, -3.10787, 2.36394, -0.06579, -3.16073, 2.31108, -0.06579, -3.20478, 2.25039, -0.06579, -3.23708, 2.18481, -0.06579, -3.25666, 1.17561, 10.3, 1.6298, 1.77369, -0.06579, -2.9816, -2.97866, -0.0292622, -1.89507, 1.76684, -0.06579, -2.91308, 1.77369, -0.06579, -2.84554, 1.79327, -0.06579, -2.77897, 1.82557, -0.06579, -2.71926, 1.86962, -0.06579, -2.66543, 1.92247, -0.06579, -2.62236, 1.98316, -0.06579, -2.59005, 2.04875, -0.06579, -2.57048, 2.11629, -0.06579, -2.56363, 1.17561, 4.29929, 3.6296, 2.18481, -0.06579, -2.57048, 2.25039, -0.06579, -2.59005, 2.31108, -0.06579, -2.62236, 2.36394, -0.06579, -2.66543, 2.40799, -0.06579, -2.71926, 2.44029, -0.06579, -2.77897, 2.45987, -0.06579, -2.84554 )
+
 [node name="Spatial" type="Spatial"]
 
-[node name="ground_asphalt" type="MeshInstance" parent="."]
+[node name="ground_asphalt" type="StaticBody" parent="."]
+
+[node name="ground_asphalt" type="MeshInstance" parent="ground_asphalt"]
 mesh = ExtResource( 1 )
-skeleton = NodePath("../ground_green")
+skeleton = NodePath("../../ground_green/ground_green")
 material/0 = SubResource( 2 )
 
-[node name="ground_green" type="MeshInstance" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="ground_asphalt"]
+shape = SubResource( 3 )
+
+[node name="ground_green" type="StaticBody" parent="."]
+
+[node name="ground_green" type="MeshInstance" parent="ground_green"]
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
-[node name="ground-3trees" type="MeshInstance" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="ground_green"]
+shape = SubResource( 4 )
+
+[node name="ground-3trees" type="StaticBody" parent="."]
+
+[node name="ground-3trees" type="MeshInstance" parent="ground-3trees"]
 mesh = ExtResource( 5 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )
 material/2 = ExtResource( 2 )
@@ -29,3 +52,6 @@ material/3 = ExtResource( 4 )
 material/4 = ExtResource( 3 )
 material/5 = ExtResource( 4 )
 material/6 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ground-3trees"]
+shape = SubResource( 5 )
