@@ -14,13 +14,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="3drts3"
+config/name="Disarstar Arena"
 run/main_scene="res://lobby.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 gamestate="*res://gamestate.gd"
+GlobalWorld="*res://World.gd"
 
 [global]
 

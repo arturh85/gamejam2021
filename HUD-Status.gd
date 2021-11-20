@@ -1,13 +1,13 @@
 extends ColorRect
 
 
-onready var GameGrid = get_node("../../TreeMap")
+onready var World = get_node("../..")
 
 func _ready():
-   GameGrid.connect("wind_direction_changed", self, "wind_direction_changed")
-   GameGrid.connect("energy_changed", self, "energy_changed")
-   GameGrid.connect("resources_changed", self, "resources_changed")
-   GameGrid.connect("co2_level_changed", self, "co2_level_changed")
+   World.connect("wind_direction_changed", self, "wind_direction_changed")
+   World.connect("energy_changed", self, "energy_changed")
+   World.connect("resources_changed", self, "resources_changed")
+   World.connect("co2_level_changed", self, "co2_level_changed")
 
 func direction_label(direction):
 	if direction == 0:

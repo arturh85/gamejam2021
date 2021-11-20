@@ -1,15 +1,105 @@
 extends Spatial
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var TreeMap = get_node("TreeMap")
+onready var GroundMap = get_node("GroundMap")
 
+var wind_direction = 0
+signal wind_direction_changed
 
-# Called when the node enters the scene tree for the first time.
+var resources = 10
+signal resources_changed
+
+var energy = 10
+signal energy_changed
+
+var co2_level = 0
+signal co2_level_changed
+
+var fires = {}
+
+var rng = RandomNumberGenerator.new()
+
 func _ready():
-	pass # Replace with function body.
+	rng.randomize()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func add_fire(x, z):
+	var key = str(x) + "," + str(z)
+	if not fires.has(key):
+		var scene = load("res://effects/Fire.tscn")
+		var instance = scene.instance()
+		instance.translation = TreeMap.map_to_world(x, 0, z)
+		add_child(instance)
+		fires[key] = instance
+
+func _spread_fire(pos):
+	var fires_to_add = []
+	var key = str(pos.x) + "," + str(pos.z)
+	if fires.has(key):
+		var instance = fires[key]
+		instance.ticks_burning += 1
+
+		co2_level += instance.ticks_burning
+
+
+		if rng.randf_range(0, 10) < instance.ticks_burning*2 :
+			fires[key].queue_free()
+			fires.erase(key)
+		for xx in range(pos.x-1,pos.x+2):
+			for zz in range(pos.z-1,pos.z+2):
+				if xx != pos.x or zz != pos.z:
+
+					var direction_factor = 0.1
+					if wind_direction == 0: # North
+						if zz > pos.z:
+							direction_factor = 0.8
+					elif wind_direction == 1: # East
+						if xx > pos.x:
+							direction_factor = 0.8
+					elif wind_direction == 2: # South
+						if zz > pos.z:
+							direction_factor = 0.8
+						pass
+					else:                         # West
+						if xx < pos.x:
+							direction_factor = 0.8
+						pass
+
+					var kkey =  str(xx) + "," + str(zz)
+					var cell_content = TreeMap.get_cell_item(xx,0, zz)
+					if cell_content >= 0: # Trees
+						if rng.randf_range(0, 1) < direction_factor:
+							fires_to_add.append([xx, zz])
+	return fires_to_add
+
+func _update_fire_spread():
+	var fires_to_add = []
+
+	var old_co2_level = co2_level
+
+	for cell in TreeMap.get_used_cells():
+		for pos in _spread_fire(cell):
+			fires_to_add.append(pos)
+	for key in fires_to_add:
+		add_fire(key[0], key[1])
+	if old_co2_level != co2_level:
+		emit_signal("co2_level_changed", co2_level)
+
+func _update_wind_direction():
+	var wind_change = rng.randf_range(-10.0, 10.0)
+	if wind_change < -8.9:
+		wind_direction = wrapi(wind_direction - 1, 0, 4)
+		emit_signal("wind_direction_changed", wind_direction)
+	if wind_change > 8.9:
+		wind_direction = wrapi(wind_direction + 1, 0, 4)
+		emit_signal("wind_direction_changed", wind_direction)
+
+
+func _on_Timer_timeout():
+	_update_wind_direction()
+	_update_fire_spread()
