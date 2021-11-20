@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Disarstar Arena"
+config/name="Disaster Arena"
 run/main_scene="res://lobby.tscn"
 config/icon="res://icon.png"
 
