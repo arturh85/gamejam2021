@@ -216,7 +216,16 @@ func _update_wind_direction():
 		emit_signal("wind_direction_changed", wind_direction)
 
 
+func _update_ground():
+	for cell in BuildingMap.get_used_cells():
+		var btype = BuildingMap.get_cell_item(cell.x, cell.y, cell.z)
+		if btype != -1:
+			for n in _cells_around8(cell):
+				GroundMap.set_cell_item(n.x, n.y, n.z, 0)
+				#var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
+			
 func _on_Timer_timeout():
+	_update_ground()
 	_update_wind_direction()
 	if rng.randi_range(0, 100) > 30:
 		_update_fire_spread()
