@@ -218,7 +218,7 @@ func _spread_fire(pos: Vector3):
 		for n in _cells_around8(pos):
 			var direction_factor = 0.1
 			if wind_direction == 0: # North
-				if n.z > pos.z:
+				if n.z < pos.z:
 					direction_factor = 0.8
 			elif wind_direction == 1: # East
 				if n.x > pos.x:
@@ -309,9 +309,15 @@ func _update_buildings():
 			add_child(building_instance)
 			building_entities[cell] = building_instance
 			
-func _on_Timer_timeout():
-	_update_wind_direction()
+
+func _on_SpreadEffectsTimer_timeout():
 	if rng.randi_range(0, 100) > 30:
 		_update_fire_spread()
-	if rng.randi_range(0, 100) > 93:
-		_update_tree_growth(false)
+
+
+func _on_TreeGrowthTimer_timeout():
+	_update_tree_growth(false)
+
+
+func _on_WindDirectionTimer_timeout():
+	_update_wind_direction()
