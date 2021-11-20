@@ -32,6 +32,10 @@ var BuildingMap
 var GroundMap
 var SceneFire
 var SceneEntityTree
+var SceneEntityBattery
+var SceneEntityHeadquarter
+var SceneEntityPowerLine
+var SceneEntitySolarCell
 var SceneHealth
 
 func _ready():
@@ -40,14 +44,19 @@ func _ready():
 	GroundMap = get_node("GroundMap")
 	SceneFire = load("res://effects/Fire.tscn")
 	SceneEntityTree = load("res://entities/Tree.tscn")
+	SceneEntityBattery = load("res://entities/Battery.tscn")
+	SceneEntityHeadquarter = load("res://entities/Headquarter.tscn")
+	SceneEntityPowerLine = load("res://entities/PowerLine.tscn")
+	SceneEntitySolarCell = load("res://entities/SolarCell.tscn")
 	SceneHealth = load("res://HealthDisplay.tscn")
 	rng.randomize()
 	
 	if TreeMap:
 		randomizeTreeMap()
+		_update_buildings()
 		
 func _random_element(list):
-	var random_idx = rng.randi_range(0, list.size())
+	var random_idx = rng.randi_range(0, list.size()-1)
 	return list[random_idx]
 
 func randomizeTreeMap():
@@ -137,7 +146,11 @@ func on_tree_burndown(pos):
 	if tree_entities.has(pos):
 		tree_entities[pos].queue_free()
 		tree_entities.erase(pos)
+	if building_entities.has(pos):
+		building_entities[pos].queue_free()
+		building_entities.erase(pos)
 	TreeMap.set_cell_item(pos.x, pos.y, pos.z, -1)
+	BuildingMap.set_cell_item(pos.x, pos.y, pos.z, -1)
 		
 func _cells_around8(center):
 	var neighbors = []
@@ -222,16 +235,34 @@ func _update_wind_direction():
 		emit_signal("wind_direction_changed", wind_direction)
 
 
-func _update_ground():
+func _update_buildings():
 	for cell in BuildingMap.get_used_cells():
 		var btype = BuildingMap.get_cell_item(cell.x, cell.y, cell.z)
 		if btype != -1:
 			for n in _cells_around8(cell):
 				GroundMap.set_cell_item(n.x, n.y, n.z, 0)
-				#var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
+		
+		if not building_entities.has(cell):
+			var building_instance = null
+			if btype == 0:
+				building_instance = SceneEntitySolarCell.instance()
+			elif btype >= 1 and btype <= 5:
+				building_instance = SceneEntityPowerLine.instance()
+			elif btype == 6:
+				building_instance = SceneEntityHeadquarter.instance()
+				print("HQ at", cell)
+			elif btype == 7:
+				building_instance = SceneEntityBattery.instance()
+			else:
+				print("ERROR: unknown building type", btype)
+				continue
+				
+			building_instance.translation = GroundMap.map_to_world(cell.x, cell.y, cell.z)
+			building_instance.grid_pos = cell
+			add_child(building_instance)
+			building_entities[cell] = building_instance
 			
 func _on_Timer_timeout():
-	_update_ground()
 	_update_wind_direction()
 	if rng.randi_range(0, 100) > 30:
 		_update_fire_spread()
