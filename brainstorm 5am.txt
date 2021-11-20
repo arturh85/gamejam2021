@@ -9,8 +9,6 @@ anderer planet
 Einheiten
 -> nur gebäude in reichweite zu existierenden gebäuden. 
 -> einsatz per mausklick (keine mobilen units)
--> haupthaus
--> solarpanels, energy-kanäle, energy-speicher
 -> bau braucht resource+energy(?) und energy für betrieb
 -> brandschutzabtrennung, wasserkannonen, löschflugzeug 'airstrike', meteor-abwehr-raketen, wetter-manipulation (jeweils 1 freischalt-gebäude)
 -> CO2-binder

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://HUD-Status.gd" type="Script" id=1]
+[ext_resource path="res://images/hud.png" type="Texture" id=2]
 
 [node name="HUD-Status" type="ColorRect"]
 anchor_left = 0.731
@@ -10,8 +11,21 @@ anchor_bottom = 1.0
 margin_left = -0.376038
 margin_top = -6.10352e-05
 margin_bottom = -1.0
+rect_pivot_offset = Vector2( -1510.17, -640 )
 color = Color( 0.466667, 0.662745, 0.25098, 1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+margin_left = -748.168
+margin_top = -522.0
+margin_right = 1171.83
+margin_bottom = 558.0
+rect_scale = Vector2( 0.534, 0.556 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
