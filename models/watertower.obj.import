@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/watertower.obj-58d52d2eb1503dc32dcac63e8fce07b2.mesh"
+
+[deps]
+
+files=[ "res://.import/watertower.obj-58d52d2eb1503dc32dcac63e8fce07b2.mesh" ]
+
+source_file="res://models/watertower.obj"
+dest_files=[ "res://.import/watertower.obj-58d52d2eb1503dc32dcac63e8fce07b2.mesh", "res://.import/watertower.obj-58d52d2eb1503dc32dcac63e8fce07b2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
