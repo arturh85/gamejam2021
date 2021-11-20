@@ -47,11 +47,12 @@ func randomizeTreeMap():
 	var available_cells = GroundMap.get_used_cells()
 	for i in range(num_seed_trees):
 		var pos = _random_element(available_cells)
-		TreeMap.set_cell_item(pos.x, pos.y, pos.z, rng.randi_range(0, TreeMap.mesh_library.get_item_list().size()-1))
+		if _is_allowed_tree(pos):
+			TreeMap.set_cell_item(pos.x, pos.y, pos.z, rng.randi_range(0, TreeMap.mesh_library.get_item_list().size()-1))
+	
+	_update_tree_growth(true)
+	_update_tree_growth(false)
 		
-	_update_tree_growth()
-	_update_tree_growth()
-	_update_tree_growth()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -117,9 +118,9 @@ func _cells_around8(center):
 func _cells_around4(center):
 	var neighbors = []
 	neighbors.append(Vector3(center.x - 1, center.y, center.z))
-	neighbors.append(Vector3(center.x, center.y, center.z - 1))
+	neighbors.append(Vector3(center.x,     center.y, center.z - 1))
 	neighbors.append(Vector3(center.x + 1, center.y, center.z))
-	neighbors.append(Vector3(center.x, center.y, center.z + 1))
+	neighbors.append(Vector3(center.x,     center.y, center.z + 1))
 	return neighbors
 	
 func _spread_fire(pos):
@@ -132,7 +133,7 @@ func _spread_fire(pos):
 		if rng.randf_range(0, 10) < instance.ticks_burning*2 :
 			fires[key].queue_free()
 			fires.erase(key)
-		for n in _cells_around8(pos):
+		for n in _cells_around4(pos):
 			var direction_factor = 0.1
 			if wind_direction == 0: # North
 				if n.z > pos.z:
@@ -155,17 +156,20 @@ func _spread_fire(pos):
 				if rng.randf_range(0, 1) < direction_factor:
 					fires_to_add.append([n.x, n.z])
 	return fires_to_add
+	
+func _is_allowed_tree(n):
+	var n_ground = GroundMap.get_cell_item(n.x, n.y, n.z)
+	return n_ground == 1
 
-func _update_tree_growth():
+func _update_tree_growth(force):
 	for cell in TreeMap.get_used_cells():
 		var tree_type = TreeMap.get_cell_item(cell.x, cell.y, cell.z)
-		if rng.randi_range(0, 100) > 50:
+		if !force && rng.randi_range(0, 100) < 80:
 			continue
 		for n in _cells_around8(cell):
 			var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
-			var n_ground = GroundMap.get_cell_item(n.x, n.y, n.z)
-			if n_ground == 1 and n_content == -1 and rng.randi_range(0, 100) > 50:
-				TreeMap.set_cell_item(n.x, n.y, n.z, tree_type)
+			if _is_allowed_tree(n) and n_content == -1 and (force or rng.randi_range(0, 100) > 80):
+				TreeMap.set_cell_item(n.x, n.y, n.z, rng.randi_range(0, TreeMap.mesh_library.get_item_list().size()-1))
 		
 func _update_fire_spread():
 	var fires_to_add = []
@@ -194,5 +198,5 @@ func _on_Timer_timeout():
 	_update_wind_direction()
 	if rng.randi_range(0, 100) > 70:
 		_update_fire_spread()
-	if rng.randi_range(0, 100) > 95:
-		_update_tree_growth()
+	if rng.randi_range(0, 100) > 93:
+		_update_tree_growth(false)
