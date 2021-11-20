@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/powerline_3con.obj-ff7f6cbe6ea2406282b23deb58182509.mesh"
+
+[deps]
+
+files=[ "res://.import/powerline_3con.obj-ff7f6cbe6ea2406282b23deb58182509.mesh" ]
+
+source_file="res://models/powerline_3con.obj"
+dest_files=[ "res://.import/powerline_3con.obj-ff7f6cbe6ea2406282b23deb58182509.mesh", "res://.import/powerline_3con.obj-ff7f6cbe6ea2406282b23deb58182509.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
