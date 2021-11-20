@@ -21,6 +21,8 @@ func _process(delta):
 	$"../SelectionTile".translation.x = p.x * $"../GridMap".cell_size.x + $"../GridMap".cell_size.x / 2.0
 	$"../SelectionTile".translation.z = p.z * $"../GridMap".cell_size.z + $"../GridMap".cell_size.z / 2.0
 	
+	if Input.is_action_just_released("alt_command"):
+		$"../GridMap".add_fire(p.x, p.z)
 	
 	return
 	

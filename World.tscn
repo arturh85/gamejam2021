@@ -64,3 +64,8 @@ material/0 = SubResource( 7 )
 [node name="CollisionShape" type="CollisionShape" parent="Ground"]
 transform = Transform( 10000, 0, 0, 0, 0.1, 0, 0, 0, 10000, 0, -0.1, 0 )
 shape = SubResource( 8 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="GridMap" method="_on_Timer_timeout"]
