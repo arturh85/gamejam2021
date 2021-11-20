@@ -133,7 +133,7 @@ func _spread_fire(pos):
 		if rng.randf_range(0, 10) < instance.ticks_burning*2 :
 			fires[key].queue_free()
 			fires.erase(key)
-		for n in _cells_around4(pos):
+		for n in _cells_around8(pos):
 			var direction_factor = 0.1
 			if wind_direction == 0: # North
 				if n.z > pos.z:
@@ -196,7 +196,7 @@ func _update_wind_direction():
 
 func _on_Timer_timeout():
 	_update_wind_direction()
-	if rng.randi_range(0, 100) > 70:
+	if rng.randi_range(0, 100) > 30:
 		_update_fire_spread()
 	if rng.randi_range(0, 100) > 93:
 		_update_tree_growth(false)
