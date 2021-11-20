@@ -122,7 +122,9 @@ func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 
 	if options.selected == 0:
-		add_fire(pos)
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if tree_content != -1:
+			add_fire(pos)
 	elif options.selected == 1:
 		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
 		self._update_buildings()
