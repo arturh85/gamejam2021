@@ -2,9 +2,8 @@ name: "godot-release"
 
 on:
   workflow_run:
-    workflows: ["godot-ci"]
-    tags:
-      - '*'
+    workflows: ["godot-ci.yml"]
+    tags: v[0-9]+.[0-9]+.[0-9]+
     types: 
       - completed
 
@@ -42,7 +41,7 @@ jobs:
         files: ${{ env.FILENAME }}.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+
   publish-ghpages:
     name: Web Export
     runs-on: ubuntu-latest
