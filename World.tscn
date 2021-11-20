@@ -117,7 +117,6 @@ autostart = true
 
 [node name="TestLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7536, 17.1627, -17.2369 )
-visible = false
 light_energy = 10.862
 light_cull_mask = 4294967293
 shadow_enabled = true

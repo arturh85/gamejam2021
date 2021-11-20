@@ -57,14 +57,14 @@ __meta__ = {
 }
 
 [node name="Label-Clock" type="Label" parent="."]
-anchor_left = -0.484
-anchor_top = -2.46
-anchor_right = -0.484
-anchor_bottom = -2.46
-margin_left = 74.6
-margin_top = -296.2
-margin_right = 210.6
-margin_bottom = -267.2
+anchor_left = -0.925
+anchor_top = -6.461
+anchor_right = -0.925
+anchor_bottom = -6.461
+margin_left = -68.0233
+margin_top = -14.503
+margin_right = 67.9767
+margin_bottom = 14.497
 text = "0:00"
 align = 1
 valign = 1
