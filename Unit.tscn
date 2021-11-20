@@ -12,9 +12,7 @@
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.305882, 0.94902, 0.192157, 1 )
 
-[node name="Unit" type="KinematicBody" groups=[
-"units",
-]]
+[node name="Unit" type="StaticBody" groups=["units"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
@@ -38,4 +36,3 @@ transform = Transform( 1.4197, 0, 0, 0, 0.119909, 0, 0, 0, 1.4197, 0, 0.260365, 
 visible = false
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
-

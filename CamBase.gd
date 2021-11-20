@@ -14,6 +14,16 @@ var start_sel_pos = Vector2()
 func _process(delta):
 	var m_pos = get_viewport().get_mouse_position()
 	calc_move(m_pos, delta)
+	
+	var rc = raycast_from_mouse(m_pos, 1)
+	var p = $"../GridMap".world_to_map(rc.position)
+	
+	$"../SelectionTile".translation.x = p.x * $"../GridMap".cell_size.x + $"../GridMap".cell_size.x / 2.0
+	$"../SelectionTile".translation.z = p.z * $"../GridMap".cell_size.z + $"../GridMap".cell_size.z / 2.0
+	
+	
+	return
+	
 	if Input.is_action_just_pressed("main_command"):
 		move_selected_units(m_pos)
 	if Input.is_action_just_pressed("alt_command"):
@@ -48,11 +58,16 @@ func move_selected_units(m_pos):
 			unit.move_to(result.position)
 
 func select_units(m_pos):
+
+	return
+	
 	var new_selected_units = []
-	if m_pos.distance_squared_to(start_sel_pos) < 16:
-		var u = get_unit_under_mouse(m_pos)
+	if m_pos.distance_squared_to(start_sel_pos) < 16999999:
+		var u = raycast_from_mouse(m_pos, 1)
 		if u != null:
-			new_selected_units.append(u)
+			#$"../SelectionTile" = u.position
+			print(u.position)
+		#	new_selected_units.append(u)
 	else:
 		new_selected_units = get_units_in_box(start_sel_pos, m_pos)
 	if new_selected_units.size() != 0:
