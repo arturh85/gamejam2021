@@ -21,7 +21,7 @@ jobs:
         workflow_conclusion: success
         commit: ${{ github.sha }}
         event: push
-        name: DisasterArena-${{ github.sha }}-${{ matrix.platform }}
+        name: ${{ matrix.platform }}  
         path: DisasterArena
 
     - name: Set version
