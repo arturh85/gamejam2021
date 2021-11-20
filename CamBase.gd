@@ -21,17 +21,21 @@ func _process(delta):
 	$"../SelectionTile".translation.x = p.x * $"../GroundMap".cell_size.x + $"../GroundMap".cell_size.x / 2.0
 	$"../SelectionTile".translation.z = p.z * $"../GroundMap".cell_size.z + $"../GroundMap".cell_size.z / 2.0
 	
-	var mat = $"../SelectionTile".get_surface_material(0)
+	var mat1 = $"../SelectionTile/T1".get_surface_material(0)
+	var mat2 = $"../SelectionTile/T2".get_surface_material(0)
 	var ground_content = $"../GroundMap".get_cell_item(p.x, 0, p.z)
 	var tree_content = $"../TreeMap".get_cell_item(p.x, 0, p.z)
 	if ground_content == 0: # Asphalt
-		mat.emission = Color(0, 1, 0)
+		mat1.emission = Color(1, 1, 0)
+		mat2.emission = Color(1, 1, 0)
 	elif tree_content >= 0: # Trees
-		mat.emission = Color(1, 0, 0)
+		mat1.emission = Color(1, 0, 0)
+		mat2.emission = Color(1, 0, 0)
 		if Input.is_action_just_released("alt_command"):
 			$"..".add_fire(p.x, p.z)
 	else: #Grass
-		mat.emission = Color(0.5, 0.5, 0.5)
+		mat1.emission = Color(0.5, 0.5, 0.5)
+		mat2.emission = Color(0.5, 0.5, 0.5)
 	
 	
 	return

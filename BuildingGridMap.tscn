@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://models/solarcell.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://materials/building1.tres" type="Material" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://models/powerline_edge.obj" type="ArrayMesh" id=7]
 [ext_resource path="res://models/powerline_3con.obj" type="ArrayMesh" id=8]
 [ext_resource path="res://models/powerline_4con.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://models/hq.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://materials/building2.tres" type="Material" id=11]
 
 [node name="Spatial" type="Spatial"]
 
@@ -17,7 +19,7 @@ mesh = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 4 )
-material/3 = ExtResource( 2 )
+material/3 = ExtResource( 11 )
 material/4 = ExtResource( 3 )
 
 [node name="powerline" type="MeshInstance" parent="."]
@@ -26,7 +28,7 @@ mesh = ExtResource( 5 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 2 )
-material/3 = ExtResource( 2 )
+material/3 = ExtResource( 11 )
 material/4 = ExtResource( 2 )
 
 [node name="powerline2" type="MeshInstance" parent="."]
@@ -35,7 +37,7 @@ mesh = ExtResource( 6 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 2 )
-material/3 = ExtResource( 2 )
+material/3 = ExtResource( 11 )
 material/4 = ExtResource( 2 )
 
 [node name="powerline_edge" type="MeshInstance" parent="."]
@@ -44,7 +46,7 @@ mesh = ExtResource( 7 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 2 )
-material/3 = ExtResource( 2 )
+material/3 = ExtResource( 11 )
 material/4 = ExtResource( 2 )
 
 [node name="powerline_3con" type="MeshInstance" parent="."]
@@ -53,7 +55,7 @@ mesh = ExtResource( 8 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 2 )
-material/3 = ExtResource( 2 )
+material/3 = ExtResource( 11 )
 material/4 = ExtResource( 2 )
 
 [node name="powerline_4con" type="MeshInstance" parent="."]
@@ -62,10 +64,28 @@ mesh = ExtResource( 9 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 2 )
-material/3 = ExtResource( 2 )
+material/3 = ExtResource( 11 )
 material/4 = ExtResource( 2 )
 material/5 = ExtResource( 4 )
 material/6 = ExtResource( 2 )
 material/7 = ExtResource( 2 )
-material/8 = ExtResource( 2 )
+material/8 = ExtResource( 11 )
 material/9 = ExtResource( 2 )
+
+[node name="hq" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -80.8856 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 4 )
+material/2 = ExtResource( 11 )
+material/3 = ExtResource( 11 )
+material/4 = ExtResource( 2 )
+material/5 = ExtResource( 4 )
+material/6 = ExtResource( 2 )
+material/7 = ExtResource( 4 )
+material/8 = ExtResource( 11 )
+material/9 = ExtResource( 2 )
+material/10 = ExtResource( 2 )
+material/11 = ExtResource( 2 )
+material/12 = ExtResource( 11 )
+material/13 = ExtResource( 4 )
