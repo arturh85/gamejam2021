@@ -1,72 +1,103 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://HUD-Status.gd" type="Script" id=1]
+[ext_resource path="res://images/hud.png" type="Texture" id=2]
+[ext_resource path="res://font.tres" type="DynamicFont" id=3]
 
 [node name="HUD-Status" type="ColorRect"]
-anchor_left = 0.731
-anchor_top = 0.87
+anchor_left = 0.001
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -0.376038
-margin_top = -6.10352e-05
-margin_bottom = -1.0
-color = Color( 0.466667, 0.662745, 0.25098, 1 )
+anchor_bottom = 0.147
+margin_left = -0.024
+margin_top = -1.0
+margin_bottom = -0.199997
+color = Color( 1, 1, 1, 0 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_left = -2.723
+anchor_top = -6.805
+anchor_right = 1.003
+anchor_bottom = 7.372
+margin_left = 2784.63
+margin_top = 606.645
+margin_right = 892.931
+margin_bottom = 518.892
+rect_scale = Vector2( 0.535, 0.558 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label-WindDirection" type="RichTextLabel" parent="."]
-margin_left = 130.832
-margin_top = 58.0
-margin_right = 270.832
-margin_bottom = 78.0
-text = "Wind Direction: North"
+anchor_right = 1.0
+anchor_bottom = 6.681
+margin_left = 204.0
+margin_top = 8.0
+margin_right = -708.0
+margin_bottom = -563.609
+custom_fonts/normal_font = ExtResource( 3 )
+text = "North"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-Energy" type="RichTextLabel" parent="."]
-margin_left = 3.0
-margin_top = 1.0
-margin_right = 143.0
-margin_bottom = 21.0
-text = "Energy: 0"
+anchor_left = 0.875
+anchor_top = 0.079
+anchor_right = 0.985
+anchor_bottom = 0.5
+margin_left = -0.125061
+margin_top = -0.0310001
+margin_right = 0.34491
+margin_bottom = -13.5
+custom_fonts/normal_font = ExtResource( 3 )
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-Resources" type="RichTextLabel" parent="."]
-margin_left = 3.0
-margin_top = 17.0
-margin_right = 143.0
-margin_bottom = 37.0
-text = "Resources: 0"
+anchor_right = 0.833
+anchor_bottom = 0.348
+margin_left = 743.0
+margin_top = 7.0
+margin_right = -0.159058
+margin_bottom = 0.027998
+custom_fonts/normal_font = ExtResource( 3 )
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-CO2" type="RichTextLabel" parent="."]
-margin_left = 147.832
-margin_top = 1.0
-margin_right = 287.832
-margin_bottom = 21.0
-text = "CO2 Level: 0"
+anchor_right = 1.022
+anchor_bottom = 6.586
+margin_left = 52.0
+margin_top = 8.0
+margin_right = -883.506
+margin_bottom = -555.154
+custom_fonts/normal_font = ExtResource( 3 )
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-Clock" type="Label" parent="."]
-anchor_left = -0.925
-anchor_top = -6.461
-anchor_right = -0.925
-anchor_bottom = -6.461
-margin_left = -68.0233
-margin_top = -14.503
-margin_right = 67.9767
-margin_bottom = 14.497
+anchor_left = 0.477
+anchor_top = 0.034
+anchor_right = 0.542
+anchor_bottom = 0.36
+margin_left = 0.0289612
+margin_top = -0.0260003
+margin_right = -0.466064
+margin_bottom = -0.0400009
+custom_fonts/font = ExtResource( 3 )
 text = "0:00"
-align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
