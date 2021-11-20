@@ -36,6 +36,9 @@ var SceneEntityBattery
 var SceneEntityHeadquarter
 var SceneEntityPowerLine
 var SceneEntitySolarCell
+var SceneEntityFarm
+var SceneEntityWaterTower
+var SceneEntitySilo
 var SceneHealth
 
 func _ready():
@@ -48,6 +51,9 @@ func _ready():
 	SceneEntityHeadquarter = load("res://entities/Headquarter.tscn")
 	SceneEntityPowerLine = load("res://entities/PowerLine.tscn")
 	SceneEntitySolarCell = load("res://entities/SolarCell.tscn")
+	SceneEntityFarm = load("res://entities/Farm.tscn")
+	SceneEntityWaterTower = load("res://entities/WaterTower.tscn")
+	SceneEntitySilo = load("res://entities/Silo.tscn")
 	SceneHealth = load("res://HealthDisplay.tscn")
 	rng.randomize()
 	
@@ -121,13 +127,19 @@ func damage_tree(key):
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 
-	if options.selected == 0:
+	if options.selected == 0: # Fire
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
 			add_fire(pos)
-	elif options.selected == 1:
+	elif options.selected == 1: # SolarCell
 		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
 		self._update_buildings()
+	elif options.selected == 2: # Bulldozer
+		self.on_burndown(pos)
+	elif options.selected == 3: # Tree
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1:
+			TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
@@ -268,6 +280,12 @@ func _update_buildings():
 				building_instance = SceneEntityHeadquarter.instance()
 			elif btype == 7:
 				building_instance = SceneEntityBattery.instance()
+			elif btype == 8:
+				building_instance = SceneEntityFarm.instance()
+			elif btype == 9:
+				building_instance = SceneEntityWaterTower.instance()
+			elif btype == 10:
+				building_instance = SceneEntitySilo.instance()
 			else:
 				print("ERROR: unknown building type", btype)
 				continue
