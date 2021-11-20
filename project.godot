@@ -18,10 +18,6 @@ config/name="3drts3"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
-[display]
-
-window/size/fullscreen=true
-
 [global]
 
 view=false
