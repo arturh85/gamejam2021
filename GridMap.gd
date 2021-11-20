@@ -34,13 +34,19 @@ func _on_Timer_timeout():
 	for cell in get_used_cells():
 			var key = str(cell.x) + "," + str(cell.z)
 			if fires.has(key):
+				var instance = fires[key]
+				instance.ticks_burning += 1
+
+				if rng.randf_range(0, 10) < instance.ticks_burning :
+					fires[key].queue_free()
+					fires.erase(key)
 				for xx in range(cell.x-1,cell.x+2):
 					for zz in range(cell.z-1,cell.z+2):
 						if xx != cell.x or zz != cell.z:
 							var kkey =  str(xx) + "," + str(zz)
 							var cell_content = get_cell_item(xx,0, zz)
 							if cell_content == 2: # Trees
-								if rng.randi_range(0, 10) > 7:
+								if rng.randi_range(0, 10) > 8:
 									fires_to_add.append([xx, zz])
 	for key in fires_to_add:
 		add_fire(key[0], key[1])
