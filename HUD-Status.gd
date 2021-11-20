@@ -3,10 +3,10 @@ extends ColorRect
 
 
 func _ready():
-   $"..".connect("wind_direction_changed", self, "wind_direction_changed")
-   $"..".connect("energy_changed", self, "energy_changed")
-   $"..".connect("resources_changed", self, "resources_changed")
-   $"..".connect("co2_level_changed", self, "co2_level_changed")
+   $"../..".connect("wind_direction_changed", self, "wind_direction_changed")
+   $"../..".connect("energy_changed", self, "energy_changed")
+   $"../..".connect("resources_changed", self, "resources_changed")
+   $"../..".connect("co2_level_changed", self, "co2_level_changed")
 
 func direction_label(direction):
 	if direction == 0:
@@ -19,13 +19,13 @@ func direction_label(direction):
 		return "West"
 
 func wind_direction_changed(direction):
-	$"Label-WindDirection".text = "Wind Direction: " + direction_label(direction)
+	$"Label-WindDirection".text = direction_label(direction)
 
 func energy_changed(energy):
-	$"Label-Energy".text = "Energy: " + str(energy)
+	$"Label-Energy".text = str(energy)
 
 func resources_changed(resources):
-	$"Label-Resources".text = "Resources: " + str(resources)
+	$"Label-Resources".text = str(resources)
 
 func co2_level_changed(co2):
-	$"Label-CO2".text = "CO2 Level: " + str(co2)
+	$"Label-CO2".text =  str(co2)
