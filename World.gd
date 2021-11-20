@@ -121,13 +121,19 @@ func damage_tree(key):
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 
-	if options.selected == 0:
+	if options.selected == 0: # Fire
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
 			add_fire(pos)
-	elif options.selected == 1:
+	elif options.selected == 1: # SolarCell
 		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
 		self._update_buildings()
+	elif options.selected == 2: # Bulldozer
+		self.on_burndown(pos)
+	elif options.selected == 3: # Tree
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1:
+			TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
