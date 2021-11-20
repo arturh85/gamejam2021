@@ -19,27 +19,28 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.815686 )
-anchor_left = -2.723
-anchor_top = -6.805
-anchor_right = 1.003
-anchor_bottom = 7.372
-margin_left = 2784.63
-margin_top = 606.645
-margin_right = 892.931
-margin_bottom = 518.892
-rect_scale = Vector2( 0.535, 0.558 )
+anchor_right = 1.0
+anchor_bottom = 6.791
+margin_top = 5.0
+margin_right = -4.0
+margin_bottom = 8.60095
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource( 2 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-WindDirection" type="RichTextLabel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 6.681
-margin_left = 204.0
-margin_top = 8.0
-margin_right = -708.0
-margin_bottom = -563.609
+anchor_left = 0.199
+anchor_top = 0.09
+anchor_right = 0.308
+anchor_bottom = 0.348
+margin_left = 0.422989
+margin_top = -0.0100002
+margin_right = -0.0840149
+margin_bottom = 0.027998
 custom_fonts/normal_font = ExtResource( 3 )
 text = "North"
 __meta__ = {
@@ -50,23 +51,10 @@ __meta__ = {
 anchor_left = 0.875
 anchor_top = 0.079
 anchor_right = 0.985
-anchor_bottom = 0.5
-margin_left = -0.125061
+anchor_bottom = 0.348
+margin_left = -0.125122
 margin_top = -0.0310001
 margin_right = 0.34491
-margin_bottom = -13.5
-custom_fonts/normal_font = ExtResource( 3 )
-text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label-Resources" type="RichTextLabel" parent="."]
-anchor_right = 0.833
-anchor_bottom = 0.348
-margin_left = 743.0
-margin_top = 7.0
-margin_right = -0.159058
 margin_bottom = 0.027998
 custom_fonts/normal_font = ExtResource( 3 )
 text = "0"
@@ -74,13 +62,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label-Resources" type="RichTextLabel" parent="."]
+anchor_left = 0.726
+anchor_right = 0.833
+anchor_bottom = 0.348
+margin_left = 0.302002
+margin_top = 7.0
+margin_right = -0.159058
+margin_bottom = 0.0279942
+custom_fonts/normal_font = ExtResource( 3 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label-CO2" type="RichTextLabel" parent="."]
-anchor_right = 1.022
-anchor_bottom = 6.586
-margin_left = 52.0
-margin_top = 8.0
-margin_right = -883.506
-margin_bottom = -555.154
+anchor_left = 0.051
+anchor_top = 0.09
+anchor_right = 0.158
+anchor_bottom = 0.348
+margin_left = -0.173004
+margin_top = -0.0100002
+margin_right = 0.365997
+margin_bottom = 0.027998
 custom_fonts/normal_font = ExtResource( 3 )
 text = "0"
 __meta__ = {
