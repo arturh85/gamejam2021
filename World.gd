@@ -47,7 +47,8 @@ func randomizeTreeMap():
 	var available_cells = GroundMap.get_used_cells()
 	for i in range(num_seed_trees):
 		var pos = _random_element(available_cells)
-		TreeMap.set_cell_item(pos.x, pos.y, pos.z, 0)
+		TreeMap.set_cell_item(pos.x, pos.y, pos.z, rng.randi_range(0, TreeMap.mesh_library.get_item_list().size()-1))
+		
 	_update_tree_growth()
 	_update_tree_growth()
 	_update_tree_growth()
