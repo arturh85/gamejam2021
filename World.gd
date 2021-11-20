@@ -20,6 +20,7 @@ signal co2_level_changed
 
 var fire_effects = {}
 var tree_entities = {}
+var building_entities = {}
 
 var rng = RandomNumberGenerator.new()
 
@@ -124,6 +125,10 @@ func add_fire(pos: Vector3):
 				add_child(tree_instance)
 				tree_entities[pos] = tree_instance
 			tree_entities[pos].on_catch_fire()
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content != -1:
+			if building_entities.has(pos):
+				building_entities[pos].on_catch_fire()
 				
 func on_tree_burndown(pos):
 	if fire_effects.has(pos):
@@ -181,7 +186,8 @@ func _spread_fire(pos: Vector3):
 	
 func _is_allowed_tree(n):
 	var n_ground = GroundMap.get_cell_item(n.x, n.y, n.z)
-	return n_ground == 1
+	var n_building = BuildingMap.get_cell_item(n.x, n.y, n.z)
+	return n_ground == 1 and n_building == -1
 
 func _update_tree_growth(force):
 	for cell in TreeMap.get_used_cells():

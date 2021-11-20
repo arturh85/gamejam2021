@@ -9,6 +9,7 @@ onready var healthbar = $"Viewport/HealthBar"
 var showBar = false
 
 func _ready():
+	texture = $Viewport.get_texture()
 	if not showBar:
 		hide()
 	
@@ -33,3 +34,4 @@ func update_healthbar(value, max_health):
 		if not showBar:
 			hide()
 	healthbar.value = value
+	print("updated", value, max_health)
