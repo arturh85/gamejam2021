@@ -118,6 +118,19 @@ func _process(delta):
 func damage_tree(key):
 	pass
 
+func on_click_cell(pos: Vector3):
+	var options = $"CanvasLayer/HUD-Tool/OptionButton"
+
+	if options.selected == 0:
+		add_fire(pos)
+	elif options.selected == 1:
+		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
+		self._update_buildings()
+	else:
+		print("ERROR: unknown selected: ", options.selected)
+
+
+
 func add_fire(pos: Vector3):
 	if not fire_effects.has(pos):
 		var fire_instance = SceneFire.instance()

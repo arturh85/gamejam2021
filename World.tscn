@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://CamBase.gd" type="Script" id=1]
 [ext_resource path="res://SelectionBox.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://HUD-Status.tscn" type="PackedScene" id=9]
 [ext_resource path="res://models/selection2.obj" type="ArrayMesh" id=10]
 [ext_resource path="res://materials/glowyellow.tres" type="Material" id=11]
+[ext_resource path="res://HUD-Tool.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=11]
 code = "shader_type canvas_item;
@@ -105,6 +106,8 @@ __meta__ = {
 }
 
 [node name="HUD-Status" parent="CanvasLayer" instance=ExtResource( 9 )]
+
+[node name="HUD-Tool" parent="CanvasLayer" instance=ExtResource( 12 )]
 
 [node name="CamBase" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 0 )
