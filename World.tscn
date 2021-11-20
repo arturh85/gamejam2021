@@ -168,38 +168,6 @@ shape = SubResource( 8 )
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="TestLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.24999, 11.4241, 8.38786 )
-light_energy = 7.0
-light_cull_mask = 4294967293
-shadow_enabled = true
-omni_range = 15.0
-omni_attenuation = 1.7411
-
-[node name="TestLight2" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.24999, 11.4241, -2.42787 )
-light_energy = 7.0
-light_cull_mask = 4294967293
-shadow_enabled = true
-omni_range = 15.0
-omni_attenuation = 1.7411
-
-[node name="TestLight3" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.96534, 10.4363, 1.97789 )
-light_energy = 7.0
-light_cull_mask = 4294967293
-shadow_enabled = true
-omni_range = 15.0
-omni_attenuation = 1.7411
-
-[node name="TestLight4" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07269, 11.4936, 2.18101 )
-light_energy = 7.0
-light_cull_mask = 4294967293
-shadow_enabled = true
-omni_range = 15.0
-omni_attenuation = 1.7411
-
 [node name="SelectionTile" type="Spatial" parent="."]
 
 [node name="T1" type="MeshInstance" parent="SelectionTile"]
