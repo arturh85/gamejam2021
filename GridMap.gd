@@ -28,8 +28,10 @@ func _on_Timer_timeout():
 	var wind_change = rng.randf_range(-10.0, 10.0)
 	if wind_change < -7:
 		wind_direction = wrapi(wind_direction - 1, 0, 4)
+		print("new wind direction: ", wind_direction)
 	if wind_change > 7:
 		wind_direction = wrapi(wind_direction + 1, 0, 4)
+		print("new wind direction: ", wind_direction)
 	
 	for cell in get_used_cells():
 			var key = str(cell.x) + "," + str(cell.z)
@@ -43,10 +45,29 @@ func _on_Timer_timeout():
 				for xx in range(cell.x-1,cell.x+2):
 					for zz in range(cell.z-1,cell.z+2):
 						if xx != cell.x or zz != cell.z:
+							
+							var direction_factor = 0.1
+							if wind_direction == 0: # North
+								if zz > cell.z:
+									direction_factor = 0.8
+							elif wind_direction == 1: # East
+								if xx > cell.x:
+									direction_factor = 0.8
+							elif wind_direction == 2: # South
+								if zz > cell.z:
+									direction_factor = 0.8
+								pass
+							else:                         # West
+								if xx < cell.x:
+									direction_factor = 0.8
+								pass
+							
+							
+							
 							var kkey =  str(xx) + "," + str(zz)
 							var cell_content = get_cell_item(xx,0, zz)
 							if cell_content == 2: # Trees
-								if rng.randi_range(0, 10) > 8:
+								if rng.randf_range(0, 1) < direction_factor:
 									fires_to_add.append([xx, zz])
 	for key in fires_to_add:
 		add_fire(key[0], key[1])
