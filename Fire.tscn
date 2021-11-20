@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://fire/Fire.tres" type="Gradient" id=1]
 [ext_resource path="res://fire/Smoke30Frames_0.png" type="Texture" id=2]
+[ext_resource path="res://Fire.gd" type="Script" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -47,10 +48,43 @@ albedo_texture = ExtResource( 2 )
 [sub_resource type="QuadMesh" id=7]
 material = SubResource( 6 )
 
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 7.177 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "flicker"
+length = 0.2
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.05, 0.07, 0.11, 0.13, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 7.177, 1.0, 1.0, 8.174, 8.174, 2.0, 2.0, 0.0 ]
+}
+
 [node name="Particles" type="Particles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.0546, 21.5708, -12.449 )
 material_override = SubResource( 1 )
-amount = 200
+amount = 187
 lifetime = 0.5
 randomness = 1.0
 visibility_aabb = AABB( -3.85516, -6.16211, -4, 7.71033, 8, 8 )
@@ -58,3 +92,21 @@ local_coords = false
 draw_order = 2
 process_material = SubResource( 5 )
 draw_pass_1 = SubResource( 7 )
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Particles/FlickerLight")
+autoplay = "flicker"
+anims/RESET = SubResource( 8 )
+anims/flicker = SubResource( 9 )
+
+[node name="FlickerLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.449699, 4.38636, 0.9209 )
+light_color = Color( 1, 0.470588, 0.286275, 1 )
+light_energy = 7.177
+light_specular = 3.359
+light_cull_mask = 4294967293
+shadow_enabled = true
+shadow_color = Color( 0.890196, 0.313726, 0, 1 )
+omni_range = 13.733
+omni_attenuation = 2.54912

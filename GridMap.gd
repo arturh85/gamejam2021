@@ -37,7 +37,7 @@ func _on_Timer_timeout():
 				var instance = fires[key]
 				instance.ticks_burning += 1
 
-				if rng.randf_range(0, 10) < instance.ticks_burning :
+				if rng.randf_range(0, 10) < instance.ticks_burning*2 :
 					fires[key].queue_free()
 					fires.erase(key)
 				for xx in range(cell.x-1,cell.x+2):
