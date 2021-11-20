@@ -24,13 +24,13 @@ func _process(delta):
 	var mat = $"../SelectionTile".get_surface_material(0)
 	var cell_content = $"../GridMap".get_cell_item(p.x, 0, p.z)
 	if cell_content == 0: # Asphalt
-		mat.albedo_color = Color(0, 1, 0, 0.1)
+		mat.emission = Color(0, 1, 0)
 	elif cell_content == 2: # Trees
-		mat.albedo_color = Color(1, 0, 0, 0.1)
+		mat.emission = Color(1, 0, 0)
 		if Input.is_action_just_released("alt_command"):
 			$"../GridMap".add_fire(p.x, p.z)
 	else: #Grass
-		mat.albedo_color = Color(0.5, 0.5, 0.5, 0.1)
+		mat.emission = Color(0.5, 0.5, 0.5)
 	
 	
 	return
