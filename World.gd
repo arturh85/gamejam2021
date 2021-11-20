@@ -27,6 +27,7 @@ var theTime = 0.0
 
 
 var TreeMap
+var BuildingMap
 var GroundMap
 var SceneFire
 var SceneEntityTree
@@ -34,6 +35,7 @@ var SceneHealth
 
 func _ready():
 	TreeMap = get_node("TreeMap")
+	BuildingMap = get_node("BuildingMap")
 	GroundMap = get_node("GroundMap")
 	SceneFire = load("res://effects/Fire.tscn")
 	SceneEntityTree = load("res://entities/Tree.tscn")
