@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://models/solarcell.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://materials/building1.tres" type="Material" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://models/farm.obj" type="ArrayMesh" id=13]
 [ext_resource path="res://models/watertower.obj" type="ArrayMesh" id=14]
 [ext_resource path="res://models/silo.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://materials/glowgreen.tres" type="Material" id=16]
+[ext_resource path="res://materials/glowyellow.tres" type="Material" id=17]
+[ext_resource path="res://materials/glowcyan.tres" type="Material" id=18]
 
 [node name="Spatial" type="Spatial"]
 
@@ -84,7 +87,7 @@ material/1 = ExtResource( 4 )
 material/2 = ExtResource( 11 )
 material/3 = ExtResource( 11 )
 material/4 = ExtResource( 2 )
-material/5 = ExtResource( 4 )
+material/5 = ExtResource( 18 )
 material/6 = ExtResource( 2 )
 material/7 = ExtResource( 4 )
 material/8 = ExtResource( 11 )
@@ -92,7 +95,7 @@ material/9 = ExtResource( 2 )
 material/10 = ExtResource( 2 )
 material/11 = ExtResource( 2 )
 material/12 = ExtResource( 11 )
-material/13 = ExtResource( 4 )
+material/13 = ExtResource( 16 )
 
 [node name="battery" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -108.12 )
@@ -113,9 +116,9 @@ material/1 = ExtResource( 2 )
 material/2 = ExtResource( 2 )
 material/3 = ExtResource( 11 )
 material/4 = ExtResource( 11 )
-material/5 = ExtResource( 4 )
+material/5 = ExtResource( 17 )
 material/6 = ExtResource( 11 )
-material/7 = ExtResource( 4 )
+material/7 = ExtResource( 17 )
 material/8 = ExtResource( 11 )
 
 [node name="watertower" type="MeshInstance" parent="."]
@@ -125,7 +128,7 @@ material/0 = ExtResource( 2 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 11 )
 material/3 = ExtResource( 2 )
-material/4 = ExtResource( 4 )
+material/4 = ExtResource( 18 )
 material/5 = ExtResource( 2 )
 material/6 = ExtResource( 11 )
 
@@ -134,7 +137,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -154.697 )
 mesh = ExtResource( 15 )
 material/0 = ExtResource( 11 )
 material/1 = ExtResource( 2 )
-material/2 = ExtResource( 4 )
+material/2 = ExtResource( 16 )
 material/3 = ExtResource( 2 )
 material/4 = ExtResource( 11 )
 material/5 = ExtResource( 11 )
