@@ -139,7 +139,7 @@ func add_fire(pos: Vector3):
 			if building_entities.has(pos):
 				building_entities[pos].on_catch_fire()
 				
-func on_tree_burndown(pos):
+func on_burndown(pos):
 	if fire_effects.has(pos):
 		fire_effects[pos].queue_free()
 		fire_effects.erase(pos)
@@ -185,15 +185,16 @@ func _spread_fire(pos: Vector3):
 			elif wind_direction == 2: # South
 				if n.z > pos.z:
 					direction_factor = 0.8
-				pass
 			else:                         # West
 				if n.x < pos.x:
 					direction_factor = 0.8
-				pass
 
-			var cell_content = TreeMap.get_cell_item(n.x, n.y, n.z)
-			if cell_content >= 0: # Trees
+			var tree_content = TreeMap.get_cell_item(n.x, n.y, n.z)
+			var building_content = BuildingMap.get_cell_item(n.x, n.y, n.z)
+			if tree_content >= 0:
 				if rng.randf_range(0, 1) < direction_factor:
+					fires_to_add.append(n)
+			elif building_content >= 0: 
 					fires_to_add.append(n)
 	return fires_to_add
 	
@@ -250,7 +251,6 @@ func _update_buildings():
 				building_instance = SceneEntityPowerLine.instance()
 			elif btype == 6:
 				building_instance = SceneEntityHeadquarter.instance()
-				print("HQ at", cell)
 			elif btype == 7:
 				building_instance = SceneEntityBattery.instance()
 			else:

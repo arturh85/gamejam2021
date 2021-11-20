@@ -23,6 +23,6 @@ func _process(delta):
 		burntime -= delta
 		health_current -= damage
 	if health_current <= 0:
-		$"..".on_tree_burndown(self.grid_pos)
+		$"..".on_burndown(self.grid_pos)
 	else:
 		$HealthDisplay.update_healthbar(health_current, health_max)
