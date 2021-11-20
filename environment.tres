@@ -13,5 +13,5 @@ fog_height_min = 2.0
 fog_height_curve = 1.03526
 glow_enabled = true
 glow_intensity = 0.73
-glow_strength = 0.42
+glow_strength = 0.5
 glow_blend_mode = 0

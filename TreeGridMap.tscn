@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://models/tree1.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://materials/tree1_base.tres" type="Material" id=2]
 [ext_resource path="res://materials/glowgreen.tres" type="Material" id=3]
 [ext_resource path="res://models/tree2.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://models/tree5.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://models/tree3.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://models/tree4.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://models/tree7.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://models/tree8.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://models/tree6.obj" type="ArrayMesh" id=10]
 
 [node name="Spatial" type="Spatial"]
 
@@ -15,5 +21,39 @@ material/1 = ExtResource( 3 )
 [node name="tree2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22.3373 )
 mesh = ExtResource( 4 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+
+[node name="tree3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40.1557 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+
+[node name="tree4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -58.9268 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 2 )
+
+[node name="tree5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -77.1895 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+
+[node name="tree6" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -96.3838 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+
+[node name="tree7" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -114.505 )
+mesh = ExtResource( 8 )
+material/0 = ExtResource( 2 )
+
+[node name="tree8" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -129.222 )
+mesh = ExtResource( 9 )
 material/0 = ExtResource( 2 )
 material/1 = ExtResource( 3 )
