@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://HUD-Status.gd" type="Script" id=1]
+[ext_resource path="res://font.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+
+[sub_resource type="Theme" id=2]
+default_font = ExtResource( 2 )
+
+[sub_resource type="Theme" id=3]
+default_font = ExtResource( 2 )
+
+[sub_resource type="Theme" id=4]
+default_font = ExtResource( 2 )
 
 [node name="HUD-Status" type="ColorRect"]
 anchor_left = 0.731
@@ -17,10 +30,11 @@ __meta__ = {
 }
 
 [node name="Label-WindDirection" type="RichTextLabel" parent="."]
-margin_left = 130.832
-margin_top = 58.0
-margin_right = 270.832
-margin_bottom = 78.0
+margin_left = 86.832
+margin_top = 56.0
+margin_right = 289.832
+margin_bottom = 77.0
+theme = SubResource( 1 )
 text = "Wind Direction: North"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -28,29 +42,31 @@ __meta__ = {
 
 [node name="Label-Energy" type="RichTextLabel" parent="."]
 margin_left = 3.0
-margin_top = 1.0
 margin_right = 143.0
 margin_bottom = 21.0
+theme = SubResource( 2 )
 text = "Energy: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-Resources" type="RichTextLabel" parent="."]
-margin_left = 3.0
-margin_top = 17.0
-margin_right = 143.0
-margin_bottom = 37.0
+margin_left = 2.83203
+margin_top = 21.0
+margin_right = 142.832
+margin_bottom = 42.0
+theme = SubResource( 3 )
 text = "Resources: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-CO2" type="RichTextLabel" parent="."]
-margin_left = 147.832
+margin_left = 146.832
 margin_top = 1.0
-margin_right = 287.832
-margin_bottom = 21.0
+margin_right = 286.832
+margin_bottom = 23.0
+theme = SubResource( 4 )
 text = "CO2 Level: 0"
 __meta__ = {
 "_edit_use_anchors_": false

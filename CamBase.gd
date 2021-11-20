@@ -33,7 +33,7 @@ func _process(delta):
 		mat1.emission = Color(1, 0, 0)
 		mat2.emission = Color(1, 0, 0)
 		if Input.is_action_just_released("alt_command"):
-			$"..".add_fire(Vector3(p.x, 0, p.z))
+			$"..".on_click_cell(Vector3(p.x, 0, p.z))
 	else: #Grass
 		mat1.emission = Color(0.5, 0.5, 0.5)
 		mat2.emission = Color(0.5, 0.5, 0.5)
