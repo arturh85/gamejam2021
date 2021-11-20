@@ -168,7 +168,16 @@ __meta__ = {
 transform = Transform( 10000, 0, 0, 0, 0.1, 0, 0, 0, 10000, 0, -0.1, 0 )
 shape = SubResource( 8 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SpreadEffectsTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="TreeGrowthTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="WindDirectionTimer" type="Timer" parent="."]
+wait_time = 10.0
 autostart = true
 
 [node name="SelectionTile" type="Spatial" parent="."]
@@ -196,4 +205,6 @@ autoplay = "idle"
 anims/RESET = SubResource( 12 )
 anims/idle = SubResource( 13 )
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="SpreadEffectsTimer" to="." method="_on_SpreadEffectsTimer_timeout"]
+[connection signal="timeout" from="TreeGrowthTimer" to="." method="_on_TreeGrowthTimer_timeout"]
+[connection signal="timeout" from="WindDirectionTimer" to="." method="_on_WindDirectionTimer_timeout"]
