@@ -2,12 +2,18 @@
 
 [ext_resource path="res://models/tree1.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://materials/tree1_base.tres" type="Material" id=2]
-[ext_resource path="res://materials/glowpink.tres" type="Material" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 1, 0.0627451, 1 )
+emission_enabled = true
+emission = Color( 0.00784314, 1, 0, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
 
 [node name="Spatial" type="Spatial"]
 
 [node name="tree1" type="MeshInstance" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
-material/1 = ExtResource( 3 )
+material/1 = SubResource( 1 )
