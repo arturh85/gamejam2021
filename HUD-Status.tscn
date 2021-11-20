@@ -3,10 +3,13 @@
 [ext_resource path="res://HUD-Status.gd" type="Script" id=1]
 
 [node name="HUD-Status" type="ColorRect"]
-margin_left = 613.0
-margin_top = 506.0
-margin_right = 1013.0
-margin_bottom = 586.0
+anchor_left = 0.731
+anchor_top = 0.87
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.376038
+margin_top = -6.10352e-05
+margin_bottom = -1.0
 color = Color( 0.466667, 0.662745, 0.25098, 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -14,10 +17,10 @@ __meta__ = {
 }
 
 [node name="Label-WindDirection" type="RichTextLabel" parent="."]
-margin_left = 256.0
-margin_top = 62.0
-margin_right = 396.0
-margin_bottom = 82.0
+margin_left = 130.832
+margin_top = 58.0
+margin_right = 270.832
+margin_bottom = 78.0
 text = "Wind Direction: North"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -44,9 +47,9 @@ __meta__ = {
 }
 
 [node name="Label-CO2" type="RichTextLabel" parent="."]
-margin_left = 278.0
+margin_left = 147.832
 margin_top = 1.0
-margin_right = 418.0
+margin_right = 287.832
 margin_bottom = 21.0
 text = "CO2 Level: 0"
 __meta__ = {
