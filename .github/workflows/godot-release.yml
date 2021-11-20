@@ -1,9 +1,12 @@
-name: Publish
+name: "godot-release"
 
 on:
-  push:
+  workflow_run:
+    workflows: ["godot-ci"]
     tags:
       - '*'
+    types: 
+      - completed
 
 jobs:
   publish:
