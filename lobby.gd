@@ -90,3 +90,11 @@ func _on_start_pressed():
 
 func _on_find_public_ip_pressed():
 	OS.shell_open("https://icanhazip.com/")
+
+
+func _process(_delta):
+	if is_visible_in_tree() and Input.is_action_just_pressed("ui_accept"):
+		if $Connect.visible:
+			self._on_host_pressed()
+		else:
+			self._on_start_pressed()

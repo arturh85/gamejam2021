@@ -14,9 +14,41 @@ __meta__ = {
 }
 
 [node name="Label-WindDirection" type="RichTextLabel" parent="."]
-margin_right = 140.0
-margin_bottom = 20.0
+margin_left = 256.0
+margin_top = 62.0
+margin_right = 396.0
+margin_bottom = 82.0
 text = "Wind Direction: North"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label-Energy" type="RichTextLabel" parent="."]
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 143.0
+margin_bottom = 21.0
+text = "Energy: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label-Resources" type="RichTextLabel" parent="."]
+margin_left = 3.0
+margin_top = 17.0
+margin_right = 143.0
+margin_bottom = 37.0
+text = "Resources: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label-CO2" type="RichTextLabel" parent="."]
+margin_left = 278.0
+margin_top = 1.0
+margin_right = 418.0
+margin_bottom = 21.0
+text = "CO2 Level: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
