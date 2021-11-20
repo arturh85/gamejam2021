@@ -42,7 +42,9 @@ func randomizeTreeMap():
 	for i in range(num_seed_trees):
 		var pos = _random_element(available_cells)
 		TreeMap.set_cell_item(pos.x, pos.y, pos.z, 0)
-	
+	_update_tree_growth()
+	_update_tree_growth()
+	_update_tree_growth()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -67,10 +69,10 @@ func _cells_around8(center):
 	
 func _cells_around4(center):
 	var neighbors = []
-	for x in range(center.x-1, center.x+2):
-		for z in range(center.z-1, center.z+2):
-			if x != center.x or z != center.z:
-				neighbors.append(Vector3(x, center.y, z))
+	neighbors.append(Vector3(center.x - 1, center.y, center.z))
+	neighbors.append(Vector3(center.x, center.y, center.z - 1))
+	neighbors.append(Vector3(center.x + 1, center.y, center.z))
+	neighbors.append(Vector3(center.x, center.y, center.z + 1))
 	return neighbors
 	
 func _spread_fire(pos):
@@ -110,10 +112,12 @@ func _spread_fire(pos):
 func _update_tree_growth():
 	for cell in TreeMap.get_used_cells():
 		var tree_type = TreeMap.get_cell_item(cell.x, cell.y, cell.z)
+		if rng.randi_range(0, 100) > 50:
+			continue
 		for n in _cells_around8(cell):
 			var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
 			var n_ground = GroundMap.get_cell_item(n.x, n.y, n.z)
-			if n_ground == 1 and n_content == -1 and rng.randi_range(0, 100) > 91:
+			if n_ground == 1 and n_content == -1 and rng.randi_range(0, 100) > 50:
 				TreeMap.set_cell_item(n.x, n.y, n.z, tree_type)
 		
 func _update_fire_spread():
@@ -141,6 +145,7 @@ func _update_wind_direction():
 
 func _on_Timer_timeout():
 	_update_wind_direction()
-	if rng.randi_range(0,3) > 2:
+	if rng.randi_range(0, 100) > 70:
 		_update_fire_spread()
-	_update_tree_growth()
+	if rng.randi_range(0, 100) > 95:
+		_update_tree_growth()
