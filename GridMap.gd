@@ -2,6 +2,12 @@ extends GridMap
 
 var fires = {}
 var wind_direction = 0
+signal wind_direction_changed
+
+var player_resources = 10
+var player_energy = 10
+var co2_level = 0
+
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -26,12 +32,12 @@ func _on_Timer_timeout():
 	var fires_to_add = []
 
 	var wind_change = rng.randf_range(-10.0, 10.0)
-	if wind_change < -7:
+	if wind_change < -8.9:
 		wind_direction = wrapi(wind_direction - 1, 0, 4)
-		print("new wind direction: ", wind_direction)
-	if wind_change > 7:
+		emit_signal("wind_direction_changed", wind_direction)
+	if wind_change > 8.9:
 		wind_direction = wrapi(wind_direction + 1, 0, 4)
-		print("new wind direction: ", wind_direction)
+		emit_signal("wind_direction_changed", wind_direction)
 	
 	for cell in get_used_cells():
 			var key = str(cell.x) + "," + str(cell.z)
