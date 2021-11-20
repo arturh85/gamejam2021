@@ -43,7 +43,6 @@ shape = SubResource( 4 )
 [node name="ground-3trees" type="StaticBody" parent="."]
 
 [node name="ground-3trees" type="MeshInstance" parent="ground-3trees"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 mesh = ExtResource( 5 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
@@ -55,5 +54,4 @@ material/5 = ExtResource( 4 )
 material/6 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="ground-3trees"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 5 )

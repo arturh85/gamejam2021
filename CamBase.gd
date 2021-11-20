@@ -16,19 +16,20 @@ func _process(delta):
 	calc_move(m_pos, delta)
 	
 	var rc = raycast_from_mouse(m_pos, 1)
-	var p = $"../GridMap".world_to_map(rc.position)
+	var p = $"../GroundMap".world_to_map(rc.position)
 	
-	$"../SelectionTile".translation.x = p.x * $"../GridMap".cell_size.x + $"../GridMap".cell_size.x / 2.0
-	$"../SelectionTile".translation.z = p.z * $"../GridMap".cell_size.z + $"../GridMap".cell_size.z / 2.0
+	$"../SelectionTile".translation.x = p.x * $"../GroundMap".cell_size.x + $"../GroundMap".cell_size.x / 2.0
+	$"../SelectionTile".translation.z = p.z * $"../GroundMap".cell_size.z + $"../GroundMap".cell_size.z / 2.0
 	
 	var mat = $"../SelectionTile".get_surface_material(0)
-	var cell_content = $"../GridMap".get_cell_item(p.x, 0, p.z)
-	if cell_content == 0: # Asphalt
+	var ground_content = $"../GroundMap".get_cell_item(p.x, 0, p.z)
+	var tree_content = $"../TreeMap".get_cell_item(p.x, 0, p.z)
+	if ground_content == 0: # Asphalt
 		mat.emission = Color(0, 1, 0)
-	elif cell_content == 2: # Trees
+	elif tree_content == 2: # Trees
 		mat.emission = Color(1, 0, 0)
 		if Input.is_action_just_released("alt_command"):
-			$"../GridMap".add_fire(p.x, p.z)
+			$"../TreeMap".add_fire(p.x, p.z)
 	else: #Grass
 		mat.emission = Color(0.5, 0.5, 0.5)
 	
