@@ -181,7 +181,8 @@ func _spread_fire(pos: Vector3):
 	
 func _is_allowed_tree(n):
 	var n_ground = GroundMap.get_cell_item(n.x, n.y, n.z)
-	return n_ground == 1
+	var n_building = BuildingMap.get_cell_item(n.x, n.y, n.z)
+	return n_ground == 1 and n_building == -1
 
 func _update_tree_growth(force):
 	for cell in TreeMap.get_used_cells():
