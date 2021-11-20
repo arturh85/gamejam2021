@@ -27,7 +27,7 @@ func _ready():
 func add_fire(x, z):
 	var key = str(x) + "," + str(z)
 	if not fires.has(key):
-		var scene = load("res://Fire.tscn")
+		var scene = load("res://effects/Fire.tscn")
 		var instance = scene.instance()
 		instance.translation = map_to_world(x, 0, z)
 		add_child(instance)

@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://materials/Fire.tres" type="Gradient" id=1]
+[ext_resource path="res://sprites/Smoke30Frames_0.png" type="Texture" id=2]
+[ext_resource path="res://effects/Fire.gd" type="Script" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 6
+particles_anim_v_frames = 5
+particles_anim_loop = true
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = ExtResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.293478, 0.875 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.193182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+angle = 360.0
+angle_random = 1.0
+scale_random = 0.8
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+anim_speed = 1.0
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
+
+[node name="Particles" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.0546, 21.5708, -12.449 )
+material_override = SubResource( 1 )
+amount = 187
+lifetime = 0.5
+randomness = 1.0
+visibility_aabb = AABB( -3.85516, -6.16211, -4, 7.71033, 8, 8 )
+local_coords = false
+draw_order = 2
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
+script = ExtResource( 3 )
+
+[node name="FlickerLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.449699, 4.38636, 0.9209 )
+light_color = Color( 1, 0.470588, 0.286275, 1 )
+light_energy = 7.177
+light_specular = 3.359
+light_cull_mask = 4294967293
+shadow_enabled = true
+omni_range = 7.323
+omni_attenuation = 1.46409
