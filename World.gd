@@ -36,6 +36,9 @@ var SceneEntityBattery
 var SceneEntityHeadquarter
 var SceneEntityPowerLine
 var SceneEntitySolarCell
+var SceneEntityFarm
+var SceneEntityWaterTower
+var SceneEntitySilo
 var SceneHealth
 
 func _ready():
@@ -48,6 +51,9 @@ func _ready():
 	SceneEntityHeadquarter = load("res://entities/Headquarter.tscn")
 	SceneEntityPowerLine = load("res://entities/PowerLine.tscn")
 	SceneEntitySolarCell = load("res://entities/SolarCell.tscn")
+	SceneEntityFarm = load("res://entities/Farm.tscn")
+	SceneEntityWaterTower = load("res://entities/WaterTower.tscn")
+	SceneEntitySilo = load("res://entities/Silo.tscn")
 	SceneHealth = load("res://HealthDisplay.tscn")
 	rng.randomize()
 	
@@ -274,6 +280,12 @@ func _update_buildings():
 				building_instance = SceneEntityHeadquarter.instance()
 			elif btype == 7:
 				building_instance = SceneEntityBattery.instance()
+			elif btype == 8:
+				building_instance = SceneEntityFarm.instance()
+			elif btype == 9:
+				building_instance = SceneEntityWaterTower.instance()
+			elif btype == 10:
+				building_instance = SceneEntitySilo.instance()
 			else:
 				print("ERROR: unknown building type", btype)
 				continue
