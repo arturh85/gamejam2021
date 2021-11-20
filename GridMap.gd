@@ -1,11 +1,11 @@
 extends GridMap
 
 var fires = {}
+var wind_direction = 0
+var rng = RandomNumberGenerator.new()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	# add_fire(-5, -5)
-	pass
+	rng.randomize()
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,6 +24,12 @@ func add_fire(x, z):
 
 func _on_Timer_timeout():
 	var fires_to_add = []
+
+	var wind_change = rng.randf_range(-10.0, 10.0)
+	if wind_change < -7:
+		wind_direction = wrapi(wind_direction - 1, 0, 4)
+	if wind_change > 7:
+		wind_direction = wrapi(wind_direction + 1, 0, 4)
 	
 	for cell in get_used_cells():
 			var key = str(cell.x) + "," + str(cell.z)
@@ -34,6 +40,7 @@ func _on_Timer_timeout():
 							var kkey =  str(xx) + "," + str(zz)
 							var cell_content = get_cell_item(xx,0, zz)
 							if cell_content == 2: # Trees
-								fires_to_add.append([xx, zz])
+								if rng.randi_range(0, 10) > 7:
+									fires_to_add.append([xx, zz])
 	for key in fires_to_add:
 		add_fire(key[0], key[1])
