@@ -157,6 +157,19 @@ func on_click_cell(pos: Vector3):
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
+func mine_tree(pos: Vector3):
+	var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+
+	if fire_effects.has(pos):
+		fire_effects[pos].queue_free()
+		fire_effects.erase(pos)
+	if tree_entities.has(pos):
+		tree_entities[pos].queue_free()
+		tree_entities.erase(pos)
+	TreeMap.set_cell_item(pos.x, pos.y, pos.z, -1)
+
+	resources += 10
+	emit_signal("resources_changed", resources)
 
 
 func add_fire(pos: Vector3):
