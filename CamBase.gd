@@ -29,7 +29,7 @@ func _process(delta):
 		mat.albedo_color = Color(1, 0, 0, 0.1)
 		if Input.is_action_just_released("alt_command"):
 			$"../GridMap".add_fire(p.x, p.z)
-	else:
+	else: #Grass
 		mat.albedo_color = Color(0.5, 0.5, 0.5, 0.1)
 	
 	
