@@ -126,18 +126,6 @@ func damage_tree(key):
 
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
-
-
-	options.add_item("Fire", 0)
-	options.add_item("Tree", 1)
-	options.add_item("Bulldozer", 2)
-	options.add_item("SolarCell", 3)
-	options.add_item("Battery", 4)
-	options.add_item("PowerLine", 5)
-	options.add_item("Farm", 6)
-	options.add_item("WaterTower", 7)
-	options.add_item("Silo", 8)
-
 	if options.selected == 0: # Fire
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
