@@ -1,12 +1,8 @@
 name: "godot-release"
 
 on:
-  workflow_run:
-    workflows: ["godot-ci"]
-    tags: v[0-9]+.[0-9]+.[0-9]+
-    types: 
-      - success
-
+  tags: v[0-9]+.[0-9]+.[0-9]+
+   
 jobs:
   publish-release:
     runs-on: ubuntu-latest
