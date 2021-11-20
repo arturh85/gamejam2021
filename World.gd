@@ -47,7 +47,8 @@ func randomizeTreeMap():
 	var available_cells = GroundMap.get_used_cells()
 	for i in range(num_seed_trees):
 		var pos = _random_element(available_cells)
-		TreeMap.set_cell_item(pos.x, pos.y, pos.z, 0)
+		if _is_allowed_tree(pos):
+			TreeMap.set_cell_item(pos.x, pos.y, pos.z, 0)
 	_update_tree_growth()
 	_update_tree_growth()
 	_update_tree_growth()
@@ -154,6 +155,10 @@ func _spread_fire(pos):
 				if rng.randf_range(0, 1) < direction_factor:
 					fires_to_add.append([n.x, n.z])
 	return fires_to_add
+	
+func _is_allowed_tree(n):
+	var n_ground = GroundMap.get_cell_item(n.x, n.y, n.z)
+	return n_ground == 1
 
 func _update_tree_growth():
 	for cell in TreeMap.get_used_cells():
@@ -162,8 +167,7 @@ func _update_tree_growth():
 			continue
 		for n in _cells_around8(cell):
 			var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
-			var n_ground = GroundMap.get_cell_item(n.x, n.y, n.z)
-			if n_ground == 1 and n_content == -1 and rng.randi_range(0, 100) > 50:
+			if _is_allowed_tree(n) and n_content == -1 and rng.randi_range(0, 100) > 50:
 				TreeMap.set_cell_item(n.x, n.y, n.z, tree_type)
 		
 func _update_fire_spread():
