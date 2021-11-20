@@ -18,7 +18,8 @@ signal energy_changed
 var co2_level = 0
 signal co2_level_changed
 
-var fires = {}
+var fire_effects = {}
+var tree_entities = {}
 
 var rng = RandomNumberGenerator.new()
 
@@ -27,10 +28,16 @@ var theTime = 0.0
 
 var TreeMap
 var GroundMap
+var SceneFire
+var SceneEntityTree
+var SceneHealth
 
 func _ready():
-	TreeMap = get_node("./TreeMap")
-	GroundMap = get_node("./GroundMap")
+	TreeMap = get_node("TreeMap")
+	GroundMap = get_node("GroundMap")
+	SceneFire = load("res://effects/Fire.tscn")
+	SceneEntityTree = load("res://entities/Tree.tscn")
+	SceneHealth = load("res://HealthDisplay.tscn")
 	rng.randomize()
 	
 	if TreeMap:
@@ -59,7 +66,7 @@ func randomizeTreeMap():
 #	pass
 
 func _process(delta):
-	var env = get_node("WorldEnvironment")
+	var env = get_node_or_null("WorldEnvironment")
 	
 	if env:
 		var mono = get_node("CanvasLayer/MonochromeShader")
@@ -96,16 +103,34 @@ func _process(delta):
 			mono.modulate = Color(1, 1, 1, 0)
 			env.environment.ambient_light_color = Color(0.1, 0.1, 0.1, 1)
 		
-		
+func damage_tree(key):
+	pass
 
-func add_fire(x, z):
-	var key = str(x) + "," + str(z)
-	if not fires.has(key):
-		var scene = load("res://effects/Fire.tscn")
-		var instance = scene.instance()
-		instance.translation = TreeMap.map_to_world(x, 0, z)
-		add_child(instance)
-		fires[key] = instance
+func add_fire(pos: Vector3):
+	if not fire_effects.has(pos):
+		var fire_instance = SceneFire.instance()
+		fire_instance.translation = GroundMap.map_to_world(pos.x, pos.y, pos.z)
+		add_child(fire_instance)
+		fire_effects[pos] = fire_instance
+		
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if tree_content != -1:
+			if not tree_entities.has(pos):
+				var tree_instance = SceneEntityTree.instance()
+				tree_instance.translation = GroundMap.map_to_world(pos.x, pos.y, pos.z)
+				tree_instance.grid_pos = pos
+				add_child(tree_instance)
+				tree_entities[pos] = tree_instance
+			tree_entities[pos].on_catch_fire()
+				
+func on_tree_burndown(pos):
+	if fire_effects.has(pos):
+		fire_effects[pos].queue_free()
+		fire_effects.erase(pos)
+	if tree_entities.has(pos):
+		tree_entities[pos].queue_free()
+		tree_entities.erase(pos)
+	TreeMap.set_cell_item(pos.x, pos.y, pos.z, -1)
 		
 func _cells_around8(center):
 	var neighbors = []
@@ -123,16 +148,12 @@ func _cells_around4(center):
 	neighbors.append(Vector3(center.x,     center.y, center.z + 1))
 	return neighbors
 	
-func _spread_fire(pos):
+func _spread_fire(pos: Vector3):
 	var fires_to_add = []
-	var key = str(pos.x) + "," + str(pos.z)
-	if fires.has(key):
-		var instance = fires[key]
+	if fire_effects.has(pos):
+		var instance = fire_effects[pos]
 		instance.ticks_burning += 1
 		co2_level += instance.ticks_burning
-		if rng.randf_range(0, 10) < instance.ticks_burning*2 :
-			fires[key].queue_free()
-			fires.erase(key)
 		for n in _cells_around8(pos):
 			var direction_factor = 0.1
 			if wind_direction == 0: # North
@@ -150,11 +171,10 @@ func _spread_fire(pos):
 					direction_factor = 0.8
 				pass
 
-			var kkey =  str(n.x) + "," + str(n.z)
-			var cell_content = TreeMap.get_cell_item(n.x,0, n.z)
+			var cell_content = TreeMap.get_cell_item(n.x, n.y, n.z)
 			if cell_content >= 0: # Trees
 				if rng.randf_range(0, 1) < direction_factor:
-					fires_to_add.append([n.x, n.z])
+					fires_to_add.append(n)
 	return fires_to_add
 	
 func _is_allowed_tree(n):
@@ -179,8 +199,8 @@ func _update_fire_spread():
 	for cell in TreeMap.get_used_cells():
 		for pos in _spread_fire(cell):
 			fires_to_add.append(pos)
-	for key in fires_to_add:
-		add_fire(key[0], key[1])
+	for pos in fires_to_add:
+		add_fire(pos)
 	if old_co2_level != co2_level:
 		emit_signal("co2_level_changed", co2_level)
 

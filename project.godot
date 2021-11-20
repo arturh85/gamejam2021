@@ -8,8 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "GDBaseEntity",
+"language": "GDScript",
+"path": "res://entities/BaseEntity.gd"
+} ]
 _global_script_class_icons={
+"GDBaseEntity": ""
 }
 
 [application]
@@ -21,7 +27,6 @@ config/icon="res://icon.png"
 [autoload]
 
 gamestate="*res://gamestate.gd"
-GlobalWorld="*res://World.gd"
 
 [global]
 

@@ -1,13 +1,12 @@
 extends ColorRect
 
 
-onready var World = get_node("../..")
 
 func _ready():
-   World.connect("wind_direction_changed", self, "wind_direction_changed")
-   World.connect("energy_changed", self, "energy_changed")
-   World.connect("resources_changed", self, "resources_changed")
-   World.connect("co2_level_changed", self, "co2_level_changed")
+   $"..".connect("wind_direction_changed", self, "wind_direction_changed")
+   $"..".connect("energy_changed", self, "energy_changed")
+   $"..".connect("resources_changed", self, "resources_changed")
+   $"..".connect("co2_level_changed", self, "co2_level_changed")
 
 func direction_label(direction):
 	if direction == 0:
