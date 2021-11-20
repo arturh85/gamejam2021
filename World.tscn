@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://CamBase.gd" type="Script" id=1]
 [ext_resource path="res://SelectionBox.gd" type="Script" id=2]
 [ext_resource path="res://ColorRect.gd" type="Script" id=3]
 [ext_resource path="res://meshlib/gridmap2.tres" type="MeshLibrary" id=4]
-[ext_resource path="res://environment.tres" type="Environment" id=5]
+[ext_resource path="res://Fire.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World.gd" type="Script" id=6]
 [ext_resource path="res://GridMap.gd" type="Script" id=7]
+[ext_resource path="res://environment.tres" type="Environment" id=8]
 
 [sub_resource type="Shader" id=11]
 code = "shader_type canvas_item;
@@ -35,14 +36,48 @@ emission_on_uv2 = false
 
 [sub_resource type="BoxShape" id=8]
 
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 7.177 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "flicker"
+length = 0.2
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.05, 0.07, 0.11, 0.13, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 7.177, 1.0, 1.0, 8.174, 8.174, 2.0, 2.0, 0.0 ]
+}
+
 [node name="World" type="Spatial"]
 script = ExtResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource( 10 )
-margin_top = 585.0
+margin_top = -3.0
 margin_right = 1026.0
 margin_bottom = 600.0
 script = ExtResource( 3 )
@@ -56,7 +91,7 @@ script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="CamBase"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 45 )
-environment = ExtResource( 5 )
+environment = ExtResource( 8 )
 fov = 47.9
 far = 150.0
 
@@ -98,11 +133,36 @@ shape = SubResource( 8 )
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.918476, 17.1627, 2.92042 )
+[node name="TestLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7536, 17.1627, -17.2369 )
 light_energy = 10.862
 light_cull_mask = 4294967293
 shadow_enabled = true
-omni_range = 51.652
+omni_range = 46.926
+omni_attenuation = 1.7411
+
+[node name="Fire" type="Spatial" parent="."]
+
+[node name="Particles" parent="Fire" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.7737, 1.13703, 21.6245 )
+amount = 500
+lifetime = 1.0
+
+[node name="FlickerLight" type="OmniLight" parent="Fire"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2234, 5.52339, 22.5454 )
+light_color = Color( 1, 0.470588, 0.286275, 1 )
+light_energy = 7.177
+light_specular = 3.359
+light_cull_mask = 4294967293
+shadow_enabled = true
+shadow_color = Color( 0.890196, 0.313726, 0, 1 )
+omni_range = 13.733
+omni_attenuation = 2.54912
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fire"]
+root_node = NodePath("../FlickerLight")
+autoplay = "flicker"
+anims/RESET = SubResource( 12 )
+anims/flicker = SubResource( 13 )
 
 [connection signal="timeout" from="Timer" to="GridMap" method="_on_Timer_timeout"]
