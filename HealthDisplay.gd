@@ -34,4 +34,3 @@ func update_healthbar(value, max_health):
 		if not showBar:
 			hide()
 	healthbar.value = value
-	print("updated", value, max_health)
