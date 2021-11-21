@@ -1,28 +1,17 @@
 ideas
 -----
 anderer planet
--> alien pflanzen (resource? anno-farm-umkreis, nachwachsen)
--> Sonne (feuer), stürme+blitze (feuer)| CO2-gesteuert
--> Meteor (feuer+zerstörung) random
--> Magnetischer Sturm special random (keine abwehr, keine CO2 abhängingkeit)
--> wind als brandbeschleuniger | CO2-gesteuert
-Einheiten
--> nur gebäude in reichweite zu existierenden gebäuden. 
--> einsatz per mausklick (keine mobilen units)
--> bau braucht resource+energy(?) und energy für betrieb
--> brandschutzabtrennung, wasserkannonen, löschflugzeug 'airstrike', meteor-abwehr-raketen, wetter-manipulation (jeweils 1 freischalt-gebäude)
+-> CO2 level / kathastrophen CO2-gesteuert
+-> Magnetischer Sturm special random
+gebäude
+-> nur gebäude in reichweite zu existierenden gebäuden?
 -> CO2-binder
 tag-nacht zyklus
--> sonnenstunden/tag gibt schwierigkeit an, random wald/map?
--> solar energy aufladen am tag
 -> tag ist bauphase, abwehr-gebäude können nachts per klick eingesetzt werden (bis energy leer)
--> resourcen-kraftwerke nachts als booster aktivierbar?
 n-player last man standing MP
--> sabotage: strom lahmlegen, resourcen klauen, 'airstrike', waldbrand mit laser (kleine animation?)
--> könnten viel resourcen benötigen und/ofer viel energy
+-> sabotage: strom lahmlegen, resourcen klauen, waldbrand mit laser 
+-> benötigen viel energy
 GUI
--> energy, resource
--> wind, temperatur, CO2 level, 
 -> kathastrophenvorhersage: sonnensturm, hitzewelle, unwetter, meteoriten
--> pixel minimap pro spieler + (wind, temperatur, CO2 level)
--> spielzeit
+->  pro spieler + (wind, gebäude , CO2 level)
+-> spielzeit (tage)
