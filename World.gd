@@ -93,9 +93,11 @@ func _ready():
 	rng.randomize()
 	
 	if TreeMap:
-		rebuildGround()		
+		rebuildGround()
 		randomizeTreeMap()
 		_update_buildings()
+		$Meteors.hide()
+		$Cloud.hide()
 		
 		
 
@@ -453,13 +455,35 @@ func _on_WindDirectionTimer_timeout():
 	_update_wind_direction()
 
 func _on_DisasterTimer_timeout():
-	var disaster_type = rng.randi_range(0, 0)
+	var max_disaster = 0
+	if co2_level > 100:
+		max_disaster = 2
+	
+		
+	var disaster_type = rng.randi_range(0, max_disaster)
 	if disaster_type == 0:
+		var max_fire = 2
+		if co2_level > 100:
+			max_fire = co2_level / 50
 		var fire_count = rng.randi_range(1, 2)
-		print("disaster: fire x ", fire_count, "after", $"DisasterTimer".wait_time )
+		print("disaster: fire x ", fire_count, " after ", $"DisasterTimer".wait_time, " seconds")
 		var trees = TreeMap.get_used_cells()
 		for i in range(fire_count):
 			var pos = _random_element(trees)
 			add_fire(pos)
+	elif disaster_type == 1:
+		print("disaster: meteor storm after ", $"DisasterTimer".wait_time, " seconds")
+		var trees = TreeMap.get_used_cells()
+		var pos = _random_element(trees)
+		$Meteors.start_disaster(TreeMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+	elif disaster_type == 2:
+		print("disaster: toxic cloud after ", $"DisasterTimer".wait_time, " seconds")
+		var trees = TreeMap.get_used_cells()
+		var pos = _random_element(trees)
+		$Cloud.start_disaster(TreeMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
 
-	$"DisasterTimer".wait_time += 5
+	var change = 2
+	if co2_level > 100:
+		change = - int(co2_level / 100)
+	$"DisasterTimer".wait_time = clamp($"DisasterTimer".wait_time + change, 5, 100)
+
