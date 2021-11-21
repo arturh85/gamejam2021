@@ -15,26 +15,26 @@ enum Buildings {
 	SILO = 10,
 }
 
-var powerline_costs = {"resources": 50, "energy": 5}
-var fire_costs = {"resources": 0, "energy": 10}
+var powerline_costs = {"resources": 50, "energy": 5, "co2": 0}
+var fire_costs = {"resources": 0, "energy": 10, "co2": 10}
 
-var meteor_costs = {"resources": 0, "energy": 10}
-var cloud_costs = {"resources": 0, "energy": 10}
+var meteor_costs = {"resources": 0, "energy": 10, "co2": 20}
+var cloud_costs = {"resources": 0, "energy": 10, "co2": 20}
 
-var tree_costs = {"resources": 30, "energy": 10}
-var bulldozer_costs = {"resources": 0, "energy": 200}
+var tree_costs = {"resources": 30, "energy": 10, "co2": 10}
+var bulldozer_costs = {"resources": 0, "energy": 200, "co2": 10}
 var building_costs = {
-	Buildings.SOLAR_CELL: {"resources": 200, "energy": 20},
+	Buildings.SOLAR_CELL: {"resources": 200, "energy": 20, "co2": 0},
 	Buildings.POWERLINE_1: powerline_costs,
 	Buildings.POWERLINE_2: powerline_costs,
 	Buildings.POWERLINE_3: powerline_costs,
 	Buildings.POWERLINE_4: powerline_costs,
 	Buildings.POWERLINE_5: powerline_costs,
-	Buildings.HEADQUARTER: {"resources": 9999, "energy": 9999},
-	Buildings.BATTERY: {"resources": 100, "energy": 20},
-	Buildings.FARM: {"resources": 200, "energy": 10},
-	Buildings.WATER_TOWER: {"resources": 20, "energy": 10},
-	Buildings.SILO: {"resources": 20, "energy": 10},
+	Buildings.HEADQUARTER: {"resources": 9999, "energy": 9999, "co2": 0},
+	Buildings.BATTERY: {"resources": 100, "energy": 20, "co2": 0},
+	Buildings.FARM: {"resources": 200, "energy": 10, "co2": 10},
+	Buildings.WATER_TOWER: {"resources": 20, "energy": 10, "co2": 0},
+	Buildings.SILO: {"resources": 20, "energy": 10, "co2": 100},
 }
 
 var mouseInHUD = false
@@ -117,8 +117,10 @@ func can_afford(cost):
 func apply_costs(cost):
 	if cost["energy"] > 0:
 		reduce_energy(cost["energy"])
-	if resources < cost["resources"]:
+	if cost["resources"] > 0:
 		reduce_resources(cost["resources"])
+	if cost["co2"] > 0:
+		increase_co2(cost["co2"])
 
 func can_afford_building(building):
 	return can_afford(building_costs[building])
@@ -203,6 +205,11 @@ func reduce_resources(cost):
 func reduce_energy(cost):
 	energy_current -= cost
 	emit_signal("energy_changed", energy_current)
+
+	
+func increase_co2(cost):
+	co2_level += cost
+	emit_signal("co2_changed", co2_level)
 
 func on_click_cell(pos: Vector3):
 	var hud = $"CanvasLayer/HUD-Tool/"
@@ -561,5 +568,5 @@ func _on_DisasterTimer_timeout():
 	var change = 2
 	if co2_level > 100:
 		change = - int(co2_level / 100)
-	$"DisasterTimer".wait_time = clamp($"DisasterTimer".wait_time + change, 5, 100)
+	$"DisasterTimer".wait_time = clamp($"DisasterTimer".wait_time + change, 5, 15)
 
