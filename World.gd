@@ -1,5 +1,6 @@
 extends Spatial
 
+class_name GDWorld
 
 enum Buildings {
 	SOLAR_CELL = 0,
@@ -104,6 +105,7 @@ func _ready():
 		_update_buildings()
 		$Meteors.hide()
 		$Cloud.hide()
+		$CanvasLayer/FireWarning.hide()
 		
 		
 
@@ -345,9 +347,7 @@ func on_click_cell(pos: Vector3):
 func mine_tree(pos: Vector3):
 	var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 
-	if fire_effects.has(pos):
-		fire_effects[pos].queue_free()
-		fire_effects.erase(pos)
+	remove_fire(pos)
 	if tree_entities.has(pos):
 		tree_entities[pos].queue_free()
 		tree_entities.erase(pos)
@@ -357,12 +357,23 @@ func mine_tree(pos: Vector3):
 	emit_signal("resources_changed", resources)
 
 
+func remove_fire(pos: Vector3):
+	if fire_effects.has(pos):
+		fire_effects[pos].queue_free()
+		fire_effects.erase(pos)
+		
+		if fire_effects.size() == 0:
+			$CanvasLayer/FireWarning.hide()
+	
+		
 func add_fire(pos: Vector3):
 	if not fire_effects.has(pos):
 		var fire_instance = SceneFire.instance()
 		fire_instance.translation = GroundMap.map_to_world(pos.x, pos.y, pos.z)
 		add_child(fire_instance)
 		fire_effects[pos] = fire_instance
+		
+		$CanvasLayer/FireWarning.show()
 		
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
@@ -379,9 +390,7 @@ func add_fire(pos: Vector3):
 				building_entities[pos].on_catch_fire()
 				
 func on_burndown(pos):
-	if fire_effects.has(pos):
-		fire_effects[pos].queue_free()
-		fire_effects.erase(pos)
+	remove_fire(pos)
 	if tree_entities.has(pos):
 		tree_entities[pos].queue_free()
 		tree_entities.erase(pos)

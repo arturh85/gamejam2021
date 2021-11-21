@@ -18,7 +18,7 @@ margin_bottom = 1.0
 rect_pivot_offset = Vector2( 353, 87 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="BG-LeftTop" type="TextureRect" parent="."]

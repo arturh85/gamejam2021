@@ -3,7 +3,7 @@ extends GDBaseEntity
 	
 func _on_WorkTimer_timeout():
 	var cost_energy = 10
-	var world = $".."
+	var world = gamestate.world()
 	for cell in world.fire_effects.keys():
 		var d = cell.distance_to(grid_pos)
 		if d < 4 and world.energy_current > cost_energy:

@@ -9,7 +9,7 @@ func _on_HUDStatus_mouse_exited():
 	
 
 func _ready():
-	var world = $"../.."
+	var world = gamestate.world()
 	world.connect("wind_direction_changed", self, "wind_direction_changed")
 	world.connect("energy_changed", self, "energy_changed")
 	world.connect("resources_changed", self, "resources_changed")

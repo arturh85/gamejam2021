@@ -14,11 +14,11 @@ func _ready():
 	
 func _on_WorkTimer_timeout():
 	var cost_energy = 10
-	var world = $".."
-	var tree_map = $"../TreeMap"
+	
+	var world = gamestate.world()
 	
 	var cells = 0
-	for cell in tree_map.get_used_cells():
+	for cell in world.TreeMap.get_used_cells():
 		var d = cell.distance_to(grid_pos)
 		if d < 4 and world.energy_current > cost_energy:
 			world.reduce_energy(cost_energy)

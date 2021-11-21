@@ -20,16 +20,17 @@ func _process(delta):
 	calc_move(m_pos, delta)
 	
 	var rc = raycast_from_mouse(m_pos, 1)
-	var p = $"../GroundMap".world_to_map(rc.position)
+	var world = gamestate.world()
+	var p = world.GroundMap.world_to_map(rc.position)
 	
-	$"../SelectionTile".translation.x = p.x * $"../GroundMap".cell_size.x + $"../GroundMap".cell_size.x / 2.0
-	$"../SelectionTile".translation.z = p.z * $"../GroundMap".cell_size.z + $"../GroundMap".cell_size.z / 2.0
+	$"../SelectionTile".translation.x = p.x * world.GroundMap.cell_size.x + world.GroundMap.cell_size.x / 2.0
+	$"../SelectionTile".translation.z = p.z * world.GroundMap.cell_size.z + world.GroundMap.cell_size.z / 2.0
 	
 	var mat1 = $"../SelectionTile/T1".get_surface_material(0)
 	var mat2 = $"../SelectionTile/T2".get_surface_material(0)
-	var ground_content = $"../GroundMap".get_cell_item(p.x, 0, p.z)
-	var tree_content = $"../TreeMap".get_cell_item(p.x, 0, p.z)
-	var building_content = $"../BuildingMap".get_cell_item(p.x, 0, p.z)
+	var ground_content = world.GroundMap.get_cell_item(p.x, 0, p.z)
+	var tree_content = world.TreeMap.get_cell_item(p.x, 0, p.z)
+	var building_content = world.BuildingMap.get_cell_item(p.x, 0, p.z)
 	if building_content >= 0: # building
 		mat1.emission = Color(1, 1, 0)
 		mat2.emission = Color(1, 1, 0)

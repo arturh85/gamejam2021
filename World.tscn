@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://CamBase.gd" type="Script" id=1]
 [ext_resource path="res://SelectionBox.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://HUD-Tool.tscn" type="PackedScene" id=12]
 [ext_resource path="res://effects/Cloud.tscn" type="PackedScene" id=13]
 [ext_resource path="res://effects/Meteors.tscn" type="PackedScene" id=14]
+[ext_resource path="res://hud/FireWarning.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Shader" id=11]
 code = "shader_type canvas_item;
@@ -110,6 +111,8 @@ __meta__ = {
 [node name="HUD-Status" parent="CanvasLayer" instance=ExtResource( 9 )]
 
 [node name="HUD-Tool" parent="CanvasLayer" instance=ExtResource( 12 )]
+
+[node name="FireWarning" parent="CanvasLayer" instance=ExtResource( 15 )]
 
 [node name="CamBase" type="Spatial" parent="."]
 transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0 )

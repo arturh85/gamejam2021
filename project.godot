@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "GDBaseEntity",
 "language": "GDScript",
 "path": "res://entities/BaseEntity.gd"
+}, {
+"base": "Spatial",
+"class": "GDWorld",
+"language": "GDScript",
+"path": "res://World.gd"
 } ]
 _global_script_class_icons={
-"GDBaseEntity": ""
+"GDBaseEntity": "",
+"GDWorld": ""
 }
 
 [application]

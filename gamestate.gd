@@ -29,6 +29,8 @@ func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
 
+func world() -> GDWorld:
+	return get_node("/root/World") as GDWorld
 
 # Callback from SceneTree.
 func _player_disconnected(id):
