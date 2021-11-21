@@ -188,7 +188,7 @@ __meta__ = {
 }
 
 [node name="Meteors" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.209518, 0, 28.9814 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.209518, 0, 52.5952 )
 
 [node name="Meshes" type="Spatial" parent="Meteors"]
 transform = Transform( 0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, 0.5, 0.5, 0, 0, 0 )

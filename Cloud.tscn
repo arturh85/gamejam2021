@@ -6,7 +6,7 @@
 
 [sub_resource type="SpatialMaterial" id=14]
 flags_transparent = true
-albedo_color = Color( 0.509804, 0.509804, 0.509804, 0.682353 )
+albedo_color = Color( 0.698039, 0.772549, 0.278431, 0.682353 )
 
 [sub_resource type="Animation" id=15]
 resource_name = "Neue Animation"
