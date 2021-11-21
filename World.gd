@@ -131,39 +131,76 @@ func _process(delta):
 			env.environment.ambient_light_color = Color(0.1, 0.1, 0.1, 1)
 			lightFactor = 0
 			
-func damage_tree(key):
-	pass
+func reduce_resources(cost):
+	resources -= cost
+	emit_signal("resources_changed", resources)
+	
+func reduce_energy(cost):
+	energy_current -= cost
+	emit_signal("energy_changed", energy_current)
 
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 	if options.selected == 0: # Fire
+		var cost_energy = 50 
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
-		if tree_content != -1:
+		if tree_content != -1 and energy_current >= cost_energy:
+			reduce_energy(cost_energy)
 			add_fire(pos)
 	elif options.selected == 1: # Tree
+		var cost_resources = 50
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1:
+		if building_content == -1 and resources >= cost_resources:
 			TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
+			reduce_resources(cost_resources)
 	elif options.selected == 2: # Bulldozer
-		self.on_burndown(pos)
+		var cost_energy = 200 
+		if energy_current >= cost_energy:
+			self.on_burndown(pos)
+			reduce_energy(cost_energy)
 	elif options.selected == 3: # SolarCell
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
-		self._update_buildings()
+		var cost_resources = 200 
+		var cost_energy = 20 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
+			self._update_buildings()
+			reduce_resources(cost_resources)
+			reduce_energy(cost_energy)
 	elif options.selected == 4: # Battery
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 7) # Battery
-		self._update_buildings()
+		var cost_resources = 100 
+		var cost_energy = 20 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 7) # Battery
+			self._update_buildings()
+			reduce_resources(cost_resources)
+			reduce_energy(cost_energy)
 	elif options.selected == 5: # PowerLine
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 1) # PowerLine
-		self._update_buildings()
+		var cost_resources = 50 
+		var cost_energy = 5 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 1) # PowerLine
+			self._update_buildings()
+			reduce_resources(cost_resources)
+			reduce_energy(cost_energy)
 	elif options.selected == 6: # Farm
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 8) # Farm
-		self._update_buildings()
+		var cost_resources = 300 
+		if resources >= cost_resources:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 8) # Farm
+			self._update_buildings()
+			reduce_resources(cost_resources)
 	elif options.selected == 7: # WaterTower
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 9) # WaterTower
-		self._update_buildings()
+		var cost_resources = 50 
+		if resources >= cost_resources:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 9) # WaterTower
+			self._update_buildings()
+			reduce_resources(cost_resources)
 	elif options.selected == 8: # Silo
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 10) # Silo
-		self._update_buildings()
+		var cost_resources = 1000 
+		var cost_energy = 500 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 10) # Silo
+			self._update_buildings()
+			reduce_resources(cost_resources)
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
