@@ -217,7 +217,8 @@ func on_click_cell(pos: Vector3):
 	elif options.selected == 1: # Tree
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and ground_content != -1:
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford(tree_costs):
 				TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
 				apply_costs(tree_costs)
@@ -234,7 +235,8 @@ func on_click_cell(pos: Vector3):
 	elif options.selected == 3: # SolarCell
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and ground_content != -1:
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.SOLAR_CELL):
 				buy_building(pos, Buildings.SOLAR_CELL)
 			else: 
@@ -244,7 +246,8 @@ func on_click_cell(pos: Vector3):
 	elif options.selected == 4: # Battery
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and ground_content != -1:
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.BATTERY):
 				buy_building(pos, Buildings.BATTERY)
 			else: 
@@ -254,7 +257,8 @@ func on_click_cell(pos: Vector3):
 	elif options.selected == 5: # PowerLine
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and ground_content != -1:
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.POWERLINE_1):
 				buy_building(pos, Buildings.POWERLINE_1)
 			else: 
@@ -264,7 +268,8 @@ func on_click_cell(pos: Vector3):
 	elif options.selected == 6: # Farm
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and ground_content != -1:
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.FARM):
 				buy_building(pos, Buildings.FARM)
 			else: 
@@ -274,7 +279,8 @@ func on_click_cell(pos: Vector3):
 	elif options.selected == 7: # WaterTower
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and ground_content != -1:
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.WATER_TOWER):
 				buy_building(pos, Buildings.WATER_TOWER)
 			else: 
@@ -284,7 +290,8 @@ func on_click_cell(pos: Vector3):
 	elif options.selected == 8: # Silo
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and ground_content != -1:
+		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.SILO):
 				buy_building(pos, Buildings.SILO)
 			else: 
