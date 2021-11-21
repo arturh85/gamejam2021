@@ -1,6 +1,6 @@
 extends Spatial
 
-const MOVE_MARGIN = 100
+const MOVE_MARGIN = 200
 const MOVE_SPEED = 30
 
 const ray_length = 1000
@@ -12,6 +12,10 @@ onready var selection_box = $SelectionBox
 var start_sel_pos = Vector2()
 
 func _process(delta):
+	
+	if $"../".mouseInHUD:
+		return
+	
 	var m_pos = get_viewport().get_mouse_position()
 	calc_move(m_pos, delta)
 	

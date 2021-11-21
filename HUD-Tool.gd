@@ -1,5 +1,13 @@
 extends Control
 
+func _on_HUDStatus_mouse_entered():
+	$"../../".mouseInHUD = true
+	print("1")
+	
+func _on_HUDStatus_mouse_exited():
+	$"../../".mouseInHUD = false
+	print("0")
+	
 func _ready():
 	var options = $OptionButton
 	if options.items.size() == 0:

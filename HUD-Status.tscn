@@ -15,6 +15,7 @@ anchor_bottom = 1.0
 margin_left = -0.024
 margin_top = -1.0
 margin_bottom = 1.0
+rect_pivot_offset = Vector2( 353, 87 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,11 +42,11 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0.815686 )
 anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.066
+anchor_bottom = 0.055
 margin_left = -301.0
 margin_top = 1.0
 margin_right = 305.0
-margin_bottom = 38.706
+margin_bottom = 31.89
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.5, 0.5 )
@@ -77,14 +78,12 @@ __meta__ = {
 
 [node name="BG-MiddleTop2" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.815686 )
-anchor_left = -0.003
-anchor_top = 0.246
-anchor_right = -0.003
-anchor_bottom = 0.246
-margin_left = 17.069
-margin_top = 23.908
-margin_right = 97.069
-margin_bottom = 391.908
+anchor_top = 0.286
+anchor_bottom = 0.286
+margin_left = 14.0
+margin_top = -0.171997
+margin_right = 94.0
+margin_bottom = 367.828
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.5, 0.5 )
@@ -182,3 +181,76 @@ stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MouseArea" type="ColorRect" parent="."]
+anchor_bottom = 0.002
+margin_left = -1.0
+margin_top = 1.0
+margin_right = 301.0
+margin_bottom = 29.796
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseArea2" type="ColorRect" parent="."]
+anchor_top = 0.284
+anchor_bottom = 0.284
+margin_left = 12.0
+margin_top = 0.0319977
+margin_right = 55.0
+margin_bottom = 185.032
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseArea3" type="ColorRect" parent="."]
+anchor_left = 1.001
+anchor_top = 0.282
+anchor_right = 1.001
+anchor_bottom = 0.282
+margin_left = -126.023
+margin_top = 0.235992
+margin_right = -0.0230713
+margin_bottom = 71.236
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseArea4" type="ColorRect" parent="."]
+anchor_left = 1.001
+anchor_right = 1.001
+margin_left = -301.023
+margin_right = -0.0230713
+margin_bottom = 30.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseArea5" type="ColorRect" parent="."]
+anchor_left = 0.501
+anchor_top = 0.002
+anchor_right = 1.0
+anchor_bottom = 0.002
+margin_left = -87.5231
+margin_top = -0.204
+margin_right = -422.0
+margin_bottom = 29.796
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="MouseArea" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="MouseArea2" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea2" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="MouseArea3" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea3" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="MouseArea4" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea4" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="MouseArea5" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea5" to="." method="_on_HUDStatus_mouse_exited"]

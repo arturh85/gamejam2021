@@ -37,6 +37,8 @@ var building_costs = {
 	Buildings.SILO: {"resources": 20, "energy": 10},
 }
 
+var mouseInHUD = false
+
 var lightFactor = 1
 var dayDuration = 60.0 #seconds
 var sunHours = 2.0
