@@ -31,4 +31,9 @@ func resources_changed(resources):
 	$"Label-Resources".text = str(resources)
 
 func co2_level_changed(co2):
-	$"Label-CO2".text =  str(co2)
+	var color = "whte"
+	if co2 >= 200:
+		color = "red"
+	elif co2 >= 100:
+		color = "yellow"
+	$"Label-CO2".bbcode_text =  "[color=" + color + "]" + str(co2) + "[/color]"
