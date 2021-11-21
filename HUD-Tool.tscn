@@ -67,26 +67,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MouseArea" type="ColorRect" parent="BuildMenu"]
-anchor_top = 1.025
-anchor_right = 1.0
-anchor_bottom = 1.025
-margin_left = -1.0
-margin_top = -124.0
-margin_right = 2.0
-margin_bottom = 2.00003
-color = Color( 1, 1, 1, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Label-Resources" type="RichTextLabel" parent="BuildMenu"]
 anchor_top = 1.075
 anchor_bottom = 1.075
 margin_left = 823.0
-margin_top = -74.9999
+margin_top = -79.9999
 margin_right = 887.0
-margin_bottom = -45.9999
+margin_bottom = -50.9999
 theme = SubResource( 2 )
 text = "999"
 __meta__ = {
@@ -106,14 +93,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="BuildMenu"]
+[node name="ResourceIcon" type="TextureRect" parent="BuildMenu"]
+modulate = Color( 1, 1, 1, 0.815686 )
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 880.0
-margin_top = -105.0
-margin_right = 1012.0
-margin_bottom = -76.0
-text = "Fire"
+margin_left = 795.0
+margin_top = -73.0
+margin_right = 861.0
+margin_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyIcon" type="TextureRect" parent="BuildMenu"]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 796.0
+margin_top = -106.0
+margin_right = 862.0
+margin_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseArea" type="ColorRect" parent="BuildMenu"]
+anchor_top = 1.025
+anchor_right = 1.0
+anchor_bottom = 1.025
+margin_left = -1.0
+margin_top = -124.0
+margin_right = 2.0
+margin_bottom = 2.00004
+color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -198,42 +222,6 @@ margin_top = -110.0
 margin_right = 773.0
 margin_bottom = -9.99997
 texture_normal = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ResourceIcon" type="TextureRect" parent="BuildMenu"]
-modulate = Color( 1, 1, 1, 0.815686 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 795.0
-margin_top = -73.0
-margin_right = 861.0
-margin_bottom = -21.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 11 )
-expand = true
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EnergyIcon" type="TextureRect" parent="BuildMenu"]
-modulate = Color( 1, 1, 1, 0.815686 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 796.0
-margin_top = -106.0
-margin_right = 862.0
-margin_bottom = -54.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 12 )
-expand = true
-stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -328,9 +316,6 @@ __meta__ = {
 
 [connection signal="mouse_entered" from="BuildMenu/MouseArea" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="BuildMenu/MouseArea" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="item_selected" from="BuildMenu/OptionButton" to="." method="_on_OptionButton_item_selected"]
-[connection signal="mouse_entered" from="BuildMenu/OptionButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="BuildMenu/OptionButton" to="." method="_on_HUDStatus_mouse_exited"]
 [connection signal="mouse_entered" from="BuildMenu/FarmButton" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="BuildMenu/FarmButton" to="." method="_on_HUDStatus_mouse_exited"]
 [connection signal="pressed" from="BuildMenu/FarmButton" to="." method="_on_FarmButton_pressed"]
@@ -354,11 +339,16 @@ __meta__ = {
 [connection signal="pressed" from="BuildMenu/SiloButton" to="." method="_on_SiloButton_pressed"]
 [connection signal="mouse_entered" from="Main-ConstructionButton" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="Main-ConstructionButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="Main-ConstructionButton" to="." method="_on_MainConstructionButton_pressed"]
 [connection signal="mouse_entered" from="Main-FireButton" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="Main-FireButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="Main-FireButton" to="." method="_on_MainFireButton_pressed"]
 [connection signal="mouse_entered" from="Main-BulldozeButton" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="Main-BulldozeButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="Main-BulldozeButton" to="." method="_on_MainBulldozeButton_pressed"]
 [connection signal="mouse_entered" from="Main-CloudButton" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="Main-CloudButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="Main-CloudButton" to="." method="_on_MainCloudButton_pressed"]
 [connection signal="mouse_entered" from="Main-MeteorButton" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="Main-MeteorButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="Main-MeteorButton" to="." method="_on_MainMeteorButton_pressed"]
