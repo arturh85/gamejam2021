@@ -22,7 +22,7 @@ func wind_direction_changed(direction):
 	$"Label-WindDirection".text = direction_label(direction)
 
 func energy_changed(energy):
-	$"Label-Energy".text = str(energy)
+	$"Label-Energy".text = str(int(energy)) + "%"
 
 func resources_changed(resources):
 	$"Label-Resources".text = str(resources)

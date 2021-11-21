@@ -2,6 +2,7 @@ extends Spatial
 
 
 
+var lightFactor = 1
 var dayDuration = 60.0 #seconds
 var sunHours = 2.0
 var fadeTimeHours = 1.0
@@ -12,7 +13,8 @@ signal wind_direction_changed
 var resources = 10
 signal resources_changed
 
-var energy = 10
+var energy_current = 50.0
+var energy_max = 50.0
 signal energy_changed
 
 var co2_level = 0
@@ -83,6 +85,10 @@ func randomizeTreeMap():
 #func _process(delta):
 #	pass
 
+func add_energy(energy):
+	energy_current = clamp(energy_current + energy, 0, energy_max)
+	emit_signal("energy_changed", (energy_current / energy_max) * 100)
+	
 func _process(delta):
 	var env = get_node_or_null("WorldEnvironment")
 	
@@ -107,53 +113,94 @@ func _process(delta):
 		if daytime > (dayDuration - sunS) / 2.0 and daytime < (dayDuration + sunS) / 2.0:
 			mono.modulate = Color(1, 1, 1, 1)
 			env.environment.ambient_light_color = Color(1, 1, 1, 1)
+			lightFactor = 1.0
 		elif daytime > (dayDuration - sunS - fadeTimeS*2.0) / 2.0 and daytime <= (dayDuration - sunS) / 2.0:
 			var d =  (daytime - (dayDuration - sunS - fadeTimeS*2.0) / 2.0) / fadeTimeS
 			var t = 0.1 + d*0.9
 			mono.modulate = Color(1, 1, 1, d)
 			env.environment.ambient_light_color = Color(t, t, t, 1)
+			lightFactor = d
 		elif daytime >= (dayDuration + sunS) / 2.0 and daytime < (dayDuration + sunS + fadeTimeS*2.0) / 2.0:
 			var d =  ((dayDuration + sunS + fadeTimeS*2.0) / 2.0 - daytime) / fadeTimeS
 			var t = 0.1 + d*0.9
 			mono.modulate = Color(1, 1, 1, d)
 			env.environment.ambient_light_color = Color(t, t, t, 1)
+			lightFactor = d
 		else:
 			mono.modulate = Color(1, 1, 1, 0)
 			env.environment.ambient_light_color = Color(0.1, 0.1, 0.1, 1)
-		
-func damage_tree(key):
-	pass
+			lightFactor = 0
+			
+func reduce_resources(cost):
+	resources -= cost
+	emit_signal("resources_changed", resources)
+	
+func reduce_energy(cost):
+	energy_current -= cost
+	emit_signal("energy_changed", energy_current)
 
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 	if options.selected == 0: # Fire
+		var cost_energy = 50 
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
-		if tree_content != -1:
+		if tree_content != -1 and energy_current >= cost_energy:
+			reduce_energy(cost_energy)
 			add_fire(pos)
 	elif options.selected == 1: # Tree
+		var cost_resources = 50
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1:
+		if building_content == -1 and resources >= cost_resources:
 			TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
+			reduce_resources(cost_resources)
 	elif options.selected == 2: # Bulldozer
-		self.on_burndown(pos)
+		var cost_energy = 200 
+		if energy_current >= cost_energy:
+			self.on_burndown(pos)
+			reduce_energy(cost_energy)
 	elif options.selected == 3: # SolarCell
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
-		self._update_buildings()
+		var cost_resources = 200 
+		var cost_energy = 20 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
+			self._update_buildings()
+			reduce_resources(cost_resources)
+			reduce_energy(cost_energy)
 	elif options.selected == 4: # Battery
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 7) # Battery
-		self._update_buildings()
+		var cost_resources = 100 
+		var cost_energy = 20 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 7) # Battery
+			self._update_buildings()
+			reduce_resources(cost_resources)
+			reduce_energy(cost_energy)
 	elif options.selected == 5: # PowerLine
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 1) # PowerLine
-		self._update_buildings()
+		var cost_resources = 50 
+		var cost_energy = 5 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 1) # PowerLine
+			self._update_buildings()
+			reduce_resources(cost_resources)
+			reduce_energy(cost_energy)
 	elif options.selected == 6: # Farm
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 8) # Farm
-		self._update_buildings()
+		var cost_resources = 300 
+		if resources >= cost_resources:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 8) # Farm
+			self._update_buildings()
+			reduce_resources(cost_resources)
 	elif options.selected == 7: # WaterTower
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 9) # WaterTower
-		self._update_buildings()
+		var cost_resources = 50 
+		if resources >= cost_resources:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 9) # WaterTower
+			self._update_buildings()
+			reduce_resources(cost_resources)
 	elif options.selected == 8: # Silo
-		BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 10) # Silo
-		self._update_buildings()
+		var cost_resources = 1000 
+		var cost_energy = 500 
+		if resources >= cost_resources and energy_current >= cost_energy:
+			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 10) # Silo
+			self._update_buildings()
+			reduce_resources(cost_resources)
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 

@@ -1,16 +1,14 @@
 extends GDBaseEntity
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var energy_per_tick = 10
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_CollectTimer_timeout():
+	var world = get_parent()
+	var energy = energy_per_tick * world.lightFactor
+	world.add_energy(energy)
