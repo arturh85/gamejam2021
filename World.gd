@@ -1,6 +1,37 @@
 extends Spatial
 
 
+enum Buildings {
+	SOLAR_CELL = 0,
+	POWERLINE_1 = 1,
+	POWERLINE_2 = 2,
+	POWERLINE_3 = 3,
+	POWERLINE_4 = 4,
+	POWERLINE_5 = 5,
+	HEADQUARTER = 6,
+	BATTERY = 7,
+	FARM = 8,
+	WATER_TOWER = 9,
+	SILO = 10,
+}
+
+var powerline_costs = {"resources": 50, "energy": 5}
+var fire_costs = {"resources": 0, "energy": 200}
+var tree_costs = {"resources": 30, "energy": 10}
+var bulldozer_costs = {"resources": 0, "energy": 200}
+var building_costs = {
+	Buildings.SOLAR_CELL: {"resources": 200, "energy": 20},
+	Buildings.POWERLINE_1: powerline_costs,
+	Buildings.POWERLINE_2: powerline_costs,
+	Buildings.POWERLINE_3: powerline_costs,
+	Buildings.POWERLINE_4: powerline_costs,
+	Buildings.POWERLINE_5: powerline_costs,
+	Buildings.HEADQUARTER: {"resources": 9999, "energy": 9999},
+	Buildings.BATTERY: {"resources": 100, "energy": 20},
+	Buildings.FARM: {"resources": 200, "energy": 10},
+	Buildings.WATER_TOWER: {"resources": 20, "energy": 10},
+	Buildings.SILO: {"resources": 20, "energy": 10},
+}
 
 var lightFactor = 1
 var dayDuration = 60.0 #seconds
@@ -10,11 +41,11 @@ var fadeTimeHours = 1.0
 var wind_direction = 0
 signal wind_direction_changed
 
-var resources = 10
+var resources = 800
 signal resources_changed
 
-var energy_current = 50.0
-var energy_max = 50.0
+var energy_current = 200.0
+var energy_max = 200.0
 signal energy_changed
 
 var co2_level = 0
@@ -60,9 +91,33 @@ func _ready():
 	rng.randomize()
 	
 	if TreeMap:
+		rebuildGround()		
 		randomizeTreeMap()
 		_update_buildings()
 		
+		
+
+func can_afford(cost):
+	if energy_current < cost["energy"]:
+		return false
+	if resources < cost["resources"]:
+		return false
+	return true
+	
+func apply_costs(cost):
+	if cost["energy"] > 0:
+		reduce_energy(cost["energy"])
+	if resources < cost["resources"]:
+		reduce_resources(cost["resources"])
+
+func can_afford_building(building):
+	return can_afford(building_costs[building])
+
+func buy_building(pos: Vector3, building):
+	BuildingMap.set_cell_item(pos.x, pos.y, pos.z, building) # SolarCell
+	apply_costs(building_costs[building])
+	_update_buildings()
+
 func _random_element(list):
 	var random_idx = rng.randi_range(0, list.size()-1)
 	return list[random_idx]
@@ -87,7 +142,7 @@ func randomizeTreeMap():
 
 func add_energy(energy):
 	energy_current = clamp(energy_current + energy, 0, energy_max)
-	emit_signal("energy_changed", (energy_current / energy_max) * 100)
+	emit_signal("energy_changed", energy_current)
 	
 func _process(delta):
 	var env = get_node_or_null("WorldEnvironment")
@@ -144,63 +199,60 @@ func on_click_cell(pos: Vector3):
 	if options.selected == 0: # Fire
 		var cost_energy = 50 
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
-		if tree_content != -1 and energy_current >= cost_energy:
-			reduce_energy(cost_energy)
-			add_fire(pos)
+		if tree_content != -1:
+			if energy_current >= cost_energy:
+				reduce_energy(cost_energy)
+				add_fire(pos)
+			else: 
+				print("cannot afford fire")
+		else:
+			print("invalid build position")
 	elif options.selected == 1: # Tree
-		var cost_resources = 50
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1 and resources >= cost_resources:
-			TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
-			reduce_resources(cost_resources)
+		if building_content == -1:
+			if can_afford(tree_costs):
+				TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
+				apply_costs(tree_costs)
+			else: 
+				print("cannot afford tree")
+		else:
+			print("invalid build position")
 	elif options.selected == 2: # Bulldozer
-		var cost_energy = 200 
-		if energy_current >= cost_energy:
+		if can_afford(bulldozer_costs):
 			self.on_burndown(pos)
-			reduce_energy(cost_energy)
+			apply_costs(bulldozer_costs)
+		else: 
+			print("cannot afford bulldozer")
 	elif options.selected == 3: # SolarCell
-		var cost_resources = 200 
-		var cost_energy = 20 
-		if resources >= cost_resources and energy_current >= cost_energy:
-			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 0) # SolarCell
-			self._update_buildings()
-			reduce_resources(cost_resources)
-			reduce_energy(cost_energy)
+		if can_afford_building(Buildings.SOLAR_CELL):
+			buy_building(pos, Buildings.SOLAR_CELL)
+		else: 
+			print("cannot afford solar cell")
 	elif options.selected == 4: # Battery
-		var cost_resources = 100 
-		var cost_energy = 20 
-		if resources >= cost_resources and energy_current >= cost_energy:
-			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 7) # Battery
-			self._update_buildings()
-			reduce_resources(cost_resources)
-			reduce_energy(cost_energy)
+		if can_afford_building(Buildings.BATTERY):
+			buy_building(pos, Buildings.BATTERY)
+		else: 
+			print("cannot afford battery")
 	elif options.selected == 5: # PowerLine
-		var cost_resources = 50 
-		var cost_energy = 5 
-		if resources >= cost_resources and energy_current >= cost_energy:
-			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 1) # PowerLine
-			self._update_buildings()
-			reduce_resources(cost_resources)
-			reduce_energy(cost_energy)
+		if can_afford_building(Buildings.POWERLINE_1):
+			buy_building(pos, Buildings.POWERLINE_1)
+		else: 
+			print("cannot afford power line")
 	elif options.selected == 6: # Farm
-		var cost_resources = 300 
-		if resources >= cost_resources:
-			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 8) # Farm
-			self._update_buildings()
-			reduce_resources(cost_resources)
+		if can_afford_building(Buildings.FARM):
+			buy_building(pos, Buildings.FARM)
+		else: 
+			print("cannot afford farm")
 	elif options.selected == 7: # WaterTower
-		var cost_resources = 50 
-		if resources >= cost_resources:
-			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 9) # WaterTower
-			self._update_buildings()
-			reduce_resources(cost_resources)
+		if can_afford_building(Buildings.WATER_TOWER):
+			buy_building(pos, Buildings.WATER_TOWER)
+		else: 
+			print("cannot afford water tower")
 	elif options.selected == 8: # Silo
-		var cost_resources = 1000 
-		var cost_energy = 500 
-		if resources >= cost_resources and energy_current >= cost_energy:
-			BuildingMap.set_cell_item(pos.x, pos.y, pos.z, 10) # Silo
-			self._update_buildings()
-			reduce_resources(cost_resources)
+		if can_afford_building(Buildings.SILO):
+			buy_building(pos, Buildings.SILO)
+		else: 
+			print("cannot afford silo")
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
@@ -307,7 +359,7 @@ func _is_allowed_tree(n):
 func _update_tree_growth(force):
 	for cell in TreeMap.get_used_cells():
 		var tree_type = TreeMap.get_cell_item(cell.x, cell.y, cell.z)
-		if !force && rng.randi_range(0, 100) < 80:
+		if !force && rng.randi_range(0, 100) < 30:
 			continue
 		for n in _cells_around8(cell):
 			var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
@@ -337,6 +389,17 @@ func _update_wind_direction():
 		emit_signal("wind_direction_changed", wind_direction)
 
 
+func rebuildGround():
+	var ground_radius = 20
+	GroundMap.clear()
+	for x in range(-ground_radius, ground_radius):
+		for z in range(-ground_radius, ground_radius):
+			GroundMap.set_cell_item(x, 0, z, 1)
+	for x in range(-ground_radius, ground_radius):
+		GroundMap.set_cell_item(x, 0, 0, 0)
+	for z in range(-ground_radius, ground_radius):
+		GroundMap.set_cell_item(0, 0, z, 0)
+			
 func _update_buildings():
 	for cell in BuildingMap.get_used_cells():
 		var btype = BuildingMap.get_cell_item(cell.x, cell.y, cell.z)
@@ -346,19 +409,19 @@ func _update_buildings():
 		
 		if not building_entities.has(cell):
 			var building_instance = null
-			if btype == 0:
+			if btype == Buildings.SOLAR_CELL:
 				building_instance = SceneEntitySolarCell.instance()
-			elif btype >= 1 and btype <= 5:
+			elif btype >= Buildings.POWERLINE_1 and btype <= Buildings.POWERLINE_5:
 				building_instance = SceneEntityPowerLine.instance()
-			elif btype == 6:
+			elif btype == Buildings.HEADQUARTER:
 				building_instance = SceneEntityHeadquarter.instance()
-			elif btype == 7:
+			elif btype == Buildings.BATTERY:
 				building_instance = SceneEntityBattery.instance()
-			elif btype == 8:
+			elif btype == Buildings.FARM:
 				building_instance = SceneEntityFarm.instance()
-			elif btype == 9:
+			elif btype == Buildings.WATER_TOWER:
 				building_instance = SceneEntityWaterTower.instance()
-			elif btype == 10:
+			elif btype == Buildings.SILO:
 				building_instance = SceneEntitySilo.instance()
 			else:
 				print("ERROR: unknown building type", btype)

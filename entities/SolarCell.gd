@@ -1,7 +1,7 @@
 extends GDBaseEntity
 
 
-var energy_per_tick = 10
+var energy_per_tick = 30
 
 func _ready():
 	pass
