@@ -33,27 +33,6 @@ var building_costs = {
 	Buildings.SILO: {"resources": 20, "energy": 10},
 }
 
-func can_afford(cost):
-	if energy_current < cost["energy"]:
-		return false
-	if resources < cost["resources"]:
-		return false
-	return true
-	
-func apply_costs(cost):
-	if cost["energy"] > 0:
-		reduce_energy(cost["energy"])
-	if resources < cost["resources"]:
-		reduce_resources(cost["resources"])
-
-func can_afford_building(building):
-	return can_afford(building_costs[building])
-
-func buy_building(pos: Vector3, building):
-	BuildingMap.set_cell_item(pos.x, pos.y, pos.z, building) # SolarCell
-	apply_costs(building_costs[building])
-	_update_buildings()
-
 var lightFactor = 1
 var dayDuration = 60.0 #seconds
 var sunHours = 2.0
@@ -116,6 +95,29 @@ func _ready():
 		randomizeTreeMap()
 		_update_buildings()
 		
+		
+
+func can_afford(cost):
+	if energy_current < cost["energy"]:
+		return false
+	if resources < cost["resources"]:
+		return false
+	return true
+	
+func apply_costs(cost):
+	if cost["energy"] > 0:
+		reduce_energy(cost["energy"])
+	if resources < cost["resources"]:
+		reduce_resources(cost["resources"])
+
+func can_afford_building(building):
+	return can_afford(building_costs[building])
+
+func buy_building(pos: Vector3, building):
+	BuildingMap.set_cell_item(pos.x, pos.y, pos.z, building) # SolarCell
+	apply_costs(building_costs[building])
+	_update_buildings()
+
 func _random_element(list):
 	var random_idx = rng.randi_range(0, list.size()-1)
 	return list[random_idx]
