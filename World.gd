@@ -308,11 +308,11 @@ func _is_allowed_tree(n):
 func _update_tree_growth(force):
 	for cell in TreeMap.get_used_cells():
 		var tree_type = TreeMap.get_cell_item(cell.x, cell.y, cell.z)
-		if !force && rng.randi_range(0, 100) < 50:
+		if !force && rng.randi_range(0, 100) < 30:
 			continue
 		for n in _cells_around8(cell):
 			var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
-			if _is_allowed_tree(n) and n_content == -1 and (force or rng.randi_range(0, 100) > 60):
+			if _is_allowed_tree(n) and n_content == -1 and (force or rng.randi_range(0, 100) > 80):
 				TreeMap.set_cell_item(n.x, n.y, n.z, rng.randi_range(0, TreeMap.mesh_library.get_item_list().size()-1))
 		
 func _update_fire_spread():

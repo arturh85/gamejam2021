@@ -1,6 +1,6 @@
 extends GDBaseEntity
 
-var capacity = 10
+var capacity = 50
 
 func _enter_tree():
 	get_parent().energy_max += capacity
