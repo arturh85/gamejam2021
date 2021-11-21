@@ -10,7 +10,7 @@ func _on_HUDStatus_mouse_exited():
 	$"../../".mouseInHUD = false
 	
 func _ready():
-	var world = gamestate.world()
+	world = gamestate.world()
 	var options = $OptionButton
 	if options.items.size() == 0:
 		options.add_item("Fire", 0)
