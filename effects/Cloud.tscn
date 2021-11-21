@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://models/cloud.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://models/lighting.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://materials/lighting.tres" type="Material" id=3]
+[ext_resource path="res://effects/Cloud.gd" type="Script" id=4]
 
 [sub_resource type="SpatialMaterial" id=14]
 flags_transparent = true
@@ -163,6 +164,7 @@ tracks/5/keys = {
 
 [node name="Cloud" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.836, 0, -26.8006 )
+script = ExtResource( 4 )
 
 [node name="Ambient" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.8667, 0 )
@@ -225,3 +227,7 @@ omni_attenuation = 1.93187
 autoplay = "Neue Animation"
 "anims/Neue Animation" = SubResource( 15 )
 anims/RESET = SubResource( 16 )
+
+[node name="EffectTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="EffectTimer" to="." method="_on_EffectTimer_timeout"]

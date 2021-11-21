@@ -12,6 +12,8 @@ func _ready():
 		options.add_item("Farm", 6)
 		options.add_item("WaterTower", 7)
 		options.add_item("Silo", 8)
+		options.add_item("Meteor", 9)
+		options.add_item("Cloud", 10)
 
 		options.select(0)
 		_on_OptionButton_item_selected(0)
@@ -38,6 +40,10 @@ func _on_OptionButton_item_selected(index):
 		cost = world.building_costs[world.Buildings.WATER_TOWER]
 	elif index == 8:
 		cost = world.building_costs[world.Buildings.SILO]
+	elif index == 9:
+		cost = world.meteor_costs
+	elif index == 10:
+		cost = world.cloud_costs
 		
 	$"Label-Energy".text = str(cost["energy"])
 	$"Label-Resources".text = str(cost["resources"])

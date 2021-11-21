@@ -142,6 +142,8 @@ margin_top = 5.0
 margin_right = 161.0
 margin_bottom = 0.185989
 custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "0"
 text = "0"
 __meta__ = {
 "_edit_use_anchors_": false

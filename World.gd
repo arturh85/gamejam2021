@@ -16,7 +16,11 @@ enum Buildings {
 }
 
 var powerline_costs = {"resources": 50, "energy": 5}
-var fire_costs = {"resources": 0, "energy": 200}
+var fire_costs = {"resources": 0, "energy": 10}
+
+var meteor_costs = {"resources": 0, "energy": 10}
+var cloud_costs = {"resources": 0, "energy": 10}
+
 var tree_costs = {"resources": 30, "energy": 10}
 var bulldozer_costs = {"resources": 0, "energy": 200}
 var building_costs = {
@@ -43,6 +47,8 @@ signal wind_direction_changed
 
 var resources = 800
 signal resources_changed
+
+var trees_max = 100
 
 var energy_current = 200.0
 var energy_max = 200.0
@@ -91,9 +97,11 @@ func _ready():
 	rng.randomize()
 	
 	if TreeMap:
-		rebuildGround()		
+		rebuildGround()
 		randomizeTreeMap()
 		_update_buildings()
+		$Meteors.hide()
+		$Cloud.hide()
 		
 		
 
@@ -197,12 +205,11 @@ func reduce_energy(cost):
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 	if options.selected == 0: # Fire
-		var cost_energy = 50 
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
-			if energy_current >= cost_energy:
-				reduce_energy(cost_energy)
+			if can_afford(fire_costs):
 				add_fire(pos)
+				apply_costs(fire_costs)
 			else: 
 				print("cannot afford fire")
 		else:
@@ -253,6 +260,19 @@ func on_click_cell(pos: Vector3):
 			buy_building(pos, Buildings.SILO)
 		else: 
 			print("cannot afford silo")
+	elif options.selected == 9: # Meteor
+		if can_afford(meteor_costs):
+			$Meteors.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+			apply_costs(meteor_costs)
+		else: 
+			print("cannot afford meteor")
+	elif options.selected == 10: # Cloud
+		if can_afford(cloud_costs):
+			$Cloud.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+			apply_costs(cloud_costs)
+		else: 
+			print("cannot afford cloud")
+		
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
@@ -326,7 +346,7 @@ func _spread_fire(pos: Vector3):
 	if fire_effects.has(pos):
 		var instance = fire_effects[pos]
 		instance.ticks_burning += 1
-		co2_level += instance.ticks_burning
+		co2_level += clamp(instance.ticks_burning * 5, 0, 5)
 		for n in _cells_around8(pos):
 			var direction_factor = 0.1
 			if wind_direction == 0: # North
@@ -357,7 +377,10 @@ func _is_allowed_tree(n):
 	return n_ground == 1 and n_building == -1
 
 func _update_tree_growth(force):
-	for cell in TreeMap.get_used_cells():
+	var trees = TreeMap.get_used_cells()
+	if trees.size() > trees_max:
+		return
+	for cell in trees:
 		var tree_type = TreeMap.get_cell_item(cell.x, cell.y, cell.z)
 		if !force && rng.randi_range(0, 100) < 30:
 			continue
@@ -371,7 +394,9 @@ func _update_fire_spread():
 
 	var old_co2_level = co2_level
 
-	for cell in TreeMap.get_used_cells():
+	var trees = TreeMap.get_used_cells()
+	co2_level = clamp(int(co2_level - trees.size() / 7.0), 0, 99999)
+	for cell in trees:
 		for pos in _spread_fire(cell):
 			fires_to_add.append(pos)
 	for pos in fires_to_add:
@@ -447,13 +472,35 @@ func _on_WindDirectionTimer_timeout():
 	_update_wind_direction()
 
 func _on_DisasterTimer_timeout():
-	var disaster_type = rng.randi_range(0, 0)
+	var max_disaster = 0
+	if co2_level > 100:
+		max_disaster = 2
+	
+		
+	var disaster_type = rng.randi_range(0, max_disaster)
 	if disaster_type == 0:
+		var max_fire = 2
+		if co2_level > 100:
+			max_fire = co2_level / 50
 		var fire_count = rng.randi_range(1, 2)
-		print("disaster: fire x ", fire_count, "after", $"DisasterTimer".wait_time )
+		print("disaster: fire x ", fire_count, " after ", $"DisasterTimer".wait_time, " seconds")
 		var trees = TreeMap.get_used_cells()
 		for i in range(fire_count):
 			var pos = _random_element(trees)
 			add_fire(pos)
+	elif disaster_type == 1:
+		print("disaster: meteor storm after ", $"DisasterTimer".wait_time, " seconds")
+		var trees = TreeMap.get_used_cells()
+		var pos = _random_element(trees)
+		$Meteors.start_disaster(TreeMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+	elif disaster_type == 2:
+		print("disaster: toxic cloud after ", $"DisasterTimer".wait_time, " seconds")
+		var trees = TreeMap.get_used_cells()
+		var pos = _random_element(trees)
+		$Cloud.start_disaster(TreeMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
 
-	$"DisasterTimer".wait_time += 5
+	var change = 2
+	if co2_level > 100:
+		change = - int(co2_level / 100)
+	$"DisasterTimer".wait_time = clamp($"DisasterTimer".wait_time + change, 5, 100)
+
