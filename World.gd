@@ -60,6 +60,7 @@ func _ready():
 	rng.randomize()
 	
 	if TreeMap:
+		rebuildGround()		
 		randomizeTreeMap()
 		_update_buildings()
 		
@@ -307,11 +308,11 @@ func _is_allowed_tree(n):
 func _update_tree_growth(force):
 	for cell in TreeMap.get_used_cells():
 		var tree_type = TreeMap.get_cell_item(cell.x, cell.y, cell.z)
-		if !force && rng.randi_range(0, 100) < 80:
+		if !force && rng.randi_range(0, 100) < 50:
 			continue
 		for n in _cells_around8(cell):
 			var n_content = TreeMap.get_cell_item(n.x, n.y, n.z)
-			if _is_allowed_tree(n) and n_content == -1 and (force or rng.randi_range(0, 100) > 80):
+			if _is_allowed_tree(n) and n_content == -1 and (force or rng.randi_range(0, 100) > 60):
 				TreeMap.set_cell_item(n.x, n.y, n.z, rng.randi_range(0, TreeMap.mesh_library.get_item_list().size()-1))
 		
 func _update_fire_spread():
@@ -337,6 +338,17 @@ func _update_wind_direction():
 		emit_signal("wind_direction_changed", wind_direction)
 
 
+func rebuildGround():
+	var ground_radius = 20
+	GroundMap.clear()
+	for x in range(-ground_radius, ground_radius):
+		for z in range(-ground_radius, ground_radius):
+			GroundMap.set_cell_item(x, 0, z, 1)
+	for x in range(-ground_radius, ground_radius):
+		GroundMap.set_cell_item(x, 0, 0, 0)
+	for z in range(-ground_radius, ground_radius):
+		GroundMap.set_cell_item(0, 0, z, 0)
+			
 func _update_buildings():
 	for cell in BuildingMap.get_used_cells():
 		var btype = BuildingMap.get_cell_item(cell.x, cell.y, cell.z)
