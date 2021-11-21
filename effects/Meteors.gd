@@ -13,6 +13,10 @@ func _on_EffectTimer_timeout():
 		$EffectTimer.autostart = false
 		hide()
 		
+	remaining_ticks -= 1
+	
+	# TODO: do damage
+		
 func start_disaster(pos: Vector3, time_between_damage, count):
 	translation = pos
 	$EffectTimer.autostart = true
