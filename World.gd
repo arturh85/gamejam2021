@@ -17,6 +17,10 @@ enum Buildings {
 
 var powerline_costs = {"resources": 50, "energy": 5}
 var fire_costs = {"resources": 0, "energy": 10}
+
+var meteor_costs = {"resources": 0, "energy": 10}
+var cloud_costs = {"resources": 0, "energy": 10}
+
 var tree_costs = {"resources": 30, "energy": 10}
 var bulldozer_costs = {"resources": 0, "energy": 200}
 var building_costs = {
@@ -256,6 +260,19 @@ func on_click_cell(pos: Vector3):
 			buy_building(pos, Buildings.SILO)
 		else: 
 			print("cannot afford silo")
+	elif options.selected == 9: # Meteor
+		if can_afford(meteor_costs):
+			$Meteors.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+			apply_costs(meteor_costs)
+		else: 
+			print("cannot afford meteor")
+	elif options.selected == 10: # Cloud
+		if can_afford(cloud_costs):
+			$Cloud.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+			apply_costs(cloud_costs)
+		else: 
+			print("cannot afford cloud")
+		
 	else:
 		print("ERROR: unknown selected: ", options.selected)
 
