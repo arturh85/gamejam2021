@@ -71,6 +71,7 @@ func set_inactive():
 	$PowerlineButton.modulate = Color(1, 1, 1, 1)
 	$WatertowerButton.modulate = Color(1, 1, 1, 1)
 	$SiloButton.modulate = Color(1, 1, 1, 1)
+	$SolarcellButton.modulate = Color(1, 1, 1, 1)
 	
 
 func set_active(act, cost):
