@@ -61,16 +61,21 @@ func _process(delta):
 func calc_move(m_pos, delta):
 	var v_size = get_viewport().size
 	var move_vec = Vector3()
-	if m_pos.x < MOVE_MARGIN:
+	if m_pos.x < MOVE_MARGIN or Input.is_action_pressed("ui_left"):
 		move_vec.x -= 1
-	if m_pos.y < MOVE_MARGIN:
+	if m_pos.y < MOVE_MARGIN or Input.is_action_pressed("ui_up"):
 		move_vec.z -= 1
-	if m_pos.x > v_size.x - MOVE_MARGIN:
+	if m_pos.x > v_size.x - MOVE_MARGIN or Input.is_action_pressed("ui_right"):
 		move_vec.x += 1
-	if m_pos.y > v_size.y - MOVE_MARGIN:
+	if m_pos.y > v_size.y - MOVE_MARGIN or Input.is_action_pressed("ui_down"):
 		move_vec.z += 1
+	
+	var shift_multiplier = 1
+	if Input.is_key_pressed(KEY_SHIFT):
+		shift_multiplier = 3
+		
 	move_vec = move_vec.rotated(Vector3(0, 1, 0), rotation_degrees.y)
-	global_translate(move_vec * delta * MOVE_SPEED)
+	global_translate(move_vec * delta * MOVE_SPEED * shift_multiplier)
 
 func move_selected_units(m_pos):
 	var result = raycast_from_mouse(m_pos, 1)
