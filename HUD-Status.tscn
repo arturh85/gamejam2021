@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://HUD-Status.gd" type="Script" id=1]
 [ext_resource path="res://images/hud_righttop.png" type="Texture" id=2]
 [ext_resource path="res://font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://images/hud_lefttop.png" type="Texture" id=4]
 [ext_resource path="res://images/hud_midletop.png" type="Texture" id=5]
-[ext_resource path="res://images/hud_left.png" type="Texture" id=6]
 [ext_resource path="res://images/hud_right.png" type="Texture" id=7]
 
 [node name="HUD-Status" type="Control"]
@@ -70,24 +69,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
-expand = true
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BG-MiddleTop2" type="TextureRect" parent="."]
-modulate = Color( 1, 1, 1, 0.815686 )
-anchor_top = 0.286
-anchor_bottom = 0.286
-margin_left = 14.0
-margin_top = -0.171997
-margin_right = 94.0
-margin_bottom = 367.828
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
 expand = true
 stretch_mode = 3
 __meta__ = {
@@ -193,18 +174,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MouseArea2" type="ColorRect" parent="."]
-anchor_top = 0.284
-anchor_bottom = 0.284
-margin_left = 12.0
-margin_top = 0.0319977
-margin_right = 55.0
-margin_bottom = 185.032
-color = Color( 1, 1, 1, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="MouseArea3" type="ColorRect" parent="."]
 anchor_left = 1.001
 anchor_top = 0.282
@@ -246,8 +215,6 @@ __meta__ = {
 
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="MouseArea" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="mouse_entered" from="MouseArea2" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="MouseArea2" to="." method="_on_HUDStatus_mouse_exited"]
 [connection signal="mouse_entered" from="MouseArea3" to="." method="_on_HUDStatus_mouse_entered"]
 [connection signal="mouse_exited" from="MouseArea3" to="." method="_on_HUDStatus_mouse_exited"]
 [connection signal="mouse_entered" from="MouseArea4" to="." method="_on_HUDStatus_mouse_entered"]

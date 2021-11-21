@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://HUD-Tool.gd" type="Script" id=1]
 [ext_resource path="res://font.tres" type="DynamicFont" id=2]
@@ -10,6 +10,14 @@
 [ext_resource path="res://images/buildicon_silo.png" type="Texture" id=8]
 [ext_resource path="res://images/buildicon_watertower.png" type="Texture" id=9]
 [ext_resource path="res://images/hud_bottom.png" type="Texture" id=10]
+[ext_resource path="res://images/resource.png" type="Texture" id=11]
+[ext_resource path="res://images/energy.png" type="Texture" id=12]
+[ext_resource path="res://images/hud_left.png" type="Texture" id=13]
+[ext_resource path="res://images/cloud.png" type="Texture" id=14]
+[ext_resource path="res://images/meteor.png" type="Texture" id=15]
+[ext_resource path="res://images/fire.png" type="Texture" id=16]
+[ext_resource path="res://images/construct.png" type="Texture" id=17]
+[ext_resource path="res://images/bulldoze.png" type="Texture" id=18]
 
 [sub_resource type="Theme" id=2]
 default_font = ExtResource( 2 )
@@ -19,8 +27,8 @@ anchor_left = -0.001
 anchor_top = 0.798
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.024
-margin_top = 0.199982
+margin_left = 1.024
+margin_top = -477.8
 margin_right = 2.0
 margin_bottom = -1.0
 script = ExtResource( 1 )
@@ -29,7 +37,18 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="BG-Bottom" type="TextureRect" parent="."]
+[node name="BuildMenu" type="Control" parent="."]
+anchor_top = 0.998
+anchor_right = 1.001
+anchor_bottom = 0.998
+margin_top = -123.804
+margin_right = -0.026001
+margin_bottom = 0.195984
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG-Bottom" type="TextureRect" parent="BuildMenu"]
 modulate = Color( 1, 1, 1, 0.815686 )
 anchor_top = 1.0
 anchor_right = 2.038
@@ -48,164 +67,298 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MouseArea" type="ColorRect" parent="."]
+[node name="MouseArea" type="ColorRect" parent="BuildMenu"]
 anchor_top = 1.025
 anchor_right = 1.0
 anchor_bottom = 1.025
 margin_left = -1.0
-margin_top = -126.0
+margin_top = -124.0
 margin_right = 2.0
-margin_bottom = -1.52588e-05
+margin_bottom = 2.00003
 color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label-Resources" type="RichTextLabel" parent="."]
+[node name="Label-Resources" type="RichTextLabel" parent="BuildMenu"]
 anchor_top = 1.075
 anchor_bottom = 1.075
-margin_left = 947.0
-margin_top = -87.0
-margin_right = 1011.0
-margin_bottom = -35.0
+margin_left = 823.0
+margin_top = -74.9999
+margin_right = 887.0
+margin_bottom = -45.9999
 theme = SubResource( 2 )
 text = "999"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label-Energy" type="RichTextLabel" parent="."]
+[node name="Label-Energy" type="RichTextLabel" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 951.014
-margin_top = -111.0
-margin_right = 1020.15
-margin_bottom = -73.0
+margin_left = 822.0
+margin_top = -105.0
+margin_right = 891.0
+margin_bottom = -75.0
 theme = SubResource( 2 )
 text = "999"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="OptionButton" type="OptionButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 885.0
-margin_top = -37.0
-margin_right = 1017.0
-margin_bottom = -8.0
+margin_left = 880.0
+margin_top = -105.0
+margin_right = 1012.0
+margin_bottom = -76.0
 text = "Fire"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FarmButton" type="TextureButton" parent="."]
+[node name="FarmButton" type="TextureButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 343.0
 margin_top = -110.0
 margin_right = 443.0
-margin_bottom = -10.0
+margin_bottom = -9.99997
 texture_normal = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TreeButton" type="TextureButton" parent="."]
+[node name="TreeButton" type="TextureButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 453.0
 margin_top = -110.0
 margin_right = 553.0
-margin_bottom = -10.0
+margin_bottom = -9.99997
 texture_normal = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BatteryButton" type="TextureButton" parent="."]
+[node name="BatteryButton" type="TextureButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 233.0
 margin_top = -110.0
 margin_right = 333.0
-margin_bottom = -10.0
+margin_bottom = -9.99997
 texture_normal = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PowerlineButton" type="TextureButton" parent="."]
+[node name="PowerlineButton" type="TextureButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 123.0
 margin_top = -110.0
 margin_right = 223.0
-margin_bottom = -10.0
+margin_bottom = -9.99997
 texture_normal = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SolarcellButton" type="TextureButton" parent="."]
+[node name="SolarcellButton" type="TextureButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 13.0
 margin_top = -110.0
 margin_right = 113.0
-margin_bottom = -10.0
+margin_bottom = -9.99997
 texture_normal = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WatertowerButton" type="TextureButton" parent="."]
+[node name="WatertowerButton" type="TextureButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 563.0
 margin_top = -110.0
 margin_right = 663.0
-margin_bottom = -10.0
+margin_bottom = -9.99997
 texture_normal = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SiloButton" type="TextureButton" parent="."]
+[node name="SiloButton" type="TextureButton" parent="BuildMenu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 673.0
 margin_top = -110.0
 margin_right = 773.0
-margin_bottom = -10.0
+margin_bottom = -9.99997
 texture_normal = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="mouse_entered" from="MouseArea" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="MouseArea" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]
-[connection signal="mouse_entered" from="OptionButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="OptionButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="mouse_entered" from="FarmButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="FarmButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="pressed" from="FarmButton" to="." method="_on_FarmButton_pressed"]
-[connection signal="mouse_entered" from="TreeButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="TreeButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="pressed" from="TreeButton" to="." method="_on_TreeButton_pressed"]
-[connection signal="mouse_entered" from="BatteryButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="BatteryButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="pressed" from="BatteryButton" to="." method="_on_BatteryButton_pressed"]
-[connection signal="mouse_entered" from="PowerlineButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="PowerlineButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="pressed" from="PowerlineButton" to="." method="_on_PowerlineButton_pressed"]
-[connection signal="mouse_entered" from="SolarcellButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="SolarcellButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="pressed" from="SolarcellButton" to="." method="_on_SolarcellButton_pressed"]
-[connection signal="mouse_entered" from="WatertowerButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="WatertowerButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="pressed" from="WatertowerButton" to="." method="_on_WatertowerButton_pressed"]
-[connection signal="mouse_entered" from="SiloButton" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="SiloButton" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="pressed" from="SiloButton" to="." method="_on_SiloButton_pressed"]
+[node name="ResourceIcon" type="TextureRect" parent="BuildMenu"]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 795.0
+margin_top = -73.0
+margin_right = 861.0
+margin_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyIcon" type="TextureRect" parent="BuildMenu"]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 796.0
+margin_top = -106.0
+margin_right = 862.0
+margin_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG-Left" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_top = -2.766
+anchor_bottom = -2.766
+margin_left = 14.0
+margin_top = 1791.58
+margin_right = 94.0
+margin_bottom = 2159.58
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseArea2" type="ColorRect" parent="."]
+margin_left = 12.0
+margin_top = 137.0
+margin_right = 55.0
+margin_bottom = 322.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main-ConstructionButton" type="TextureButton" parent="."]
+margin_left = 21.0
+margin_top = 152.0
+margin_right = 71.0
+margin_bottom = 202.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 17 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main-FireButton" type="TextureButton" parent="."]
+margin_left = 21.0
+margin_top = 216.0
+margin_right = 71.0
+margin_bottom = 266.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 16 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main-BulldozeButton" type="TextureButton" parent="."]
+margin_left = 21.0
+margin_top = 184.0
+margin_right = 71.0
+margin_bottom = 234.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 18 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main-CloudButton" type="TextureButton" parent="."]
+margin_left = 21.0
+margin_top = 249.0
+margin_right = 71.0
+margin_bottom = 299.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 14 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main-MeteorButton" type="TextureButton" parent="."]
+margin_left = 21.0
+margin_top = 282.0
+margin_right = 71.0
+margin_bottom = 332.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 15 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="BuildMenu/MouseArea" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/MouseArea" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="item_selected" from="BuildMenu/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="mouse_entered" from="BuildMenu/OptionButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/OptionButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="BuildMenu/FarmButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/FarmButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="BuildMenu/FarmButton" to="." method="_on_FarmButton_pressed"]
+[connection signal="mouse_entered" from="BuildMenu/TreeButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/TreeButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="BuildMenu/TreeButton" to="." method="_on_TreeButton_pressed"]
+[connection signal="mouse_entered" from="BuildMenu/BatteryButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/BatteryButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="BuildMenu/BatteryButton" to="." method="_on_BatteryButton_pressed"]
+[connection signal="mouse_entered" from="BuildMenu/PowerlineButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/PowerlineButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="BuildMenu/PowerlineButton" to="." method="_on_PowerlineButton_pressed"]
+[connection signal="mouse_entered" from="BuildMenu/SolarcellButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/SolarcellButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="BuildMenu/SolarcellButton" to="." method="_on_SolarcellButton_pressed"]
+[connection signal="mouse_entered" from="BuildMenu/WatertowerButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/WatertowerButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="BuildMenu/WatertowerButton" to="." method="_on_WatertowerButton_pressed"]
+[connection signal="mouse_entered" from="BuildMenu/SiloButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="BuildMenu/SiloButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="pressed" from="BuildMenu/SiloButton" to="." method="_on_SiloButton_pressed"]
+[connection signal="mouse_entered" from="Main-ConstructionButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="Main-ConstructionButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="Main-FireButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="Main-FireButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="Main-BulldozeButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="Main-BulldozeButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="Main-CloudButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="Main-CloudButton" to="." method="_on_HUDStatus_mouse_exited"]
+[connection signal="mouse_entered" from="Main-MeteorButton" to="." method="_on_HUDStatus_mouse_entered"]
+[connection signal="mouse_exited" from="Main-MeteorButton" to="." method="_on_HUDStatus_mouse_exited"]
