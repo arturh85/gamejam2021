@@ -2,6 +2,7 @@ extends Spatial
 
 
 
+var lightFactor = 1
 var dayDuration = 60.0 #seconds
 var sunHours = 2.0
 var fadeTimeHours = 1.0
@@ -12,7 +13,8 @@ signal wind_direction_changed
 var resources = 10
 signal resources_changed
 
-var energy = 10
+var energy_current = 50.0
+var energy_max = 50.0
 signal energy_changed
 
 var co2_level = 0
@@ -83,6 +85,10 @@ func randomizeTreeMap():
 #func _process(delta):
 #	pass
 
+func add_energy(energy):
+	energy_current = clamp(energy_current + energy, 0, energy_max)
+	emit_signal("energy_changed", (energy_current / energy_max) * 100)
+	
 func _process(delta):
 	var env = get_node_or_null("WorldEnvironment")
 	
@@ -107,20 +113,24 @@ func _process(delta):
 		if daytime > (dayDuration - sunS) / 2.0 and daytime < (dayDuration + sunS) / 2.0:
 			mono.modulate = Color(1, 1, 1, 1)
 			env.environment.ambient_light_color = Color(1, 1, 1, 1)
+			lightFactor = 1.0
 		elif daytime > (dayDuration - sunS - fadeTimeS*2.0) / 2.0 and daytime <= (dayDuration - sunS) / 2.0:
 			var d =  (daytime - (dayDuration - sunS - fadeTimeS*2.0) / 2.0) / fadeTimeS
 			var t = 0.1 + d*0.9
 			mono.modulate = Color(1, 1, 1, d)
 			env.environment.ambient_light_color = Color(t, t, t, 1)
+			lightFactor = d
 		elif daytime >= (dayDuration + sunS) / 2.0 and daytime < (dayDuration + sunS + fadeTimeS*2.0) / 2.0:
 			var d =  ((dayDuration + sunS + fadeTimeS*2.0) / 2.0 - daytime) / fadeTimeS
 			var t = 0.1 + d*0.9
 			mono.modulate = Color(1, 1, 1, d)
 			env.environment.ambient_light_color = Color(t, t, t, 1)
+			lightFactor = d
 		else:
 			mono.modulate = Color(1, 1, 1, 0)
 			env.environment.ambient_light_color = Color(0.1, 0.1, 0.1, 1)
-		
+			lightFactor = 0
+			
 func damage_tree(key):
 	pass
 
