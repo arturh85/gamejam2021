@@ -2,11 +2,9 @@ extends Control
 
 func _on_HUDStatus_mouse_entered():
 	$"../../".mouseInHUD = true
-	print("1")
 	
 func _on_HUDStatus_mouse_exited():
 	$"../../".mouseInHUD = false
-	print("0")
 	
 	
 
