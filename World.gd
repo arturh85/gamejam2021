@@ -44,6 +44,8 @@ signal wind_direction_changed
 var resources = 800
 signal resources_changed
 
+var trees_max = 100
+
 var energy_current = 200.0
 var energy_max = 200.0
 signal energy_changed
@@ -357,7 +359,10 @@ func _is_allowed_tree(n):
 	return n_ground == 1 and n_building == -1
 
 func _update_tree_growth(force):
-	for cell in TreeMap.get_used_cells():
+	var trees = TreeMap.get_used_cells()
+	if trees.size() > trees_max:
+		return
+	for cell in trees:
 		var tree_type = TreeMap.get_cell_item(cell.x, cell.y, cell.z)
 		if !force && rng.randi_range(0, 100) < 30:
 			continue
