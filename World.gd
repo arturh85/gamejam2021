@@ -10,11 +10,11 @@ var fadeTimeHours = 1.0
 var wind_direction = 0
 signal wind_direction_changed
 
-var resources = 10
+var resources = 800
 signal resources_changed
 
-var energy_current = 50.0
-var energy_max = 50.0
+var energy_current = 200.0
+var energy_max = 200.0
 signal energy_changed
 
 var co2_level = 0
@@ -87,7 +87,7 @@ func randomizeTreeMap():
 
 func add_energy(energy):
 	energy_current = clamp(energy_current + energy, 0, energy_max)
-	emit_signal("energy_changed", (energy_current / energy_max) * 100)
+	emit_signal("energy_changed", energy_current)
 	
 func _process(delta):
 	var env = get_node_or_null("WorldEnvironment")
