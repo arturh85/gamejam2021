@@ -16,7 +16,7 @@ enum Buildings {
 }
 
 var powerline_costs = {"resources": 50, "energy": 5}
-var fire_costs = {"resources": 0, "energy": 200}
+var fire_costs = {"resources": 0, "energy": 10}
 var tree_costs = {"resources": 30, "energy": 10}
 var bulldozer_costs = {"resources": 0, "energy": 200}
 var building_costs = {
@@ -199,12 +199,11 @@ func reduce_energy(cost):
 func on_click_cell(pos: Vector3):
 	var options = $"CanvasLayer/HUD-Tool/OptionButton"
 	if options.selected == 0: # Fire
-		var cost_energy = 50 
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
-			if energy_current >= cost_energy:
-				reduce_energy(cost_energy)
+			if can_afford(fire_costs):
 				add_fire(pos)
+				apply_costs(fire_costs)
 			else: 
 				print("cannot afford fire")
 		else:
@@ -328,7 +327,7 @@ func _spread_fire(pos: Vector3):
 	if fire_effects.has(pos):
 		var instance = fire_effects[pos]
 		instance.ticks_burning += 1
-		co2_level += instance.ticks_burning
+		co2_level += clamp(instance.ticks_burning * 5, 0, 5)
 		for n in _cells_around8(pos):
 			var direction_factor = 0.1
 			if wind_direction == 0: # North
@@ -376,7 +375,9 @@ func _update_fire_spread():
 
 	var old_co2_level = co2_level
 
-	for cell in TreeMap.get_used_cells():
+	var trees = TreeMap.get_used_cells()
+	co2_level = clamp(int(co2_level - trees.size() / 7.0), 0, 99999)
+	for cell in trees:
 		for pos in _spread_fire(cell):
 			fires_to_add.append(pos)
 	for pos in fires_to_add:
