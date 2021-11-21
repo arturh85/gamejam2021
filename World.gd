@@ -216,7 +216,8 @@ func on_click_cell(pos: Vector3):
 			print("invalid build position")
 	elif options.selected == 1: # Tree
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
-		if building_content == -1:
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1:
 			if can_afford(tree_costs):
 				TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
 				apply_costs(tree_costs)
@@ -231,47 +232,85 @@ func on_click_cell(pos: Vector3):
 		else: 
 			print("cannot afford bulldozer")
 	elif options.selected == 3: # SolarCell
-		if can_afford_building(Buildings.SOLAR_CELL):
-			buy_building(pos, Buildings.SOLAR_CELL)
-		else: 
-			print("cannot afford solar cell")
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1:
+			if can_afford_building(Buildings.SOLAR_CELL):
+				buy_building(pos, Buildings.SOLAR_CELL)
+			else: 
+				print("cannot afford solar cell")
+		else:
+			print("invalid build position")
 	elif options.selected == 4: # Battery
-		if can_afford_building(Buildings.BATTERY):
-			buy_building(pos, Buildings.BATTERY)
-		else: 
-			print("cannot afford battery")
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1:
+			if can_afford_building(Buildings.BATTERY):
+				buy_building(pos, Buildings.BATTERY)
+			else: 
+				print("cannot afford battery")
+		else:
+			print("invalid build position")
 	elif options.selected == 5: # PowerLine
-		if can_afford_building(Buildings.POWERLINE_1):
-			buy_building(pos, Buildings.POWERLINE_1)
-		else: 
-			print("cannot afford power line")
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1:
+			if can_afford_building(Buildings.POWERLINE_1):
+				buy_building(pos, Buildings.POWERLINE_1)
+			else: 
+				print("cannot afford power line")
+		else:
+			print("invalid build position")
 	elif options.selected == 6: # Farm
-		if can_afford_building(Buildings.FARM):
-			buy_building(pos, Buildings.FARM)
-		else: 
-			print("cannot afford farm")
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1:
+			if can_afford_building(Buildings.FARM):
+				buy_building(pos, Buildings.FARM)
+			else: 
+				print("cannot afford farm")
+		else:
+			print("invalid build position")
 	elif options.selected == 7: # WaterTower
-		if can_afford_building(Buildings.WATER_TOWER):
-			buy_building(pos, Buildings.WATER_TOWER)
-		else: 
-			print("cannot afford water tower")
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1:
+			if can_afford_building(Buildings.WATER_TOWER):
+				buy_building(pos, Buildings.WATER_TOWER)
+			else: 
+				print("cannot afford water tower")
+		else:
+			print("invalid build position")
 	elif options.selected == 8: # Silo
-		if can_afford_building(Buildings.SILO):
-			buy_building(pos, Buildings.SILO)
-		else: 
-			print("cannot afford silo")
+		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if building_content == -1 and ground_content != -1:
+			if can_afford_building(Buildings.SILO):
+				buy_building(pos, Buildings.SILO)
+			else: 
+				print("cannot afford silo")
+		else:
+			print("invalid build position")
 	elif options.selected == 9: # Meteor
-		if can_afford(meteor_costs):
-			$Meteors.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
-			apply_costs(meteor_costs)
-		else: 
-			print("cannot afford meteor")
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if ground_content != -1:
+			if can_afford(meteor_costs):
+				$Meteors.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+				apply_costs(meteor_costs)
+			else: 
+				print("cannot afford meteor")
+		else:
+			print("invalid build position")
 	elif options.selected == 10: # Cloud
-		if can_afford(cloud_costs):
-			$Cloud.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
-			apply_costs(cloud_costs)
-		else: 
-			print("cannot afford cloud")
+		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
+		if ground_content != -1:
+			if can_afford(cloud_costs):
+				$Cloud.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
+				apply_costs(cloud_costs)
+			else: 
+				print("cannot afford cloud")
+		else:
+			print("invalid build position")
 		
 	else:
 		print("ERROR: unknown selected: ", options.selected)
