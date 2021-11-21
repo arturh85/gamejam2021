@@ -1,46 +1,106 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD-Status.gd" type="Script" id=1]
-[ext_resource path="res://images/hud.png" type="Texture" id=2]
+[ext_resource path="res://images/hud_righttop.png" type="Texture" id=2]
 [ext_resource path="res://font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://images/hud_lefttop.png" type="Texture" id=4]
+[ext_resource path="res://images/hud_midletop.png" type="Texture" id=5]
+[ext_resource path="res://images/hud_left.png" type="Texture" id=6]
+[ext_resource path="res://images/hud_right.png" type="Texture" id=7]
 
-[node name="HUD-Status" type="ColorRect"]
+[node name="HUD-Status" type="Control"]
 anchor_left = 0.001
 anchor_right = 1.0
-anchor_bottom = 0.147
+anchor_bottom = 1.0
 margin_left = -0.024
 margin_top = -1.0
-margin_bottom = -0.199997
-color = Color( 1, 1, 1, 0 )
+margin_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BG-LeftTop" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.815686 )
-anchor_right = 1.0
-anchor_bottom = 6.791
+anchor_bottom = 0.056
 margin_left = -1.0
 margin_top = 1.0
-margin_bottom = -2.39899
+margin_right = 608.0
+margin_bottom = 33.288
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource( 2 )
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
 expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG-RightTop" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.066
+margin_left = -301.0
+margin_top = 1.0
+margin_right = 305.0
+margin_bottom = 38.706
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG-MiddleTop" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_left = 0.502
+anchor_top = 0.002
+anchor_right = 1.0
+anchor_bottom = 0.05
+margin_left = -91.546
+margin_top = -0.204
+margin_right = -235.0
+margin_bottom = 28.9
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG-MiddleTop2" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_left = -0.003
+anchor_top = 0.246
+anchor_right = -0.003
+anchor_bottom = 0.246
+margin_left = 17.069
+margin_top = 23.908
+margin_right = 97.069
+margin_bottom = 391.908
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label-WindDirection" type="RichTextLabel" parent="."]
-anchor_left = 0.199
-anchor_top = 0.09
-anchor_right = 0.308
-anchor_bottom = 0.348
-margin_left = 0.423004
-margin_top = -0.0100002
-margin_right = 0.916016
-margin_bottom = 2.028
+anchor_bottom = 0.316
+margin_left = 189.0
+margin_top = 5.0
+margin_right = 296.0
+margin_bottom = -0.23201
 custom_fonts/normal_font = ExtResource( 3 )
 text = "North"
 __meta__ = {
@@ -48,14 +108,13 @@ __meta__ = {
 }
 
 [node name="Label-Energy" type="RichTextLabel" parent="."]
-anchor_left = 0.875
-anchor_top = 0.079
-anchor_right = 0.985
-anchor_bottom = 0.348
-margin_left = -0.125122
-margin_top = -0.0310001
-margin_right = 0.34491
-margin_bottom = 0.027998
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.314
+margin_left = -109.0
+margin_top = 5.0
+margin_right = -2.0
+margin_bottom = -0.0279999
 custom_fonts/normal_font = ExtResource( 3 )
 text = "0%"
 __meta__ = {
@@ -63,13 +122,13 @@ __meta__ = {
 }
 
 [node name="Label-Resources" type="RichTextLabel" parent="."]
-anchor_left = 0.726
-anchor_right = 0.833
-anchor_bottom = 0.348
-margin_left = 0.302002
-margin_top = 7.0
-margin_right = -0.159058
-margin_bottom = 0.0279942
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.329
+margin_left = -258.0
+margin_top = 5.0
+margin_right = -150.0
+margin_bottom = -0.0580139
 custom_fonts/normal_font = ExtResource( 3 )
 text = "0"
 __meta__ = {
@@ -77,14 +136,11 @@ __meta__ = {
 }
 
 [node name="Label-CO2" type="RichTextLabel" parent="."]
-anchor_left = 0.051
-anchor_top = 0.09
-anchor_right = 0.158
-anchor_bottom = 0.348
-margin_left = -0.173
-margin_top = -0.0100002
-margin_right = 0.365997
-margin_bottom = 0.0280018
+anchor_bottom = 0.307
+margin_left = 53.0
+margin_top = 5.0
+margin_right = 161.0
+margin_bottom = 0.185989
 custom_fonts/normal_font = ExtResource( 3 )
 text = "0"
 __meta__ = {
@@ -92,17 +148,35 @@ __meta__ = {
 }
 
 [node name="Label-Clock" type="Label" parent="."]
-anchor_left = 0.487
-anchor_top = 0.034
-anchor_right = 0.556
-anchor_bottom = 0.36
-margin_left = -0.201019
-margin_top = -0.0260003
-margin_right = 0.211975
-margin_bottom = -0.0400009
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.334
+margin_left = -19.5
+margin_top = 4.0
+margin_right = -444.0
+margin_bottom = -0.0680084
 custom_fonts/font = ExtResource( 3 )
 text = "0:00"
-valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG-MiddleTop3" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_left = 1.0
+anchor_top = 0.286
+anchor_right = 1.0
+anchor_bottom = 0.377
+margin_left = -121.0
+margin_top = -0.172012
+margin_right = 121.0
+margin_bottom = 81.046
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }

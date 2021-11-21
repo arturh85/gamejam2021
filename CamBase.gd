@@ -1,6 +1,6 @@
 extends Spatial
 
-const MOVE_MARGIN = 20
+const MOVE_MARGIN = 100
 const MOVE_SPEED = 30
 
 const ray_length = 1000

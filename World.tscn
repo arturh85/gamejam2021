@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://CamBase.gd" type="Script" id=1]
 [ext_resource path="res://SelectionBox.gd" type="Script" id=2]
@@ -13,9 +13,7 @@
 [ext_resource path="res://materials/selection.tres" type="Material" id=11]
 [ext_resource path="res://HUD-Tool.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Cloud.tscn" type="PackedScene" id=13]
-[ext_resource path="res://materials/meteor.tres" type="Material" id=14]
-[ext_resource path="res://models/meteor.obj" type="ArrayMesh" id=15]
-[ext_resource path="res://effects/Fire.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Meteors.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Shader" id=11]
 code = "shader_type canvas_item;
@@ -30,62 +28,6 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = SubResource( 11 )
-
-[sub_resource type="Animation" id=14]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Meshes:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Meshes:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=15]
-resource_name = "impact"
-length = 5.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Meshes:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2.5, 5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 20, 0 ), Vector3( 70, -100, -70 ), Vector3( 70, -100, -70 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Meshes:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
 
 [sub_resource type="BoxShape" id=8]
 
@@ -187,94 +129,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Meteors" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.209518, 0, 52.5952 )
-
-[node name="Meshes" type="Spatial" parent="Meteors"]
-transform = Transform( 0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, 0.5, 0.5, 0, 0, 0 )
-visible = false
-
-[node name="M1" type="MeshInstance" parent="Meteors/Meshes"]
-transform = Transform( 1.2, 0, 0, 0, 1.2, -5.96046e-08, 0, -5.96046e-08, 1.2, -4.42308, 39.4407, -3.12759 )
-mesh = ExtResource( 15 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 14 )
-
-[node name="Particles" parent="Meteors/Meshes/M1" instance=ExtResource( 16 )]
-transform = Transform( 0.769231, 0, 0, 0, 0.769231, -5.96046e-08, 0, -5.96046e-08, 0.769231, 0, -10, 0 )
-amount = 5000
-lifetime = 2.0
-
-[node name="M2" type="MeshInstance" parent="Meteors/Meshes"]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.87665, 32.1476, 4.9715 )
-mesh = ExtResource( 15 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 14 )
-
-[node name="Particles" parent="Meteors/Meshes/M2" instance=ExtResource( 16 )]
-transform = Transform( 0.769231, 0, 0, 0, 0.769231, 0, 0, 0, 0.769231, 0, -10, 0 )
-amount = 5000
-lifetime = 2.0
-
-[node name="M3" type="MeshInstance" parent="Meteors/Meshes"]
-transform = Transform( 0.8, 0, 0, 0, 0.8, -2.98023e-08, 0, -2.98023e-08, 0.8, -9.00213, 54.5895, 0.745138 )
-mesh = ExtResource( 15 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 14 )
-
-[node name="Particles" parent="Meteors/Meshes/M3" instance=ExtResource( 16 )]
-transform = Transform( 0.769231, 0, 0, 0, 0.769231, 0, 0, 0, 0.769231, 0, -10, 0 )
-amount = 5000
-lifetime = 2.0
-
-[node name="M4" type="MeshInstance" parent="Meteors/Meshes"]
-transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 4.69529, 57.9113, -5.92212 )
-mesh = ExtResource( 15 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 14 )
-
-[node name="Particles" parent="Meteors/Meshes/M4" instance=ExtResource( 16 )]
-transform = Transform( 0.769231, 0, 0, 0, 0.769231, 0, 0, 0, 0.769231, 0, -10, 0 )
-amount = 5000
-lifetime = 2.0
-
-[node name="M5" type="MeshInstance" parent="Meteors/Meshes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65794, 45.2657, -15.5474 )
-mesh = ExtResource( 15 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 14 )
-
-[node name="Particles" parent="Meteors/Meshes/M5" instance=ExtResource( 16 )]
-transform = Transform( 0.769231, 0, 0, 0, 0.769231, 0, 0, 0, 0.769231, 0, -10, 0 )
-amount = 5000
-lifetime = 2.0
-
-[node name="M6" type="MeshInstance" parent="Meteors/Meshes"]
-transform = Transform( 1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -1.01667, 67.709, -10.3967 )
-mesh = ExtResource( 15 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 14 )
-
-[node name="Particles" parent="Meteors/Meshes/M6" instance=ExtResource( 16 )]
-transform = Transform( 0.769231, 0, 0, 0, 0.769231, 0, 0, 0, 0.769231, 0, -10, 0 )
-amount = 5000
-lifetime = 2.0
-
-[node name="M7" type="MeshInstance" parent="Meteors/Meshes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.05024, 46.3587, -3.45279 )
-mesh = ExtResource( 15 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 14 )
-
-[node name="Particles" parent="Meteors/Meshes/M7" instance=ExtResource( 16 )]
-transform = Transform( 0.769231, 0, 0, 0, 0.769231, 0, 0, 0, 0.769231, 0, -10, 0 )
-amount = 5000
-lifetime = 2.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Meteors"]
-autoplay = "impact"
-anims/RESET = SubResource( 14 )
-anims/impact = SubResource( 15 )
+[node name="Meteors" parent="." instance=ExtResource( 14 )]
 
 [node name="Cloud" parent="." instance=ExtResource( 13 )]
 

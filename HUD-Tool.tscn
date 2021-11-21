@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://HUD-Tool.gd" type="Script" id=1]
 [ext_resource path="res://font.tres" type="DynamicFont" id=2]
@@ -9,30 +9,60 @@
 [ext_resource path="res://images/buildicon_battery.png" type="Texture" id=7]
 [ext_resource path="res://images/buildicon_silo.png" type="Texture" id=8]
 [ext_resource path="res://images/buildicon_watertower.png" type="Texture" id=9]
+[ext_resource path="res://images/hud_bottom.png" type="Texture" id=10]
 
 [sub_resource type="Theme" id=2]
 default_font = ExtResource( 2 )
 
-[node name="HUD-Tool" type="ColorRect"]
+[node name="HUD-Tool" type="Control"]
+anchor_left = -0.001
 anchor_top = 0.798
-anchor_right = 1.002
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.0
+margin_left = 0.024
 margin_top = 0.199982
-margin_right = -0.0480957
+margin_right = 2.0
 margin_bottom = -1.0
-color = Color( 0.501961, 0.501961, 0.501961, 0.901961 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 
+[node name="BG-Bottom" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_top = 1.0
+anchor_right = 2.038
+anchor_bottom = 1.0
+margin_left = -5.0
+margin_top = -125.0
+margin_right = -34.0261
+margin_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_top = 3.05176e-05
+margin_right = 55.0
+margin_bottom = 52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label-Resources" type="RichTextLabel" parent="."]
+anchor_top = 1.075
+anchor_bottom = 1.075
 margin_left = 6.0
-margin_top = 77.0
+margin_top = -51.0
 margin_right = 70.0
-margin_bottom = 129.0
+margin_bottom = 1.0
 theme = SubResource( 2 )
 text = "999"
 __meta__ = {
@@ -40,14 +70,12 @@ __meta__ = {
 }
 
 [node name="Label-Energy" type="RichTextLabel" parent="."]
-anchor_left = 0.007
-anchor_top = 0.625
-anchor_right = 0.074
-anchor_bottom = 0.901
-margin_left = 98.825
-margin_top = 3.99998
-margin_right = 99.15
-margin_bottom = 8.87997
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 106.014
+margin_top = -40.0
+margin_right = 175.148
+margin_bottom = -2.00003
 theme = SubResource( 2 )
 text = "999"
 __meta__ = {
@@ -55,10 +83,12 @@ __meta__ = {
 }
 
 [node name="Label-Help" type="RichTextLabel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 11.0
-margin_top = 12.0
+margin_top = -107.0
 margin_right = 143.0
-margin_bottom = 50.0
+margin_bottom = -69.0
 theme = SubResource( 2 )
 text = "Choose Tool:"
 __meta__ = {
@@ -66,108 +96,96 @@ __meta__ = {
 }
 
 [node name="OptionButton" type="OptionButton" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 12.0
-margin_top = 39.0
+margin_top = -80.0
 margin_right = 144.0
-margin_bottom = 68.0
+margin_bottom = -51.0
 text = "Fire"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Base" type="TextureRect" parent="."]
-anchor_left = 0.161
-anchor_top = 0.067
-anchor_right = 0.259
-anchor_bottom = 0.9
-margin_left = -0.059021
-margin_top = -0.04
-margin_right = 0.07901
-margin_bottom = -7.62939e-06
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 165.288
+margin_top = -111.0
+margin_right = 266.072
+margin_bottom = -11.0
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Farm" type="TextureRect" parent="."]
-anchor_left = 0.279
-anchor_top = 0.067
-anchor_right = 0.377
-anchor_bottom = 0.9
-margin_left = -0.301025
-margin_top = -0.04
-margin_right = -0.162994
-margin_bottom = -7.62939e-06
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 286.232
+margin_top = -111.0
+margin_right = 387.016
+margin_bottom = -11.0
 texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EnergyLine" type="TextureRect" parent="."]
-anchor_left = 0.395
-anchor_top = 0.067
-anchor_right = 0.494
-anchor_bottom = 0.9
-margin_left = 0.494995
-margin_top = -0.04
-margin_right = -0.386017
-margin_bottom = -7.62939e-06
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 406.16
+margin_top = -111.0
+margin_right = 506.952
+margin_bottom = -11.0
 texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SolarCell" type="TextureRect" parent="."]
-anchor_left = 0.512
-anchor_top = 0.067
-anchor_right = 0.61
-anchor_bottom = 0.9
-margin_left = 0.271973
-margin_top = -0.04
-margin_right = 0.409973
-margin_bottom = -7.62939e-06
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 526.096
+margin_top = -111.0
+margin_right = 626.88
+margin_bottom = -11.0
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Battery" type="TextureRect" parent="."]
-anchor_left = 0.63
-anchor_top = 0.067
-anchor_right = 0.728
-anchor_bottom = 0.9
-margin_left = 0.0299683
-margin_top = -0.04
-margin_right = 0.167969
-margin_bottom = -7.62939e-06
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 647.04
+margin_top = -111.0
+margin_right = 747.824
+margin_bottom = -11.0
 texture = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="WaterTower" type="TextureRect" parent="."]
-anchor_left = 0.749
-anchor_top = 0.067
-anchor_right = 0.847
-anchor_bottom = 0.9
-margin_left = -0.231018
-margin_top = -0.04
-margin_right = -0.0930786
-margin_bottom = -7.62939e-06
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 768.992
+margin_top = -111.0
+margin_right = 869.776
+margin_bottom = -11.0
 texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Silo" type="TextureRect" parent="."]
-anchor_left = 0.868
-anchor_top = 0.067
-anchor_right = 0.966
-anchor_bottom = 0.9
-margin_left = -0.492004
-margin_top = -0.04
-margin_right = -0.354004
-margin_bottom = -7.62939e-06
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 890.944
+margin_top = -111.0
+margin_right = 991.728
+margin_bottom = -11.0
 texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
