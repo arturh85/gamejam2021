@@ -74,6 +74,7 @@ func set_inactive():
 	
 
 func set_active(act, cost):
+	set_inactive()
 	active = act
 	$"Label-Energy".text = str(cost["energy"])
 	$"Label-Resources".text = str(cost["resources"])
