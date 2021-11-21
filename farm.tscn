@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://models/farm.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://materials/building1.tres" type="Material" id=2]
+[ext_resource path="res://materials/building2.tres" type="Material" id=3]
+[ext_resource path="res://materials/glowyellow.tres" type="Material" id=4]
+
+[node name="farm" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -124.158 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 2 )
+material/2 = ExtResource( 2 )
+material/3 = ExtResource( 3 )
+material/4 = ExtResource( 3 )
+material/5 = ExtResource( 4 )
+material/6 = ExtResource( 3 )
+material/7 = ExtResource( 4 )
+material/8 = ExtResource( 3 )

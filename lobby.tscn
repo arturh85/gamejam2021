@@ -65,6 +65,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="PortForward" type="Label" parent="Players"]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = -124.0
 margin_top = 375.0
 margin_right = 128.0
@@ -76,6 +77,7 @@ is forwarded on your router."
 align = 1
 
 [node name="FindPublicIP" type="LinkButton" parent="Players"]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = 168.0
 margin_top = 393.5
 margin_right = 341.0

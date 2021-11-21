@@ -26,7 +26,7 @@ func _process(delta):
 	var ground_content = $"../GroundMap".get_cell_item(p.x, 0, p.z)
 	var tree_content = $"../TreeMap".get_cell_item(p.x, 0, p.z)
 	var building_content = $"../BuildingMap".get_cell_item(p.x, 0, p.z)
-	if building_content >= 0: # Asphalt
+	if building_content >= 0: # building
 		mat1.emission = Color(1, 1, 0)
 		mat2.emission = Color(1, 1, 0)
 	elif tree_content >= 0: # Trees
