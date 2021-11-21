@@ -1,5 +1,8 @@
 extends Control
 
+var active = -1
+var world
+
 func _on_HUDStatus_mouse_entered():
 	$"../../".mouseInHUD = true
 	
@@ -7,6 +10,7 @@ func _on_HUDStatus_mouse_exited():
 	$"../../".mouseInHUD = false
 	
 func _ready():
+	world = $"../.."
 	var options = $OptionButton
 	if options.items.size() == 0:
 		options.add_item("Fire", 0)
@@ -51,5 +55,59 @@ func _on_OptionButton_item_selected(index):
 	elif index == 10:
 		cost = world.cloud_costs
 		
+	active = index
+		
 	$"Label-Energy".text = str(cost["energy"])
 	$"Label-Resources".text = str(cost["resources"])
+
+
+func set_inactive():
+	active = -1
+	$"Label-Energy".text = ""
+	$"Label-Resources".text = ""
+	$FarmButton.modulate = Color(1, 1, 1, 1)
+	$TreeButton.modulate = Color(1, 1, 1, 1)
+	$BatteryButton.modulate = Color(1, 1, 1, 1)
+	$PowerlineButton.modulate = Color(1, 1, 1, 1)
+	$WatertowerButton.modulate = Color(1, 1, 1, 1)
+	$SiloButton.modulate = Color(1, 1, 1, 1)
+	
+
+func set_active(act, cost):
+	active = act
+	$"Label-Energy".text = str(cost["energy"])
+	$"Label-Resources".text = str(cost["resources"])
+
+func _on_FarmButton_pressed():
+	set_active(6, world.building_costs[world.Buildings.FARM])
+	$FarmButton.modulate = Color(0, 0.5, 0, 1)
+
+
+func _on_TreeButton_pressed():
+	set_active(1, world.tree_costs)
+	$TreeButton.modulate = Color(0, 0.5, 0, 1)
+
+
+func _on_BatteryButton_pressed():
+	set_active(4, world.building_costs[world.Buildings.BATTERY])
+	$BatteryButton.modulate = Color(0, 0.5, 0, 1)
+
+
+func _on_PowerlineButton_pressed():
+	set_active(5, world.powerline_costs)
+	$PowerlineButton.modulate = Color(0, 0.5, 0, 1)
+
+
+func _on_SolarcellButton_pressed():
+	set_active(3, world.building_costs[world.Buildings.SOLAR_CELL])
+	$SolarcellButton.modulate = Color(0, 0.5, 0, 1)
+
+
+func _on_WatertowerButton_pressed():
+	set_active(7, world.building_costs[world.Buildings.WATER_TOWER])
+	$WatertowerButton.modulate = Color(0, 0.5, 0, 1)
+
+
+func _on_SiloButton_pressed():
+	set_active(8, world.building_costs[world.Buildings.SILO])
+	$SiloButton.modulate = Color(0, 0.5, 0, 1)

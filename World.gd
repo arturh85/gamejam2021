@@ -205,18 +205,19 @@ func reduce_energy(cost):
 	emit_signal("energy_changed", energy_current)
 
 func on_click_cell(pos: Vector3):
-	var options = $"CanvasLayer/HUD-Tool/OptionButton"
-	if options.selected == 0: # Fire
+	var hud = $"CanvasLayer/HUD-Tool/"
+	if hud.active == 0: # Fire
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if tree_content != -1:
 			if can_afford(fire_costs):
 				add_fire(pos)
 				apply_costs(fire_costs)
+				hud.set_inactive()
 			else: 
 				print("cannot afford fire")
 		else:
 			print("invalid build position")
-	elif options.selected == 1: # Tree
+	elif hud.active == 1: # Tree
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
@@ -224,105 +225,115 @@ func on_click_cell(pos: Vector3):
 			if can_afford(tree_costs):
 				TreeMap.set_cell_item(pos.x, pos.y, pos.z, 1)
 				apply_costs(tree_costs)
+				hud.set_inactive()
 			else: 
 				print("cannot afford tree")
 		else:
 			print("invalid build position")
-	elif options.selected == 2: # Bulldozer
+	elif hud.active == 2: # Bulldozer
 		if can_afford(bulldozer_costs):
 			self.on_burndown(pos)
 			apply_costs(bulldozer_costs)
+			hud.set_inactive()
 		else: 
 			print("cannot afford bulldozer")
-	elif options.selected == 3: # SolarCell
+	elif hud.active == 3: # SolarCell
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.SOLAR_CELL):
 				buy_building(pos, Buildings.SOLAR_CELL)
+				hud.set_inactive()
 			else: 
 				print("cannot afford solar cell")
 		else:
 			print("invalid build position")
-	elif options.selected == 4: # Battery
+	elif hud.active == 4: # Battery
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.BATTERY):
 				buy_building(pos, Buildings.BATTERY)
+				hud.set_inactive()
 			else: 
 				print("cannot afford battery")
 		else:
 			print("invalid build position")
-	elif options.selected == 5: # PowerLine
+	elif hud.active == 5: # PowerLine
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.POWERLINE_1):
 				buy_building(pos, Buildings.POWERLINE_1)
+				hud.set_inactive()
 			else: 
 				print("cannot afford power line")
 		else:
 			print("invalid build position")
-	elif options.selected == 6: # Farm
+	elif hud.active == 6: # Farm
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.FARM):
 				buy_building(pos, Buildings.FARM)
+				hud.set_inactive()
 			else: 
 				print("cannot afford farm")
 		else:
 			print("invalid build position")
-	elif options.selected == 7: # WaterTower
+	elif hud.active == 7: # WaterTower
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.WATER_TOWER):
 				buy_building(pos, Buildings.WATER_TOWER)
+				hud.set_inactive()
 			else: 
 				print("cannot afford water tower")
 		else:
 			print("invalid build position")
-	elif options.selected == 8: # Silo
+	elif hud.active == 8: # Silo
 		var building_content = BuildingMap.get_cell_item(pos.x, pos.y, pos.z)
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)
 		if building_content == -1 and ground_content != -1 and tree_content == -1:
 			if can_afford_building(Buildings.SILO):
 				buy_building(pos, Buildings.SILO)
+				hud.set_inactive()
 			else: 
 				print("cannot afford silo")
 		else:
 			print("invalid build position")
-	elif options.selected == 9: # Meteor
+	elif hud.active == 9: # Meteor
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		if ground_content != -1:
 			if can_afford(meteor_costs):
 				$Meteors.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
 				apply_costs(meteor_costs)
+				hud.set_inactive()
 			else: 
 				print("cannot afford meteor")
 		else:
 			print("invalid build position")
-	elif options.selected == 10: # Cloud
+	elif hud.active == 10: # Cloud
 		var ground_content = GroundMap.get_cell_item(pos.x, pos.y, pos.z)
 		if ground_content != -1:
 			if can_afford(cloud_costs):
 				$Cloud.start_disaster(GroundMap.map_to_world(pos.x, pos.y, pos.z), 1.0, 5)
 				apply_costs(cloud_costs)
+				hud.set_inactive()
 			else: 
 				print("cannot afford cloud")
 		else:
 			print("invalid build position")
 		
 	else:
-		print("ERROR: unknown selected: ", options.selected)
+		print("ERROR: unknown selected: ", hud.active)
 
 func mine_tree(pos: Vector3):
 	var tree_content = TreeMap.get_cell_item(pos.x, pos.y, pos.z)

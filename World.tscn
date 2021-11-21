@@ -152,7 +152,7 @@ mesh_library = ExtResource( 5 )
 cell_size = Vector3( 5, 0.1, 5 )
 cell_scale = 0.15
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( 13, 65531, 1 )
 }
 __meta__ = {
 "_editor_clip_": 0
@@ -164,7 +164,7 @@ mesh_library = ExtResource( 7 )
 cell_size = Vector3( 5, 0.1, 5 )
 cell_scale = 0.5
 data = {
-"cells": PoolIntArray( 0, 1, 1, 0, 2, 1, 0, 3, 0, 65532, 65531, 8, 0, 65535, 6, 2, 65535, 2, 3, 65535, 2, 4, 65535, 7 )
+"cells": PoolIntArray( 0, 1, 1, 0, 2, 1, 0, 3, 0, 16, 65531, 7, 19, 65531, 5, 22, 65531, 10, 25, 65531, 0, 28, 65531, 9, 33, 65531, 8, 65532, 65531, 8, 0, 65535, 6, 2, 65535, 2, 3, 65535, 2, 4, 65535, 7 )
 }
 __meta__ = {
 "_editor_clip_": 0,
