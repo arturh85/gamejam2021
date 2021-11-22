@@ -17,7 +17,9 @@ Compete with friends in Multiplayer for the best score while hurdling disasters 
 
 ## Screenshots
 
-TODO
+![Screenshot 1](screenshots/disasterArena1.png?raw=true "Screenshot 1")
+![Screenshot 2](screenshots/disasterArena2.png?raw=true "Screenshot 2")
+![Screenshot 3](screenshots/disasterArena3.png?raw=true "Screenshot 3")
 
 ## Network Port
 
@@ -25,7 +27,7 @@ You need to open `Port 10567` on your router to host a server.
 
 ## Controls
 
-TODO
+Control map with WASD / Array keys, select what to build / where to build with mouse.
 
 ## Context
 
