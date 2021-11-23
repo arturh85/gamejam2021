@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ColorRect.gd" type="Script" id=1]
+[ext_resource path="res://hud/CanvasLayer.gd" type="Script" id=2]
+[ext_resource path="res://hud/HUD-Tool.tscn" type="PackedScene" id=5]
+[ext_resource path="res://hud/FireWarning.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hud/HUD-Status.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float contrast = 0.5;
+    COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+    float avg = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
+	float a = pow(abs(avg * 2.0 - 1.0), 1.0 / max(contrast, 0.0001)) * sign(avg - 0.5) + 0.5 + 0.4;
+    COLOR.rgb = vec3(a);
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 11 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="MonochromeShader" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -3.0
+margin_right = 2.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FireWarning" parent="." instance=ExtResource( 6 )]
+margin_left = 61.976
+margin_top = 59.0
+margin_right = -842.0
+margin_bottom = -483.0
+
+[node name="HUD-Status" parent="." instance=ExtResource( 7 )]
+mouse_filter = 0
+
+[node name="HUD-Tool" parent="." instance=ExtResource( 5 )]

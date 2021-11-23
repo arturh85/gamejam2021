@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://HUD-Status.gd" type="Script" id=1]
+[ext_resource path="res://hud/HUD-Status.gd" type="Script" id=1]
 [ext_resource path="res://images/hud_righttop.png" type="Texture" id=2]
 [ext_resource path="res://font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://images/hud_lefttop.png" type="Texture" id=4]
@@ -11,10 +11,8 @@
 anchor_left = 0.001
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -0.024
-margin_top = -1.0
-margin_bottom = 1.0
-rect_pivot_offset = Vector2( 353, 87 )
+margin_left = -1.024
+mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": true
@@ -75,99 +73,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label-WindDirection" type="RichTextLabel" parent="."]
-anchor_bottom = 0.316
-margin_left = 189.0
-margin_top = 5.0
-margin_right = 296.0
-margin_bottom = -0.23201
-custom_fonts/normal_font = ExtResource( 3 )
-text = "North"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label-Energy" type="RichTextLabel" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 0.314
-margin_left = -109.0
-margin_top = 5.0
-margin_right = -2.0
-margin_bottom = -0.0279999
-custom_fonts/normal_font = ExtResource( 3 )
-text = "0%"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label-Resources" type="RichTextLabel" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 0.329
-margin_left = -258.0
-margin_top = 5.0
-margin_right = -150.0
-margin_bottom = -0.0580139
-custom_fonts/normal_font = ExtResource( 3 )
-text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label-CO2" type="RichTextLabel" parent="."]
-anchor_bottom = 0.307
-margin_left = 53.0
-margin_top = 5.0
-margin_right = 161.0
-margin_bottom = 0.185989
-custom_fonts/normal_font = ExtResource( 3 )
-bbcode_enabled = true
-bbcode_text = "0"
-text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label-Clock" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.334
-margin_left = -19.5
-margin_top = 4.0
-margin_right = -444.0
-margin_bottom = -0.0680084
-custom_fonts/font = ExtResource( 3 )
-text = "0:00"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BG-Right" type="TextureRect" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0.815686 )
-anchor_left = 1.0
-anchor_top = 0.286
-anchor_right = 1.0
-anchor_bottom = 0.377
-margin_left = -121.0
-margin_top = -0.172012
-margin_right = 121.0
-margin_bottom = 81.046
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="MouseArea" type="ColorRect" parent="."]
-anchor_bottom = 0.002
-margin_left = -1.0
-margin_top = 1.0
 margin_right = 301.0
 margin_bottom = 29.796
 color = Color( 1, 1, 1, 0 )
@@ -215,11 +121,103 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="mouse_entered" from="MouseArea" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="MouseArea" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="mouse_entered" from="MouseArea3" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="MouseArea3" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="mouse_entered" from="MouseArea4" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="MouseArea4" to="." method="_on_HUDStatus_mouse_exited"]
-[connection signal="mouse_entered" from="MouseArea5" to="." method="_on_HUDStatus_mouse_entered"]
-[connection signal="mouse_exited" from="MouseArea5" to="." method="_on_HUDStatus_mouse_exited"]
+[node name="Label-WindDirection" type="RichTextLabel" parent="."]
+anchor_bottom = 0.316
+margin_left = 189.0
+margin_top = 5.0
+margin_right = 296.0
+margin_bottom = -0.23201
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 3 )
+text = "North"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label-Energy" type="RichTextLabel" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.314
+margin_left = -109.0
+margin_top = 5.0
+margin_right = -2.0
+margin_bottom = -0.0279999
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 3 )
+text = "0%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label-Resources" type="RichTextLabel" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.329
+margin_left = -258.0
+margin_top = 5.0
+margin_right = -150.0
+margin_bottom = -0.0580139
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 3 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label-CO2" type="RichTextLabel" parent="."]
+anchor_bottom = 0.307
+margin_left = 53.0
+margin_top = 5.0
+margin_right = 161.0
+margin_bottom = 0.185989
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "0"
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label-Clock" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.334
+margin_left = -19.5
+margin_top = 4.0
+margin_right = -444.0
+margin_bottom = -0.0680084
+mouse_filter = 1
+custom_fonts/font = ExtResource( 3 )
+text = "0:00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG-Right" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.815686 )
+anchor_left = 1.0
+anchor_top = 0.286
+anchor_right = 1.0
+anchor_bottom = 0.377
+margin_left = -121.0
+margin_top = -0.172012
+margin_right = 121.0
+margin_bottom = 81.046
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="MouseArea" to="." method="_on_MouseArea_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea" to="." method="_on_MouseArea_mouse_exited"]
+[connection signal="mouse_entered" from="MouseArea4" to="." method="_on_MouseArea_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea4" to="." method="_on_MouseArea_mouse_exited"]
+[connection signal="mouse_entered" from="MouseArea5" to="." method="_on_MouseArea_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea5" to="." method="_on_MouseArea_mouse_exited"]

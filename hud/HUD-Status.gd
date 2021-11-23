@@ -1,15 +1,17 @@
 extends Control
 
-func _on_HUDStatus_mouse_entered():
-	$"../../".mouseInHUD = true
+
+# func _on_HUDStatus_mouse_entered():
+# 	$"../../".mouseInHUD = true
+# 	
+# func _on_HUDStatus_mouse_exited():
+# 	$"../../".mouseInHUD = false
 	
-func _on_HUDStatus_mouse_exited():
-	$"../../".mouseInHUD = false
 	
-	
+var world: GDWorld
 
 func _ready():
-	var world = gamestate.world()
+	world = gamestate.world()
 	world.connect("wind_direction_changed", self, "wind_direction_changed")
 	world.connect("energy_changed", self, "energy_changed")
 	world.connect("resources_changed", self, "resources_changed")
@@ -43,3 +45,13 @@ func co2_level_changed(co2):
 	elif co2 >= 100:
 		color = "yellow"
 	$"Label-CO2".bbcode_text =  "[color=" + color + "]" + str(co2) + "[/color]"
+
+
+func _on_MouseArea_mouse_entered():
+	print("enter")
+	world.mouseInHUD = true
+
+
+func _on_MouseArea_mouse_exited():
+	print("exit")
+	world.mouseInHUD = false

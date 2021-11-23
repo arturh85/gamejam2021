@@ -18,10 +18,10 @@ __meta__ = {
 }
 
 [node name="Icon" type="TextureRect" parent="."]
-margin_left = 9.0
-margin_top = 71.0
-margin_right = 129.0
-margin_bottom = 191.0
+margin_left = 1.0
+margin_top = 12.0
+margin_right = 121.0
+margin_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.5, 0.5 )

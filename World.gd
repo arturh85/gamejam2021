@@ -84,30 +84,27 @@ var SceneEntitySilo
 var SceneHealth
 
 func _ready():
-	TreeMap = get_node("TreeMap")
-	BuildingMap = get_node("BuildingMap")
-	GroundMap = get_node("GroundMap")
-	SceneFire = load("res://effects/Fire.tscn")
-	SceneEntityTree = load("res://entities/Tree.tscn")
-	SceneEntityBattery = load("res://entities/Battery.tscn")
-	SceneEntityHeadquarter = load("res://entities/Headquarter.tscn")
-	SceneEntityPowerLine = load("res://entities/PowerLine.tscn")
-	SceneEntitySolarCell = load("res://entities/SolarCell.tscn")
-	SceneEntityFarm = load("res://entities/Farm.tscn")
-	SceneEntityWaterTower = load("res://entities/WaterTower.tscn")
-	SceneEntitySilo = load("res://entities/Silo.tscn")
-	SceneHealth = load("res://HealthDisplay.tscn")
-	rng.randomize()
-	
+	TreeMap = get_node_or_null("TreeMap")
 	if TreeMap:
+		BuildingMap = get_node("BuildingMap")
+		GroundMap = get_node("GroundMap")
+		SceneFire = load("res://effects/Fire.tscn")
+		SceneEntityTree = load("res://entities/Tree.tscn")
+		SceneEntityBattery = load("res://entities/Battery.tscn")
+		SceneEntityHeadquarter = load("res://entities/Headquarter.tscn")
+		SceneEntityPowerLine = load("res://entities/PowerLine.tscn")
+		SceneEntitySolarCell = load("res://entities/SolarCell.tscn")
+		SceneEntityFarm = load("res://entities/Farm.tscn")
+		SceneEntityWaterTower = load("res://entities/WaterTower.tscn")
+		SceneEntitySilo = load("res://entities/Silo.tscn")
+		SceneHealth = load("res://HealthDisplay.tscn")
+		rng.randomize()
 		rebuildGround()
 		randomizeTreeMap()
 		_update_buildings()
 		$Meteors.hide()
 		$Cloud.hide()
 		$CanvasLayer/FireWarning.hide()
-		
-		
 
 func can_afford(cost):
 	if energy_current < cost["energy"]:
