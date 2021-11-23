@@ -1,6 +1,6 @@
 extends Spatial
 
-const MOVE_MARGIN = 200
+const MOVE_MARGIN = 40
 const MOVE_SPEED = 30
 
 const ray_length = 1000
@@ -12,15 +12,17 @@ onready var selection_box = $SelectionBox
 var start_sel_pos = Vector2()
 
 func _process(delta):
-	
-	if $"../".mouseInHUD:
+	var world = gamestate.world()
+	var selectionTile = world.get_node("SelectionTile")
+	if world.mouseInHUD:
+		selectionTile.hide()
 		return
+	selectionTile.show()
 	
 	var m_pos = get_viewport().get_mouse_position()
 	calc_move(m_pos, delta)
 	
 	var rc = raycast_from_mouse(m_pos, 1)
-	var world = gamestate.world()
 	var p = world.GroundMap.world_to_map(rc.position)
 	
 	$"../SelectionTile".translation.x = p.x * world.GroundMap.cell_size.x + world.GroundMap.cell_size.x / 2.0
