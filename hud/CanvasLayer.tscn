@@ -30,18 +30,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -3.0
 margin_right = 2.0
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FireWarning" parent="." instance=ExtResource( 6 )]
-margin_left = 61.976
-margin_top = 59.0
-margin_right = -842.0
-margin_bottom = -483.0
+margin_top = 43.0
+margin_right = -962.0
+margin_bottom = -471.0
+rect_pivot_offset = Vector2( 0, 0 )
 
 [node name="HUD-Status" parent="." instance=ExtResource( 7 )]
-mouse_filter = 0
+mouse_filter = 2
 
 [node name="HUD-Tool" parent="." instance=ExtResource( 5 )]
+mouse_filter = 2
