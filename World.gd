@@ -208,7 +208,7 @@ func reduce_energy(cost):
 	
 func increase_co2(cost):
 	co2_level += cost
-	emit_signal("co2_changed", co2_level)
+	emit_signal("co2_level_changed", co2_level)
 
 func on_click_cell(pos: Vector3):
 	var hud = $"CanvasLayer/HUD-Tool/"
